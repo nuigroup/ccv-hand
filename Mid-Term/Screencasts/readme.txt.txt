@@ -1,1 +1,1 @@
-The frame from the occluded_fingers video can be better seen as the "occluded_fingers.jpg" image.
+The frame from the occluded_fingers video can be better seen as the "occluded_fingers.jpg" image.And even better in the "occluded_fingers_for_dummies.jpg"
