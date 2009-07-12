@@ -1,0 +1,21 @@
+// List of images not included in tim_face.smd
+model_name: tim_face
+model_dir: ./
+parts_file: face
+image_dir: ../images/
+points_dir: ../points/
+
+// Details of points : images
+training_set:
+{
+  107_0793.pts : 107_0793.jpg
+  107_0794.pts : 107_0794.jpg
+  107_0795.pts : 107_0795.jpg
+  107_0798.pts : 107_0798.jpg
+  107_0799.pts : 107_0799.jpg
+  107_0800.pts : 107_0800.jpg
+  108_0801.pts : 108_0801.jpg
+  108_0802.pts : 108_0802.jpg
+  108_0803.pts : 108_0803.jpg
+  108_0804.pts : 108_0804.jpg
+}

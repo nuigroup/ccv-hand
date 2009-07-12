@@ -1,0 +1,36 @@
+// List of all annotated face images
+model_name: tim_face
+model_dir: ./
+parts_file: face
+image_dir: ../images/
+points_dir: ../points/
+
+// Details of points : images
+training_set:
+{
+  107_0764.pts : 107_0764.jpg
+  107_0766.pts : 107_0766.jpg
+  107_0779.pts : 107_0779.jpg
+  107_0780.pts : 107_0780.jpg
+  107_0781.pts : 107_0781.jpg
+  107_0782.pts : 107_0782.jpg
+  107_0784.pts : 107_0784.jpg
+  107_0785.pts : 107_0785.jpg
+  107_0786.pts : 107_0786.jpg
+  107_0787.pts : 107_0787.jpg
+  107_0788.pts : 107_0788.jpg
+  107_0789.pts : 107_0789.jpg
+  107_0790.pts : 107_0790.jpg
+  107_0791.pts : 107_0791.jpg
+  107_0792.pts : 107_0792.jpg
+  107_0793.pts : 107_0793.jpg
+  107_0794.pts : 107_0794.jpg
+  107_0795.pts : 107_0795.jpg
+  107_0798.pts : 107_0798.jpg
+  107_0799.pts : 107_0799.jpg
+  107_0800.pts : 107_0800.jpg
+  108_0801.pts : 108_0801.jpg
+  108_0802.pts : 108_0802.jpg
+  108_0803.pts : 108_0803.jpg
+  108_0804.pts : 108_0804.jpg
+}

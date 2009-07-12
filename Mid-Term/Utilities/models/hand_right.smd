@@ -1,0 +1,75 @@
+// Shape Model Data
+model_name: hand_right
+model_dir: C:/Users/Thiago/Desktop/GSOC/am_tools/models/
+parts_file: hand_right
+tri_file: hand_right
+image_dir: ../images/
+points_dir: ../points/
+// Alternatives: radial,wolfson,sunras,bmp 
+// shape_aligner can be None, AlignCoG2D, AlignEuclid2D, ...
+shape_aligner: align_similar_2d
+shape_variant_maker: -
+shape_modes:  { min: 0 max: 999 prop: 0.9 } 
+tex_modes:  { min: 0 max: 999 prop: 0.9 } 
+combined_modes:  { min: 0 max: 999 prop: 0.999 } 
+params_limiter: mdpm_prob_limits
+{
+  acceptance_prob: 0.99
+}
+tex_params_limiter: mdpm_box_limits
+{
+  sd_limits: 3
+}
+shape_params_limiter: mdpm_box_limits
+{
+  sd_limits: 3
+}
+tex_params_pdf: axis_gaussian_builder
+shape_params_pdf: axis_gaussian_builder
+app_params_pdf: axis_gaussian_builder
+n_pixels: 5000
+colour: Grey // Alternatives: Grey,RGB,...
+// Texture Sampler can be tri_raw, tri_edge...
+tex_sampler: vapm_profile_set_sampler {
+  profile_sampler: vsml_profile_sampler_2d<vxl_byte>
+  prof_hi: 2
+  prof_lo: -2
+  width: 1
+  step_size: 1.0
+  use_gradient: 0
+}
+// tex_aligner can be None, AlignLinear1D, ...
+tex_aligner: align_linear_1d
+// shape_wts define how to compute relative scaling of shape & tex.
+// shape_wts can be `EqualVar', `EqualEffect',...
+shape_wts: EqualVar
+// point_finder defines point finder used for ASM search
+point_finder: local_models
+// tex_model defines type of model to represent texture statistics, eg: pca, pca+haar1d
+tex_model: pca
+// Image Pyramid Builder can be gauss_byte, gauss_float, grad_float ...
+pyr_builder: gauss_byte
+points_pyr_builder: Same
+max_im_pyr_levels: 5
+
+// Levels of multi-res model to build :
+min_level: 0
+max_level: 2
+
+// For ASM profile models : 
+g_in_len: 3
+g_out_len: 3
+g_width: 1
+sample_int: 1
+use_grad: 1
+norm_grey: 1
+restrict_points_to_parts: 0
+
+default_image_pixel_size: 1
+// Details of points : images
+training_set:
+{
+t1_0009.pts : t1_0009.bmp
+t1_0010.pts : t1_0010.bmp
+t1_0021.pts : t1_0021.bmp
+}

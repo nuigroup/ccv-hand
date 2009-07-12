@@ -1,0 +1,103 @@
+part "Chin" {
+    indices(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+    form open_boundary
+         jagged
+	 point_density 1
+}
+
+part "L.Eyebrow" {
+    indices(15,16,17,18,19,20)
+    form closed_boundary
+         jagged
+	 point_density 1
+}
+
+
+part "R.Eyebrow" {
+    indices(21,22,23,24,25,26)
+    form closed_boundary
+         jagged
+	 point_density 1
+}
+
+
+part "L.Eye" {
+    indices(27,28,29,30)
+    form closed_boundary
+         jagged
+	 point_density 1
+}
+
+part "R.Eye" {
+    indices(32,33,34,35)
+    form closed_boundary
+         jagged
+	 point_density 1
+}
+
+part "Nose" {
+    indices(37,38,39,40,41,42,43,44,45)
+    form open_boundary
+         jagged
+	 point_density 1
+}
+
+
+part "Nostrils" {
+    indices(46,47)
+    form open_boundary
+         jagged
+	 point_density 1
+}
+
+part "Lip_Outline" {
+    indices(48,49,50,51,52,53,54,55,56,57,58,59)
+    form closed_boundary
+         jagged
+	 point_density 1
+}
+
+part "TopLip" {
+    indices(48,60,61,62,54)
+    form open_boundary
+         jagged
+	 point_density 1
+}
+
+part "BottomLip" {
+    indices(54,63,64,65,48)
+    form open_boundary
+         jagged
+	 point_density 1
+}
+
+
+part "MouthMidline" {
+    indices(51,64,66,61,57)
+    form open_boundary
+         jagged
+	 point_density 1
+}
+
+part "ChinMidline" {
+    indices(57,7)
+    form open_boundary
+         jagged
+	 point_density 1
+}
+
+
+part "L.mouthline" {
+    indices(3,48)
+    form open_boundary
+         jagged
+	 point_density 1
+}
+
+part "R.mouthline" {
+    indices(11,54)
+    form open_boundary
+         jagged
+	 point_density 1
+}
+

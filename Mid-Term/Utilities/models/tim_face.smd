@@ -1,0 +1,55 @@
+// List of images + parameters required to define type of model
+// Note: List excludes images in the separate test set (tim_face_test.smd)
+model_name: tim_face
+model_dir: ./
+parts_file: face
+image_dir: ../images/
+points_dir: ../points/
+
+shape_aligner: align_similar_2d
+shape_modes:  { min: 0 max: 30 prop: 0.98 }
+tex_modes:  { min: 0 max: 40 prop: 0.99 } 
+combined_modes:  { min: 0 max: 30 prop: 0.99 } 
+params_limiter: mdpm_box_limits
+{
+  sd_limits: 3
+}
+n_pixels: 10000
+colour: Grey // Alternatives: Grey,RGB,...
+// Texture Sampler can be tri_raw, tri_edge...
+tex_sampler: vapm_triangle_sampler<vxl_byte>
+tex_aligner: align_linear_1d
+// shape_wts define how to compute relative scaling of shape & tex.
+// shape_wts can be `EqualVar', `EqualEffect',...
+shape_wts: EqualVar
+
+// tex_model defines type of model to represent texture statistics, eg: pca, pca+haar1d
+tex_model: pca
+// Image Pyramid Builder can be gauss_byte, gauss_float, grad_float ...
+pyr_builder: gauss_byte
+points_pyr_builder: Same
+max_im_pyr_levels: 5
+
+// Levels of multi-res model to build :
+min_level: 0
+max_level: 4
+
+// Details of points : images
+training_set:
+{
+  107_0764.pts : 107_0764.jpg
+  107_0766.pts : 107_0766.jpg
+  107_0779.pts : 107_0779.jpg
+  107_0780.pts : 107_0780.jpg
+  107_0781.pts : 107_0781.jpg
+  107_0782.pts : 107_0782.jpg
+  107_0784.pts : 107_0784.jpg
+  107_0785.pts : 107_0785.jpg
+  107_0786.pts : 107_0786.jpg
+  107_0787.pts : 107_0787.jpg
+  107_0788.pts : 107_0788.jpg
+  107_0789.pts : 107_0789.jpg
+  107_0790.pts : 107_0790.jpg
+  107_0791.pts : 107_0791.jpg
+  107_0792.pts : 107_0792.jpg
+}

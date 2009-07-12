@@ -1,0 +1,62 @@
+// Directory containing images
+image_dir: ..\images\
+// Directory containing points
+points_dir: ..\points\
+
+training_set:
+{
+dummy.pts : t1_0004.bmp
+dummy.pts : t1_0006.bmp
+dummy.pts : t1_0007.bmp
+dummy.pts : t1_0008.bmp
+dummy.pts : t1_0010.bmp
+dummy.pts : t1_0011.bmp
+dummy.pts : t1_0012.bmp
+dummy.pts : t1_0013.bmp
+dummy.pts : t1_0014.bmp
+dummy.pts : t1_0015.bmp
+dummy.pts : t1_0016.bmp
+dummy.pts : t1_0017.bmp
+dummy.pts : t1_0018.bmp
+dummy.pts : t1_0019.bmp
+dummy.pts : t1_0020.bmp
+dummy.pts : t1_0021.bmp
+dummy.pts : t1_0022.bmp
+dummy.pts : t1_0023.bmp
+dummy.pts : t1_0024.bmp
+dummy.pts : t1_0025.bmp
+dummy.pts : t1_0026.bmp
+dummy.pts : t1_0027.bmp
+dummy.pts : t1_0028.bmp
+dummy.pts : t1_0029.bmp
+dummy.pts : t1_0030.bmp
+dummy.pts : t1_0031.bmp
+dummy.pts : t1_0032.bmp
+dummy.pts : t1_0033.bmp
+dummy.pts : t1_0034.bmp
+dummy.pts : t1_0035.bmp
+dummy.pts : t1_0036.bmp
+dummy.pts : t1_0037.bmp
+dummy.pts : t1_0038.bmp
+dummy.pts : t1_0039.bmp
+dummy.pts : t1_0040.bmp
+dummy.pts : t1_0041.bmp
+dummy.pts : t1_0042.bmp
+dummy.pts : t1_0043.bmp
+dummy.pts : t1_0044.bmp
+dummy.pts : t1_0045.bmp
+dummy.pts : t1_0046.bmp
+dummy.pts : t1_0047.bmp
+dummy.pts : t1_0048.bmp
+dummy.pts : t1_0049.bmp
+dummy.pts : t1_0050.bmp
+dummy.pts : t1_0051.bmp
+dummy.pts : t1_0052.bmp
+dummy.pts : t1_0053.bmp
+dummy.pts : t1_0054.bmp
+dummy.pts : t1_0055.bmp
+dummy.pts : t1_0056.bmp
+dummy.pts : t1_0057.bmp
+dummy.pts : t1_0058.bmp
+dummy.pts : t1_0059.bmp
+}

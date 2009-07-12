@@ -1,0 +1,21 @@
+// Define type of AAM (basic_aam,shape_aam,comp_aam,direct_aam,raw_regression_aam,grad_regression_aam)
+aam_type: basic_aam
+
+// Define model directory and base name of APM and AAM files
+model_dir: C:\Users\Thiago\Desktop\GSOC\am_tools\models\
+am_name: hand3
+aam_name: hand3
+
+// Parameter displacements used during search
+displacement_x: 2
+displacement_y: 2
+max_disp: 0.125
+scaledisplacement_x: 0.05
+scaledisplacement_y: 0.05
+tex_displacement: 0.05
+displacement_params: 0.5
+n_per_eg: 2
+
+// Maximum number of images to sample from (overrides that supplied in SMD)
+max_n_samples: 10
+rob_kernel: None
