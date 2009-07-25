@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<CONFIG>
+    <!--/////////////////////////////////////////
+
+        YOU CAN MANUALLY EDIT THE FEATURES BELOW
+ 
+    ///////////////////////////////////////////// -->
+  <!--// CAMERA SETTINGS // -->
+    <CAMERA_0>
+        <USECAMERA>0</USECAMERA>
+        <DEVICE>0</DEVICE>
+        <WIDTH>640</WIDTH>
+        <HEIGHT>480</HEIGHT>
+        <FRAMERATE>120</FRAMERATE>
+    </CAMERA_0>
+    <!--// VIDEO SETTINGS // -->
+    <VIDEO>
+        <FILENAME>test_videos/RearDI.m4v</FILENAME>
+    </VIDEO>
+</CONFIG>
