@@ -44,6 +44,7 @@
 void ccvHandSandBox::setup(){
 
     printf("CCV HAND TRACKING SANDBOX STARTED\n");
+    printf("CCV HAND TRACKING SANDBOX STARTED\n");
     ofSetWindowTitle("CCV HAND TRACKING SANDBOX");
     verdana.loadFont("verdana.ttf", 8, true, true);
     ofBackground(100,100,100);
@@ -64,14 +65,24 @@ void ccvHandSandBox::setup(){
     sourceImg.setUseTexture(false);
     floatBgImg.allocate(camWidth, camHeight);
 
-    blur = false;
+    amplify = true;
+    blur = true;
     erode = false;
     dilate = false;
     eqHist = false;
     bLearnBackground = false;
     bDynamicBG = false;
+    highpass = true;
+    bDrawOutlines = true;
+    bShowLabels = true;
 
-	threshold = 30;
+    //Setup Calibration
+	calib.setup(camWidth, camHeight, &tracker);
+
+    MIN_BLOB_SIZE = 2;
+    MAX_BLOB_SIZE = 50;
+
+	threshold = 112;
 
 }
 //--------------------------------------------------------------
@@ -87,14 +98,24 @@ void ccvHandSandBox::update()
 
         sourceImg.setFromPixels(vidPlayer.getPixels(), camWidth,camHeight);
         processedImg = sourceImg;
+        cvSub(processedImg.getCvImage(), grayBg.getCvImage(), processedImg.getCvImage());
+
         processedImg.threshold(threshold);
+
+		processedImg.flagImageChanged();
 
          if(blur)processedImg.blur( 3 );
          if(dilate)processedImg.dilate( );
          if(erode)processedImg.erode( );
          if(eqHist)processedImg.equalizeHist();
-         if(highpass)processedImg.highpass(10,40);
-        }
+         if(highpass)processedImg.highpass(12,3);
+         if(amplify)processedImg.amplify(processedImg, 300);
+
+
+         contourFinder.findContours(processedImg,  (MIN_BLOB_SIZE * 2) + 1, ((camWidth * camHeight) * .4) * (MAX_BLOB_SIZE * .001), maxBlobs, false);
+
+         tracker.track(&contourFinder);
+   }
 
 
 }
@@ -103,15 +124,20 @@ void ccvHandSandBox::update()
 void ccvHandSandBox::draw(){
 
 
-	sourceImg.draw(20,20, 320, 240);
+	processedImg.draw(20,20, 320, 240);
     vidPlayer.draw(360,280);
-    processedImg.draw(20,280,320,240);
+    grayBg.draw(20,280,320,240);
+
+    drawFingerOutlines();
 
 	ofSetColor(0xffffff);
 
 	char sandBoxStr[1024];
 	sprintf(sandBoxStr, "+/- THRESHOLD: %5i",threshold);
 	verdana.drawString(sandBoxStr, 20, 560);
+
+	sprintf(sandBoxStr, " a  Amplify:    %s",amplify? "true" : "false");
+	verdana.drawString(sandBoxStr, 20, 720);
 
 	sprintf(sandBoxStr, " d  DILATE:    %s",dilate? "true" : "false");
 	verdana.drawString(sandBoxStr, 20, 580);
@@ -159,6 +185,9 @@ void ccvHandSandBox::keyPressed  (int key){
 			threshold --;
 			if (threshold < 0) threshold = 0;
 			break;
+        case 'a':
+			amplify=!amplify;
+        break;
         case 'b':
 			blur=!blur;
         break;
@@ -173,7 +202,7 @@ void ccvHandSandBox::keyPressed  (int key){
         break;
         case 'k':
             bLearnBackground = true;
-            learnBackGround(processedImg);
+            learnBackGround(sourceImg);
         break;
         case 'q':
 			eqHist=!eqHist;
@@ -220,22 +249,76 @@ void ccvHandSandBox::loadXMLSettings()
     videoFileName = XML.getValue("CONFIG:VIDEO:FILENAME", "test_videos/t1.avi");
     camWidth					= XML.getValue("CONFIG:CAMERA_0:WIDTH", 640);
 	camHeight					= XML.getValue("CONFIG:CAMERA_0:HEIGHT", 480);
+	tmpLocalHost				= XML.getValue("CONFIG:NETWORK:LOCALHOST", "localhost");
+	tmpPort						= XML.getValue("CONFIG:NETWORK:TUIOPORT_OUT", 3333);
+	tmpFlashPort				= XML.getValue("CONFIG:NETWORK:TUIOFLASHPORT_OUT", 3000);
+	maxBlobs					= XML.getValue("CONFIG:BLOBS:MAXNUMBER", 20);
+	myTUIO.setup(tmpLocalHost.c_str(), tmpPort, tmpFlashPort);
 
 }
 
-void ccvHandSandBox::learnBackGround(CPUImageFilter& img)
+void ccvHandSandBox::learnBackGround(ofxCvColorImage& img)
 {
         //Capture full background
-        if (bLearnBackground == true
+        if (bLearnBackground == true)
         {
             floatBgImg = img;
 			cvConvertScale( floatBgImg.getCvImage(), grayBg.getCvImage(), 255.0f/65535.0f, 0 );
 			grayBg.flagImageChanged();
             bLearnBackground = false;
         }
-        cvSub(img.getCvImage(), grayBg.getCvImage(), img.getCvImage());
+}
 
-		img.flagImageChanged();
+/*****************************************************************************
+* Getters
+*****************************************************************************/
 
-    }
+std::map<int, Blob> ccvHandSandBox::getBlobs()
+{
+	return tracker.getTrackedBlobs();
+}
 
+/*****************************************************************************
+* Drawing functions
+*****************************************************************************/
+
+void ccvHandSandBox::drawFingerOutlines()
+{
+	//Find the blobs for drawing
+	for (int i=0; i<contourFinder.nBlobs; i++)
+
+	{
+//	    char debugNumber[1024];
+//	    sprintf(debugNumber, "quant: %i", contourFinder.nBlobs);
+//        verdana.drawString(debugNumber, 365, contourFinder.blobs[i].boundingRect.height/2 + 185);
+
+		if (bDrawOutlines)
+		{
+			//Draw contours (outlines) on the source image
+			contourFinder.blobs[i].drawContours(20, 20, camWidth, camHeight, MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT);
+		}
+		if (bShowLabels) //Show ID label;
+		{
+			float xpos = contourFinder.blobs[i].centroid.x * (MAIN_WINDOW_WIDTH/camWidth);
+			float ypos = contourFinder.blobs[i].centroid.y * (MAIN_WINDOW_HEIGHT/camHeight);
+
+			if (i > 0)
+			{
+			//float distance = sqrt(pow(contourFinder.blobs[i].centroid.x - contourFinder.blobs[i-1].centroid.x, 2)+pow(contourFinder.blobs[i].centroid.x - contourFinder.blobs[i-1].centroid.x,2));
+
+		//	char distStr[1024];
+		//	sprintf(distStr, "dist: %f", distance);
+		//	verdana.drawString(distStr, xpos + 15, ypos + contourFinder.blobs[i].boundingRect.height/2 + 85);
+
+			}
+       //     ofCircle(contourFinder.blobs[i].centroid.x* (MAIN_WINDOW_WIDTH/camWidth), contourFinder.blobs[i].centroid.y* (MAIN_WINDOW_HEIGHT/camHeight), 10);
+			ofSetColor(0xCCFFCC);
+			char idStr[1024];
+			sprintf(idStr, "id: %i", contourFinder.blobs[i].id);
+			verdana.drawString(idStr, xpos + 15, ypos + contourFinder.blobs[i].boundingRect.height/2 + 45);
+
+//			cvEllipseBox(sourceImg, contourFinder.track_box, CV_RGB(255,0,0), 3, CV_AA, 0);
+		}
+	}
+	ofSetColor(0xFFFFFF);
+}
