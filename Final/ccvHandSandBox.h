@@ -50,7 +50,25 @@
 #include "ofxXmlSettings.h"
 #include "Filters/CPUImageFilter.h"
 
+//Used for tracking algo
+#include "Tracking/BlobManager.h"
+#include "Tracking/Tracking.h"
+
+#include "ofMain.h"
+
+//Communications
+#include "Communication/TUIO.h"
+
+//Used other calibration
+#include "Calibration/CalibrationUtils.h"
+#include "Calibration/Calibration.h"
+
+
 #include <cv.h>
+
+//height and width of the source/tracked draw window
+#define MAIN_WINDOW_HEIGHT 240.0f
+#define MAIN_WINDOW_WIDTH  320.0f
 
 class ccvHandSandBox : public ofSimpleApp{
 
@@ -63,6 +81,8 @@ class ccvHandSandBox : public ofSimpleApp{
 		int camWidth;
 		int camHeight;
 
+		int	maxBlobs;
+
 		void keyPressed  (int key);
 		void mouseMoved(int x, int y );
 		void mouseDragged(int x, int y, int button);
@@ -72,11 +92,18 @@ class ccvHandSandBox : public ofSimpleApp{
         ofVideoGrabber 		vidGrabber;
         ofVideoPlayer       vidPlayer;
 
+        //Getters
+        std::map<int, Blob> getBlobs();
+
         ofxCvGrayscaleImage 	grayImage;
 		ofxCvGrayscaleImage 	grayBg;
 		ofxCvGrayscaleImage 	grayDiff;
+		ofxCvGrayscaleImage 	originalBg;
+
 		ofxCvShortImage		    floatBgImg;
 		ofImage				    background;
+
+		ofImage fileImage;
 
 		float               fLearnRate;
 
@@ -90,10 +117,11 @@ class ccvHandSandBox : public ofSimpleApp{
 
         CPUImageFilter      processedImg;
         ofxCvColorImage		sourceImg;
+        ofxCvColorImage		colorBg;
 
 
 		void loadXMLSettings();
-		void learnBackGround(CPUImageFilter& img);
+		void learnBackGround(ofxCvColorImage& img);
 
 		string videoFileName;
 
@@ -101,8 +129,26 @@ class ccvHandSandBox : public ofSimpleApp{
         ofxXmlSettings		XML;
         string				message;
 
-        unsigned char* pixelsWcam;
-        bool blur,erode, dilate, eqHist, highpass;
+        bool				bDrawOutlines;
+        bool				bShowLabels;
+
+        bool blur,erode, dilate, eqHist, highpass, amplify;
+
+        ContourFinder       contourFinder;
+        BlobTracker			tracker;
+
+        int					MIN_BLOB_SIZE;
+        int					MAX_BLOB_SIZE;
+
+        //Communication
+        TUIO				myTUIO;
+        string				tmpLocalHost;
+        int					tmpPort;
+        int					tmpFlashPort;
+
+        Calibration         calib;
+
+        void drawFingerOutlines();
 
 };
 
