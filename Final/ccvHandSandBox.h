@@ -70,6 +70,12 @@
 #define MAIN_WINDOW_HEIGHT 240.0f
 #define MAIN_WINDOW_WIDTH  320.0f
 
+// AAM-Library
+#include "AAM_IC.h"
+#include "AAM_Basic.h"
+
+#include <time.h>
+
 class ccvHandSandBox : public ofSimpleApp{
 
 	public:
@@ -108,6 +114,8 @@ class ccvHandSandBox : public ofSimpleApp{
 		float               fLearnRate;
 
 		ofTrueTypeFont		verdana;
+		ofTrueTypeFont		bigTitle;
+		ofTrueTypeFont		info;
 
 		int 				threshold;
 		bool				bLearnBackground;
@@ -124,6 +132,7 @@ class ccvHandSandBox : public ofSimpleApp{
 		void learnBackGround(ofxCvColorImage& img);
 
 		string videoFileName;
+		string  aamModelFileName;
 
         //XML Settings Vars
         ofxXmlSettings		XML;
@@ -133,6 +142,9 @@ class ccvHandSandBox : public ofSimpleApp{
         bool				bShowLabels;
 
         bool blur,erode, dilate, eqHist, highpass, amplify;
+
+        bool                vJones;
+        bool                aamTracking;
 
         ContourFinder       contourFinder;
         BlobTracker			tracker;
@@ -148,7 +160,33 @@ class ccvHandSandBox : public ofSimpleApp{
 
         Calibration         calib;
 
-        void drawFingerOutlines();
+        void                drawFingerOutlines();
+
+        //Camshift / Mean-Shift variables
+        CvBox2D             handBox;
+        CvRect              handRect;
+        CvConnectedComp     handComp;
+        CvRect              handSelectionRect;
+        CvPoint             handPoint;
+
+        void                HandROIAdjust(int x , int y, IplImage* image);
+
+        CvHistogram         *hist;
+        int                 histDims;
+        float*              hranges;
+        ofxCvGrayscaleImage            histImg;
+        IplImage*            h_plane;
+
+        void                drawROIRect();
+
+        IplImage**          planes;
+
+        void                aamSearch();
+
+        AAM_Pyramid         model;
+
+        time_t      before, after;
+        double      elapsed;
 
 };
 

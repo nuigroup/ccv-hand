@@ -40,6 +40,11 @@
 ***************************************************************************/
 
 #include "ccvHandSandBox.h"
+#include <cv.h>
+#include <highgui.h>
+#include <time.h>
+
+#define DEBUG 0
 
 void ccvHandSandBox::setup(){
 
@@ -47,7 +52,9 @@ void ccvHandSandBox::setup(){
     printf("CCV HAND TRACKING SANDBOX STARTED\n");
     ofSetWindowTitle("CCV HAND TRACKING SANDBOX");
     verdana.loadFont("verdana.ttf", 8, true, true);
-    ofBackground(100,100,100);
+    bigTitle.loadFont("verdana.ttf", 20, true, true);
+    info.loadFont("verdana.ttf", 12, true, true);
+    ofBackground(0,200,255);
     background.loadImage("images/background.jpg");
     //Load Settings from config.xml file
 	loadXMLSettings();
@@ -75,15 +82,43 @@ void ccvHandSandBox::setup(){
     highpass = true;
     bDrawOutlines = true;
     bShowLabels = true;
-
+    aamTracking = false;
+    vJones  =  false;
     //Setup Calibration
 	calib.setup(camWidth, camHeight, &tracker);
 
     MIN_BLOB_SIZE = 2;
     MAX_BLOB_SIZE = 50;
 
-	threshold = 112;
+	threshold = 11;
 
+	histDims = 16;
+
+    float hranges_arr[] = {0,180};
+
+	hranges = hranges_arr;
+
+	hist = cvCreateHist( 1, &histDims, CV_HIST_ARRAY, &hranges, 1 );
+
+	histImg.allocate(camWidth,camHeight);
+    cvZero(histImg.getCvImage() );
+
+    h_plane = cvCreateImage(cvGetSize(histImg.getCvImage()), 8 , 1);
+    planes = &h_plane;
+
+    //Checking if lots of time is being consumed during the model load
+
+    time(&before);
+
+    model.ReadModel(aamModelFileName);
+
+    time(&after);
+
+    elapsed = difftime(before, after);
+
+    #if DEBUG
+    printf ("Time elapsed to load model %lf . \n", elapsed);
+    #endif
 }
 //--------------------------------------------------------------
 void ccvHandSandBox::update()
@@ -98,7 +133,21 @@ void ccvHandSandBox::update()
 
         sourceImg.setFromPixels(vidPlayer.getPixels(), camWidth,camHeight);
         processedImg = sourceImg;
+
+        h_plane = processedImg.getCvImage();
+        planes = &h_plane;
+
         cvSub(processedImg.getCvImage(), grayBg.getCvImage(), processedImg.getCvImage());
+
+        #if DEBUG
+        printf("Got problems here(?)\n");
+        #endif
+        cvCalcHist( planes, hist, 0, 0 ); // Compute histogram
+
+        #if DEBUG
+        printf("Ok!\n");
+        #endif
+        cvCalcBackProject( planes, histImg.getCvImage(), hist );
 
         processedImg.threshold(threshold);
 
@@ -115,6 +164,15 @@ void ccvHandSandBox::update()
          contourFinder.findContours(processedImg,  (MIN_BLOB_SIZE * 2) + 1, ((camWidth * camHeight) * .4) * (MAX_BLOB_SIZE * .001), maxBlobs, false);
 
          tracker.track(&contourFinder);
+
+        //Working on ROI-Camshift
+         HandROIAdjust(15,200, processedImg.getCvImage());
+         cvCamShift(processedImg.getCvImage(), handSelectionRect, cvTermCriteria( CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 10, 1 ), &handComp, &handBox);
+         handSelectionRect = handComp.rect;
+
+         cvEllipseBox( processedImg.getCvImage(), handBox, CV_RGB(255,0,0), 3, CV_AA, 0 );
+
+
    }
 
 
@@ -127,8 +185,12 @@ void ccvHandSandBox::draw(){
 	processedImg.draw(20,20, 320, 240);
     vidPlayer.draw(360,280);
     grayBg.draw(20,280,320,240);
+    histImg.draw(350,20,320,240);
+
 
     drawFingerOutlines();
+
+    drawROIRect();
 
 	ofSetColor(0xffffff);
 
@@ -157,20 +219,36 @@ void ccvHandSandBox::draw(){
 	sprintf(sandBoxStr, " y  Dynamic Background:    %s",bDynamicBG? "true" : "false");
 	verdana.drawString(sandBoxStr, 20, 680);
 
-	sprintf(sandBoxStr, " k Background Subtract:    %s",bLearnBackground? "true" : "false");
+    ofSetColor(0x000000);
+	sprintf(sandBoxStr, " Press k for background subtract:    %s",bLearnBackground? "true" : "false");
 	verdana.drawString(sandBoxStr, 20, 700);
 
-    ofSetColor(0x000000);
-    verdana.drawString("GOOGLE SUMMER OF CODE 2009", 605, 100);
     ofSetColor(0xFFFFFF);
-    verdana.drawString("CCV HAND TRACKING", 605, 150);
-    ofSetColor(0x000000);
-    verdana.drawString("Student: Thiago de Freitas Oliveira Araujo", 605, 170);
-    verdana.drawString("Mentor: Laurence Muller", 605, 190);
+	sprintf(sandBoxStr, " m Activate AAM:    %s",aamTracking? "true" : "false");
+	verdana.drawString(sandBoxStr, 20, 740);
 
+	sprintf(sandBoxStr, " v Activate Viola and Jones:    %s",vJones? "true" : "false");
+	verdana.drawString(sandBoxStr, 20, 760);
+
+	verdana.drawString("Tracking View", 20, 10);
+
+	verdana.drawString("Subtracted Background", 20, 270);
+
+	verdana.drawString("Histogram", 350, 10);
+
+
+    ofSetColor(0x000000);
+    info.drawString("GOOGLE SUMMER OF CODE 2009", 685, 100);
+    ofSetColor(0xFFFFFF);
+    bigTitle.drawString("CCV HAND TRACKING", 685, 150);
+    ofSetColor(0x000000);
+    verdana.drawString("Student: Thiago de Freitas Oliveira Araujo", 725, 170);
+    verdana.drawString("Mentor: Laurence Muller", 725, 190);
+
+	ofSetColor(0x000000);
+	verdana.drawString("Follow the development at:", 485, 270);
 	ofSetColor(0xFFFFFF);
-	verdana.drawString("Follow the development at:", 435, 220);
-	verdana.drawString("nuicode.com |  ~  | thiagodefreitas.wordpress.com", 605, 220);
+	verdana.drawString("nuicode.com |  ~  | thiagodefreitas.wordpress.com", 655, 270);
 }
 
 //--------------------------------------------------------------
@@ -183,7 +261,7 @@ void ccvHandSandBox::keyPressed  (int key){
 			break;
 		case '-':
 			threshold --;
-			if (threshold < 0) threshold = 0;
+			if (threshold < 5) threshold = 5;
 			break;
         case 'a':
 			amplify=!amplify;
@@ -209,6 +287,12 @@ void ccvHandSandBox::keyPressed  (int key){
         break;
         case 'y':
             bDynamicBG = !bDynamicBG;
+        break;
+        case 'm':
+            aamTracking = !aamTracking;
+        break;
+        case 'v':
+            vJones = !vJones;
         break;
 	}
 
@@ -253,6 +337,8 @@ void ccvHandSandBox::loadXMLSettings()
 	tmpPort						= XML.getValue("CONFIG:NETWORK:TUIOPORT_OUT", 3333);
 	tmpFlashPort				= XML.getValue("CONFIG:NETWORK:TUIOFLASHPORT_OUT", 3000);
 	maxBlobs					= XML.getValue("CONFIG:BLOBS:MAXNUMBER", 20);
+	aamModelFileName			= XML.getValue("CONFIG:AAM:MODEL", "hand.amf");
+
 	myTUIO.setup(tmpLocalHost.c_str(), tmpPort, tmpFlashPort);
 
 }
@@ -321,4 +407,28 @@ void ccvHandSandBox::drawFingerOutlines()
 		}
 	}
 	ofSetColor(0xFFFFFF);
+}
+
+void ccvHandSandBox::HandROIAdjust(int x, int y, IplImage* image)
+{
+    handSelectionRect.x = MIN(x,handPoint.x);
+    handSelectionRect.y = MIN(y,handPoint.y);
+    handSelectionRect.width = handSelectionRect.x + CV_IABS(x - handPoint.x);
+    handSelectionRect.height = handSelectionRect.y + CV_IABS(y - handPoint.y);
+    handSelectionRect.x = MAX( handSelectionRect.x, 0 );
+    handSelectionRect.y = MAX( handSelectionRect.y, 0 );
+    handSelectionRect.width = MIN( handSelectionRect.width, image->width );
+    handSelectionRect.height = MIN( handSelectionRect.height, image->height );
+    handSelectionRect.width -= handSelectionRect.x;
+    handSelectionRect.height -= handSelectionRect.y;
+}
+
+void ccvHandSandBox::drawROIRect()
+{
+//
+}
+
+void ccvHandSandBox::aamSearch()
+{
+
 }
