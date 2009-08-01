@@ -120,6 +120,7 @@ class ccvHandSandBox : public ofSimpleApp{
 		int 				threshold;
 		bool				bLearnBackground;
 		bool                bDynamicBG;
+		bool                bTUIOMode;
 
 		bool                newFrame;
 

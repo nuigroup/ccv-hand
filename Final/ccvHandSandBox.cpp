@@ -84,6 +84,7 @@ void ccvHandSandBox::setup(){
     bShowLabels = true;
     aamTracking = false;
     vJones  =  false;
+    bTUIOMode = true;
     //Setup Calibration
 	calib.setup(camWidth, camHeight, &tracker);
 
@@ -172,6 +173,13 @@ void ccvHandSandBox::update()
 
          cvEllipseBox( processedImg.getCvImage(), handBox, CV_RGB(255,0,0), 3, CV_AA, 0 );
 
+        if (bTUIOMode)
+		{
+			//Start sending OSC
+			myTUIO.bTCPMode = true;
+			myTUIO.sendTUIO(&getBlobs());
+		}
+
 
    }
 
@@ -195,6 +203,12 @@ void ccvHandSandBox::draw(){
 	ofSetColor(0xffffff);
 
 	char sandBoxStr[1024];
+
+	ofSetColor(0x000000);
+	sprintf(sandBoxStr, " t  Hand info enabled at TUIO:    %s",myTUIO.bHandInfo? "true" : "false");
+	verdana.drawString(sandBoxStr, 20, 540);
+
+    ofSetColor(0xFFFFFF);
 	sprintf(sandBoxStr, "+/- THRESHOLD: %5i",threshold);
 	verdana.drawString(sandBoxStr, 20, 560);
 
@@ -285,6 +299,13 @@ void ccvHandSandBox::keyPressed  (int key){
         case 'q':
 			eqHist=!eqHist;
         break;
+        case 't':
+			myTUIO.bHandInfo=!myTUIO.bHandInfo;
+			if(myTUIO.bHandInfo)
+			printf("Mode changed to inform hand information in the TUIO packet\n");
+			else
+			printf("Mode changed to not inform hand information in the TUIO packet\n");
+        break;
         case 'y':
             bDynamicBG = !bDynamicBG;
         break;
@@ -338,6 +359,7 @@ void ccvHandSandBox::loadXMLSettings()
 	tmpFlashPort				= XML.getValue("CONFIG:NETWORK:TUIOFLASHPORT_OUT", 3000);
 	maxBlobs					= XML.getValue("CONFIG:BLOBS:MAXNUMBER", 20);
 	aamModelFileName			= XML.getValue("CONFIG:AAM:MODEL", "hand.amf");
+	myTUIO.bHandInfo			= XML.getValue("CONFIG:BOOLEAN:HANDINFO",0);
 
 	myTUIO.setup(tmpLocalHost.c_str(), tmpPort, tmpFlashPort);
 
