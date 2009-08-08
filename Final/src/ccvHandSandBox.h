@@ -194,6 +194,8 @@ public:
     void                aamSearch();
 
     AAM_Pyramid         model;
+   // AAM_IC              modelIC;
+    AAM_Basic           modelBasic;
     AAM_Shape           Shape;
 
     time_t      before, after;

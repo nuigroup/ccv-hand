@@ -160,6 +160,39 @@ void ccvHandSandBox::update()
 
         sourceImg.setFromPixels(vidPlayer.getPixels(), camWidth,camHeight);
 
+                processedImg = sourceImg;
+
+        h_plane = processedImg.getCvImage();
+        planes = &h_plane;
+
+        cvSub(processedImg.getCvImage(), grayBg.getCvImage(), processedImg.getCvImage());
+
+#if DEBUG
+        printf("Got problems here(?)\n");
+#endif
+        cvCalcHist( planes, hist, 0, 0 ); // Compute histogram
+
+#if DEBUG
+        printf("Ok!\n");
+#endif
+        cvCalcBackProject( planes, histImg.getCvImage(), hist );
+
+        processedImg.threshold(threshold);
+
+        processedImg.flagImageChanged();
+
+        if (blur)processedImg.blur( 3 );
+        if (dilate)processedImg.dilate( );
+        if (erode)processedImg.erode( );
+        if (eqHist)processedImg.equalizeHist();
+        if (highpass)processedImg.highpass(12,3);
+        if (amplify)processedImg.amplify(processedImg, 300);
+
+
+        contourFinder.findContours(processedImg,  (MIN_BLOB_SIZE * 2) + 1, ((camWidth * camHeight) * .4) * (MAX_BLOB_SIZE * .001), maxBlobs, false);
+
+        tracker.track(&contourFinder);
+
         if (initBg)
         {
             initBackgroundModel(&bkgdMdl,sourceImg.getCvImage(), &paramMoG);
@@ -251,59 +284,36 @@ void ccvHandSandBox::update()
                 }
 
                 flag = model.InitShapeFromDetBox(Shape,blobsCheck.getCvImage(),facedet);
-
+                /*
+                modelIC.InitParams(blobsCheck.getCvImage());
+*/
                 if (flag == false)
                 {
                    printf("False model fitting\n");
                 }
                 else
                 {
-               //model.Fit(blobsCheck.getCvImage(), Shape, 30, false);
-              //model.Draw(blobsCheck.getCvImage(), Shape, 1);
-
+             //  model.Fit(blobsCheck.getCvImage(), Shape, 30, false);
+               //printf("Pyramid OK\n");
+               /*
+               modelIC.Fit(blobsCheck.getCvImage(), Shape, 30, false);
+               printf ("Inverse Compositional OK\n");
+               */
+              //model.Draw(blobsCheck.getCvImage(), Shape, 0);
+              /*
+              modelIC.Draw(blobsCheck.getCvImage(), Shape, 1);
+*/
                 }
-            }
-        }
 
-        processedImg = sourceImg;
-
-        h_plane = processedImg.getCvImage();
-        planes = &h_plane;
-
-        cvSub(processedImg.getCvImage(), grayBg.getCvImage(), processedImg.getCvImage());
-
-#if DEBUG
-        printf("Got problems here(?)\n");
-#endif
-        cvCalcHist( planes, hist, 0, 0 ); // Compute histogram
-
-#if DEBUG
-        printf("Ok!\n");
-#endif
-        cvCalcBackProject( planes, histImg.getCvImage(), hist );
-
-        processedImg.threshold(threshold);
-
-        processedImg.flagImageChanged();
-
-        if (blur)processedImg.blur( 3 );
-        if (dilate)processedImg.dilate( );
-        if (erode)processedImg.erode( );
-        if (eqHist)processedImg.equalizeHist();
-        if (highpass)processedImg.highpass(12,3);
-        if (amplify)processedImg.amplify(processedImg, 300);
-
-
-        contourFinder.findContours(processedImg,  (MIN_BLOB_SIZE * 2) + 1, ((camWidth * camHeight) * .4) * (MAX_BLOB_SIZE * .001), maxBlobs, false);
-
-        tracker.track(&contourFinder);
-
-        //Working on ROI-Camshift
-        HandROIAdjust(15,200, processedImg.getCvImage());
+                    //Working on ROI-Camshift
+        HandROIAdjust(coordReal.cX,coordReal.cY, processedImg.getCvImage());
         cvCamShift(processedImg.getCvImage(), handSelectionRect, cvTermCriteria( CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 10, 1 ), &handComp, &handBox);
         handSelectionRect = handComp.rect;
 
-        cvEllipseBox( processedImg.getCvImage(), handBox, CV_RGB(255,0,0), 3, CV_AA, 0 );
+        cvEllipseBox( processedImg.getCvImage(), handBox, CV_RGB(255,255,255), 3, CV_AA, 0 );
+            }
+        }
+
 
         if (bTUIOMode)
         {
