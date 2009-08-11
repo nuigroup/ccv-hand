@@ -65,6 +65,9 @@
 
 
 #include <cv.h>
+#include <cxcore.h>
+#include <cvaux.h>
+#include <highgui.h>
 
 //height and width of the source/tracked draw window
 #define MAIN_WINDOW_HEIGHT 240.0f
@@ -202,7 +205,7 @@ public:
     void                aamSearch();
 
     AAM_Pyramid         model;
-   // AAM_IC              modelIC;
+    // AAM_IC              modelIC;
     AAM_Basic           modelBasic;
     AAM_Shape           Shape;
 
@@ -258,6 +261,8 @@ public:
 
     double minF_left, maxF_left;
     double minF, maxF;
+
+    CvRect  win;
 
 };
 

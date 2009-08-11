@@ -75,21 +75,21 @@ void ccvHandSandBox::setup()
     sourceImg.allocate(camWidth,camHeight);
     sourceImg.setUseTexture(false);
     floatBgImg.allocate(camWidth, camHeight);
-   // blobsCheck.allocate(camWidth, camHeight);
+    // blobsCheck.allocate(camWidth, camHeight);
     processedImgColor.allocate(camWidth, camHeight);
     BgImgColor.allocate(camWidth,camHeight);
 
-    if(tmpl = cvLoadImage(tmplImageName.c_str(), 1))
+    if (tmpl = cvLoadImage(tmplImageName.c_str(), 1))
     {
         printf("Succesful at template loading\n");
     }
 
-    if(tmpl_left = cvLoadImage(tmplLeftName.c_str(), 1))
+    if (tmpl_left = cvLoadImage(tmplLeftName.c_str(), 1))
     {
         printf("Succesful at template loading\n");
     }
 
-    templateImg = cvCreateImage( cvSize(camWidth - tmpl->width + 1 ,camHeight - tmpl->height + 1),32,1);
+    // templateImg = cvCreateImage( cvSize(camWidth - tmpl->width + 1 ,camHeight - tmpl->height + 1),32,1);
     templateImgLeft = cvCreateImage( cvSize(camWidth - tmpl_left->width + 1 ,camHeight - tmpl_left->height + 1),32,1);
 
     templateImgDraw.allocate(camWidth - tmpl->width + 1, camHeight - tmpl->height + 1);
@@ -193,32 +193,7 @@ void ccvHandSandBox::update()
         cvSub(processedImgColor.getCvImage(), BgImgColor.getCvImage(), processedImgColor.getCvImage());
 
 
-/************************************
-Template Matching
-***************************************/
-        cvMatchTemplate(processedImgColor.getCvImage(), tmpl, templateImg, 1);
-        cvNormalize(templateImg, templateImg, 1, 0, CV_MINMAX);
-        cvPow(templateImg,templateImg,5);
-        cvMinMaxLoc(templateImg, &minF, &maxF);
-        printf("Maximum: %lf, Minimum %lf\n", maxF, minF);
-             #if DEBUG
-        cvSaveImage("done.bmp", templateImg);
-#endif
-        cvMatchTemplate(processedImgColor.getCvImage(), tmpl_left, templateImgLeft, 5);
-        cvNormalize(templateImgLeft, templateImgLeft, 1, 0, CV_MINMAX);
 
-        cvMinMaxLoc(templateImgLeft, &minF_left, &maxF_left);
-        printf("Maximum: %lf, Minimum %lf\n", maxF_left, minF_left);
-        cvPow(templateImgLeft, templateImgLeft, 5);
-
-             #if DEBUG
-        cvSaveImage("done_left.bmp", templateImgLeft);
-        #endif
-        cvSaveImage("source.bmp", processedImgColor.getCvImage());
-
-        cvConvertImage(templateImg, templateImgDraw.getCvImage());
-
-//        processedImg.getPixels(templateImg);
 
 //*-------------------------------------------------------------------
 //
@@ -256,7 +231,7 @@ Template Matching
 
         templateImgDraw.flagImageChanged();
 
-         if (blur)templateImgDraw.blur( 3 );
+        if (blur)templateImgDraw.blur( 3 );
         if (dilate)templateImgDraw.dilate( );
         if (erode)templateImgDraw.erode( );
         if (eqHist)templateImgDraw.equalizeHist();
@@ -270,27 +245,27 @@ Template Matching
         }
         else
         {
-            #if DEBUG
-                    printf("AfterBackground initialization:\n");
+#if DEBUG
+            printf("AfterBackground initialization:\n");
 #endif
 
-            blobsCheck = templateImgDraw;
+            blobsCheck = sourceImg;
             //cvSub(blobsCheck.getCvImage(), grayBg.getCvImage(), blobsCheck.getCvImage());
- #if DEBUG
-                    printf("Copied Image\n");
+#if DEBUG
+            printf("Copied Image\n");
 #endif
 
             binaryForeground = updateBackground(bkgdMdl,blobsCheck.getCvImage());
-             #if DEBUG
-                    printf("Updated background\n");
+#if DEBUG
+            printf("Updated background\n");
 #endif
             blobsVector = getBlobs2(blobsCheck.getCvImage(),binaryForeground);
-             #if DEBUG
-                    printf("BLobs Vector\n");
+#if DEBUG
+            printf("BLobs Vector\n");
 #endif
             blobs_total = blobsVector.GetNumBlobs();
-             #if DEBUG
-                    printf("Blobs Total:\n");
+#if DEBUG
+            printf("Blobs Total:\n");
 #endif
             /*
                         if (blur)blobsCheck.blur( 3 );
@@ -301,7 +276,7 @@ Template Matching
                         if (amplify)blobsCheck.amplify(blobsCheck, 300);
             */
 #if DEBUG
-                    printf("Before Selection:\n");
+            printf("Before Selection:\n");
 #endif
 
             if ( blobs_total > 0 )
@@ -375,11 +350,76 @@ Template Matching
                 **********************************************/
 
 
-//                for (int i =0; i < contourFinder.nBlobs; i++)
-//                {
-//                    if ( contourFinder.blobs[i].area > 1000)
-//                    {
-//
+                for (int i =0; i < contourFinder.nBlobs; i++)
+                {
+                    if ( contourFinder.blobs[i].area > 1000)
+                    {
+
+
+                        /************************************
+                        Template Matching
+                        ***************************************/
+                       // templateImg = cvCreateImage(cvSize(processedImgColor.getCvImage()->width - tmpl->width + 1 , processedImgColor.getCvImage()->height - tmpl->height + 1),32, 1);
+
+                        win = cvRect(contourFinder.blobs[i].centroid.x, contourFinder.blobs[i].centroid.y, 150,150);
+//                        /* make sure that the search window is still within the frame */
+                        if (win.x < 0)
+                            win.x = 0;
+                        if (win.y < 0)
+                            win.y = 0;
+                        if (win.x + win.width > processedImgColor.getCvImage()->width)
+                        win.x = processedImgColor.getCvImage()->width - win.width;
+                    if (win.y + win.height > processedImgColor.getCvImage()->height)
+                            win.y = processedImgColor.getCvImage()->height - win.height;
+
+                        cvSetImageROI(processedImgColor.getCvImage(),win);
+
+                        templateImg = cvCreateImage(cvSize(win.width - tmpl->width + 1 , win.height - tmpl->height + 1),32, 1);
+
+                        printf("Widths: %d %d %d, Heights: %d, %d, %d\n", win.width, tmpl->width, templateImg->width, win.height, tmpl->height, templateImg->height);
+                        cvMatchTemplate(processedImgColor.getCvImage(), tmpl, templateImg, 1);
+
+
+                        cvResetImageROI(processedImgColor.getCvImage());
+                        //cvReleaseImage(&templateImg);
+
+                        cvNormalize(templateImg, templateImg, 1, 0, CV_MINMAX);
+                        cvPow(templateImg,templateImg,5);
+
+
+                        cvMinMaxLoc(templateImg, &minF, &maxF);
+                        printf("Maximum: %lf, Minimum %lf\n", maxF, minF);
+
+                        if(maxF > 0)
+                        {
+                            ofSetColor(0xffffff);
+                           ofLine(win.x, win.y,  0 , 0);
+                        }
+#if DEBUG
+                        cvSaveImage("done.bmp", templateImg);
+#endif
+                        cvSetImageROI(processedImgColor.getCvImage(),win);
+
+                         templateImgLeft = cvCreateImage(cvSize(win.width - tmpl_left->width + 1 , win.height - tmpl_left->height + 1),32, 1);
+
+                        cvMatchTemplate(processedImgColor.getCvImage(), tmpl_left, templateImgLeft, 5);
+                        cvResetImageROI(processedImgColor.getCvImage());
+                       // cvReleaseImage(&templateImgLeft);
+                        cvNormalize(templateImgLeft, templateImgLeft, 1, 0, CV_MINMAX);
+
+                        cvMinMaxLoc(templateImgLeft, &minF_left, &maxF_left);
+                        printf("Maximum: %lf, Minimum %lf\n", maxF_left, minF_left);
+                        cvPow(templateImgLeft, templateImgLeft, 5);
+
+#if DEBUG
+                        cvSaveImage("done_left.bmp", templateImgLeft);
+                        cvSaveImage("source.bmp", processedImgColor.getCvImage());
+                        #endif
+
+                     //   cvConvertImage(templateImg, templateImgDraw.getCvImage());
+
+//        processedImg.getPixels(templateImg);
+
 //                        //flag = model.InitShapeFromDetBox(Shape,blobsCheck.getCvImage(),facedet);
 //                        Shape[0].x = contourFinder.blobs[i].centroid.x;
 //                        Shape[0].y = contourFinder.blobs[i].centroid.y;
@@ -409,8 +449,8 @@ Template Matching
 //                            modelIC.Draw(blobsCheck.getCvImage(), Shape, 1);
 //                            */
 //                        }
-//                    }
-//                }
+                    }
+                }
 
 //--------------------------------------------------------------------------------------------
                 //Working on ROI-Camshift
@@ -418,9 +458,9 @@ Template Matching
                 cvCamShift(processedImg.getCvImage(), handSelectionRect, cvTermCriteria( CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 10, 1 ), &handComp, &handBox);
                 handSelectionRect = handComp.rect;
 
-/****************************************************************
-Fitting with Kalman
-****************************************************************/
+                /****************************************************************
+                Fitting with Kalman
+                ****************************************************************/
 //                        printf("Kalman + fitting \n");
 //                        if( contourFinder.nBlobs > 5)
 //                        {
@@ -454,11 +494,11 @@ Fitting with Kalman
 //                        }
 //                        }
 
-/*---------------------------------------------------------*/
+                /*---------------------------------------------------------*/
 
-/****************************************************************
-//Fitting with Camshift
-//****************************************************************/
+                /****************************************************************
+                //Fitting with Camshift
+                //****************************************************************/
 //                        if( contourFinder.nBlobs > 5)
 //                        {
 //                        Shape[0].x = handSelectionRect.x;
@@ -491,7 +531,7 @@ Fitting with Kalman
 //                        }
 //                        }
 //
-/*---------------------------------------------------------*/
+                /*---------------------------------------------------------*/
 
 
                 cvEllipseBox( processedImg.getCvImage(), handBox, CV_RGB(255,255,255), 3, CV_AA, 0 );
