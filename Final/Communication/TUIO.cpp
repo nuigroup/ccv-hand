@@ -107,6 +107,12 @@ void TUIO::sendTUIO(std::map<int, Blob> * blobs)
 				set.addFloatArg(this_blob->second.D.x); //dX
 				set.addFloatArg(this_blob->second.D.y); //dY
 				set.addFloatArg(this_blob->second.maccel); //m
+				if(bHandInfo)
+				{
+				set.addFloatArg(this_blob->second.handID);
+				set.addFloatArg(this_blob->second.xHand);
+				set.addFloatArg(this_blob->second.yHand);
+				}
 				if(bHeightWidth){
 					set.addFloatArg(this_blob->second.boundingRect.width); // wd
 					set.addFloatArg(this_blob->second.boundingRect.height);// ht
