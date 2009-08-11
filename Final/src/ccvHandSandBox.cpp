@@ -42,6 +42,7 @@
 #include "ccvHandSandBox.h"
 #include <cv.h>
 #include <highgui.h>
+#include <cxcore.h>
 #include <time.h>
 
 
@@ -55,12 +56,12 @@ void ccvHandSandBox::setup()
     verdana.loadFont("verdana.ttf", 8, true, true);
     bigTitle.loadFont("verdana.ttf", 20, true, true);
     info.loadFont("verdana.ttf", 12, true, true);
-    ofBackground(0,200,255);
-    background.loadImage("images/background.jpg");
+    ofBackground(42,108,155);
+    background.loadImage("images/background.bmp");
     //Load Settings from config.xml file
     loadXMLSettings();
 
-    facedet.LoadCascade("haarcascade.xml");
+    facedet.LoadCascade(cascadeFileName.c_str());
 
     vidPlayer.loadMovie(videoFileName);
     vidPlayer.play();
@@ -74,7 +75,25 @@ void ccvHandSandBox::setup()
     sourceImg.allocate(camWidth,camHeight);
     sourceImg.setUseTexture(false);
     floatBgImg.allocate(camWidth, camHeight);
-    blobsCheck.allocate(camWidth, camHeight);
+   // blobsCheck.allocate(camWidth, camHeight);
+    processedImgColor.allocate(camWidth, camHeight);
+    BgImgColor.allocate(camWidth,camHeight);
+
+    if(tmpl = cvLoadImage(tmplImageName.c_str(), 1))
+    {
+        printf("Succesful at template loading\n");
+    }
+
+    if(tmpl_left = cvLoadImage(tmplLeftName.c_str(), 1))
+    {
+        printf("Succesful at template loading\n");
+    }
+
+    templateImg = cvCreateImage( cvSize(camWidth - tmpl->width + 1 ,camHeight - tmpl->height + 1),32,1);
+    templateImgLeft = cvCreateImage( cvSize(camWidth - tmpl_left->width + 1 ,camHeight - tmpl_left->height + 1),32,1);
+
+    templateImgDraw.allocate(camWidth - tmpl->width + 1, camHeight - tmpl->height + 1);
+    blobsCheck.allocate(camWidth - tmpl->width + 1, camHeight - tmpl->height + 1);
 
     amplify = true;
     blur = true;
@@ -138,6 +157,8 @@ void ccvHandSandBox::setup()
 
     model.ReadModel(aamModelFileName);
 
+    Shape = model.__VJDetectShape;
+
     time(&after);
 
     elapsed = difftime(before, after);
@@ -145,6 +166,8 @@ void ccvHandSandBox::setup()
 #if DEBUG
     printf ("Time elapsed to load model %lf . \n", elapsed);
 #endif
+
+
 }
 //--------------------------------------------------------------
 void ccvHandSandBox::update()
@@ -160,12 +183,47 @@ void ccvHandSandBox::update()
 
         sourceImg.setFromPixels(vidPlayer.getPixels(), camWidth,camHeight);
 
-                processedImg = sourceImg;
+        processedImg = sourceImg;
+        processedImgColor = sourceImg;
 
         h_plane = processedImg.getCvImage();
         planes = &h_plane;
 
         cvSub(processedImg.getCvImage(), grayBg.getCvImage(), processedImg.getCvImage());
+        cvSub(processedImgColor.getCvImage(), BgImgColor.getCvImage(), processedImgColor.getCvImage());
+
+
+/************************************
+Template Matching
+***************************************/
+        cvMatchTemplate(processedImgColor.getCvImage(), tmpl, templateImg, 1);
+        cvNormalize(templateImg, templateImg, 1, 0, CV_MINMAX);
+        cvPow(templateImg,templateImg,5);
+        cvMinMaxLoc(templateImg, &minF, &maxF);
+        printf("Maximum: %lf, Minimum %lf\n", maxF, minF);
+             #if DEBUG
+        cvSaveImage("done.bmp", templateImg);
+#endif
+        cvMatchTemplate(processedImgColor.getCvImage(), tmpl_left, templateImgLeft, 5);
+        cvNormalize(templateImgLeft, templateImgLeft, 1, 0, CV_MINMAX);
+
+        cvMinMaxLoc(templateImgLeft, &minF_left, &maxF_left);
+        printf("Maximum: %lf, Minimum %lf\n", maxF_left, minF_left);
+        cvPow(templateImgLeft, templateImgLeft, 5);
+
+             #if DEBUG
+        cvSaveImage("done_left.bmp", templateImgLeft);
+        #endif
+        cvSaveImage("source.bmp", processedImgColor.getCvImage());
+
+        cvConvertImage(templateImg, templateImgDraw.getCvImage());
+
+//        processedImg.getPixels(templateImg);
+
+//*-------------------------------------------------------------------
+//
+//        h_plane = processedImg.getCvImage();
+//        planes = &h_plane;
 
 #if DEBUG
         printf("Got problems here(?)\n");
@@ -193,29 +251,58 @@ void ccvHandSandBox::update()
 
         tracker.track(&contourFinder);
 
+
+        templateImgDraw.threshold(threshold);
+
+        templateImgDraw.flagImageChanged();
+
+         if (blur)templateImgDraw.blur( 3 );
+        if (dilate)templateImgDraw.dilate( );
+        if (erode)templateImgDraw.erode( );
+        if (eqHist)templateImgDraw.equalizeHist();
+        if (highpass)templateImgDraw.highpass(12,3);
+        if (amplify)templateImgDraw.amplify(templateImgDraw, 300);
+
         if (initBg)
         {
-            initBackgroundModel(&bkgdMdl,sourceImg.getCvImage(), &paramMoG);
+            initBackgroundModel(&bkgdMdl,templateImgDraw.getCvImage(), &paramMoG);
             initBg  = false;
         }
         else
         {
+            #if DEBUG
+                    printf("AfterBackground initialization:\n");
+#endif
 
-            blobsCheck = sourceImg;
-             //cvSub(blobsCheck.getCvImage(), grayBg.getCvImage(), blobsCheck.getCvImage());
-
+            blobsCheck = templateImgDraw;
+            //cvSub(blobsCheck.getCvImage(), grayBg.getCvImage(), blobsCheck.getCvImage());
+ #if DEBUG
+                    printf("Copied Image\n");
+#endif
 
             binaryForeground = updateBackground(bkgdMdl,blobsCheck.getCvImage());
+             #if DEBUG
+                    printf("Updated background\n");
+#endif
             blobsVector = getBlobs2(blobsCheck.getCvImage(),binaryForeground);
+             #if DEBUG
+                    printf("BLobs Vector\n");
+#endif
             blobs_total = blobsVector.GetNumBlobs();
-/*
-            if (blur)blobsCheck.blur( 3 );
-            if (dilate)blobsCheck.dilate( );
-            if (erode)blobsCheck.erode( );
-            if (eqHist)blobsCheck.equalizeHist();
-            if (highpass)blobsCheck.highpass(12,3);
-            if (amplify)blobsCheck.amplify(blobsCheck, 300);
-*/
+             #if DEBUG
+                    printf("Blobs Total:\n");
+#endif
+            /*
+                        if (blur)blobsCheck.blur( 3 );
+                        if (dilate)blobsCheck.dilate( );
+                        if (erode)blobsCheck.erode( );
+                        if (eqHist)blobsCheck.equalizeHist();
+                        if (highpass)blobsCheck.highpass(12,3);
+                        if (amplify)blobsCheck.amplify(blobsCheck, 300);
+            */
+#if DEBUG
+                    printf("Before Selection:\n");
+#endif
 
             if ( blobs_total > 0 )
             {
@@ -283,34 +370,131 @@ void ccvHandSandBox::update()
                     meanKalmanDistance+=resultDistance;
                 }
 
-                flag = model.InitShapeFromDetBox(Shape,blobsCheck.getCvImage(),facedet);
-                /*
-                modelIC.InitParams(blobsCheck.getCvImage());
-*/
-                if (flag == false)
-                {
-                   printf("False model fitting\n");
-                }
-                else
-                {
-             //  model.Fit(blobsCheck.getCvImage(), Shape, 30, false);
-               //printf("Pyramid OK\n");
-               /*
-               modelIC.Fit(blobsCheck.getCvImage(), Shape, 30, false);
-               printf ("Inverse Compositional OK\n");
-               */
-              //model.Draw(blobsCheck.getCvImage(), Shape, 0);
-              /*
-              modelIC.Draw(blobsCheck.getCvImage(), Shape, 1);
-*/
-                }
+                /******************************************
+                Model fitting with the CCV contourFinder
+                **********************************************/
 
-                    //Working on ROI-Camshift
-        HandROIAdjust(coordReal.cX,coordReal.cY, processedImg.getCvImage());
-        cvCamShift(processedImg.getCvImage(), handSelectionRect, cvTermCriteria( CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 10, 1 ), &handComp, &handBox);
-        handSelectionRect = handComp.rect;
 
-        cvEllipseBox( processedImg.getCvImage(), handBox, CV_RGB(255,255,255), 3, CV_AA, 0 );
+//                for (int i =0; i < contourFinder.nBlobs; i++)
+//                {
+//                    if ( contourFinder.blobs[i].area > 1000)
+//                    {
+//
+//                        //flag = model.InitShapeFromDetBox(Shape,blobsCheck.getCvImage(),facedet);
+//                        Shape[0].x = contourFinder.blobs[i].centroid.x;
+//                        Shape[0].y = contourFinder.blobs[i].centroid.y;
+//                        Shape[1].x = contourFinder.blobs[i].centroid.x + contourFinder.blobs[i].boundingRect.width;
+//                        Shape[1].y = contourFinder.blobs[i].centroid.x + contourFinder.blobs[i].boundingRect.height;
+//
+//
+//                        flag = true;
+//                        /*
+//                        modelIC.InitParams(blobsCheck.getCvImage());
+//                        */
+//                        if (flag == false)
+//                        {
+//                            printf("False model fitting\n");
+//                        }
+//                        else
+//                        {
+//
+//                            model.Fit(blobsCheck.getCvImage(), Shape, 30, true);
+//                            //printf("Pyramid OK\n");
+//                            /*
+//                            modelIC.Fit(blobsCheck.getCvImage(), Shape, 30, false);
+//                            printf ("Inverse Compositional OK\n");
+//                            */
+//                            model.Draw(blobsCheck.getCvImage(), Shape, 2);
+//                            /*
+//                            modelIC.Draw(blobsCheck.getCvImage(), Shape, 1);
+//                            */
+//                        }
+//                    }
+//                }
+
+//--------------------------------------------------------------------------------------------
+                //Working on ROI-Camshift
+                HandROIAdjust(coordReal.cX,coordReal.cY, processedImg.getCvImage());
+                cvCamShift(processedImg.getCvImage(), handSelectionRect, cvTermCriteria( CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 10, 1 ), &handComp, &handBox);
+                handSelectionRect = handComp.rect;
+
+/****************************************************************
+Fitting with Kalman
+****************************************************************/
+//                        printf("Kalman + fitting \n");
+//                        if( contourFinder.nBlobs > 5)
+//                        {
+//                        Shape[0].x = coordReal.MinX;
+//                        Shape[0].y = coordReal.MinY;
+//                        Shape[1].x = coordReal.lX;
+//                        Shape[1].y = coordReal.lY;
+//
+//
+//                        flag = true;
+//                        /*
+//                        modelIC.InitParams(blobsCheck.getCvImage());
+//                        */
+//                        if (flag == false)
+//                        {
+//                            printf("False model fitting\n");
+//                        }
+//                        else
+//                        {
+//
+//                            model.Fit(blobsCheck.getCvImage(), Shape, 30, true);
+//                            printf("Pyramid OK\n");
+//                            /*
+//                            modelIC.Fit(blobsCheck.getCvImage(), Shape, 30, false);
+//                            printf ("Inverse Compositional OK\n");
+//                            */
+//                            model.Draw(blobsCheck.getCvImage(), Shape, 2);
+//                            /*
+//                            modelIC.Draw(blobsCheck.getCvImage(), Shape, 1);
+//                            */
+//                        }
+//                        }
+
+/*---------------------------------------------------------*/
+
+/****************************************************************
+//Fitting with Camshift
+//****************************************************************/
+//                        if( contourFinder.nBlobs > 5)
+//                        {
+//                        Shape[0].x = handSelectionRect.x;
+//                        Shape[0].y = handSelectionRect.y;
+//                        Shape[1].x = handSelectionRect.x + handSelectionRect.width/2;
+//                        Shape[1].y = handSelectionRect.x + handSelectionRect.height/2;
+//
+//
+//                        flag = true;
+//                        /*
+//                        modelIC.InitParams(blobsCheck.getCvImage());
+//                        */
+//                        if (flag == false)
+//                        {
+//                            printf("False model fitting\n");
+//                        }
+//                        else
+//                        {
+//
+//                            model.Fit(blobsCheck.getCvImage(), Shape, 30, true);
+//                            //printf("Pyramid OK\n");
+//                            /*
+//                            modelIC.Fit(blobsCheck.getCvImage(), Shape, 30, false);
+//                            printf ("Inverse Compositional OK\n");
+//                            */
+//                            model.Draw(blobsCheck.getCvImage(), Shape, 2);
+//                            /*
+//                            modelIC.Draw(blobsCheck.getCvImage(), Shape, 1);
+//                            */
+//                        }
+//                        }
+//
+/*---------------------------------------------------------*/
+
+
+                cvEllipseBox( processedImg.getCvImage(), handBox, CV_RGB(255,255,255), 3, CV_AA, 0 );
             }
         }
 
@@ -326,13 +510,13 @@ void ccvHandSandBox::update()
     }
     time(&afAaam);
 
-    #if DEBUG
+#if DEBUG
     printf ("Time elapsed for total calculations %lf . \n", elapsed2);
-    #endif
+#endif
+
 
 
 }
-
 //--------------------------------------------------------------
 void ccvHandSandBox::draw()
 {
@@ -340,7 +524,8 @@ void ccvHandSandBox::draw()
 
     processedImg.draw(20,20, 320, 240);
     blobsCheck.draw(360,280);
-    grayBg.draw(20,280,320,240);
+    //grayBg.draw(20,280,320,240);
+    templateImgDraw.draw(20,280,320,240);
     vidPlayer.draw(350,20,320,240);
 
 
@@ -411,6 +596,9 @@ void ccvHandSandBox::draw()
     verdana.drawString("Follow the development at:", 485, 270);
     ofSetColor(0xFFFFFF);
     verdana.drawString("nuicode.com |  ~  | thiagodefreitas.wordpress.com", 655, 270);
+
+
+
 }
 
 //--------------------------------------------------------------
@@ -513,7 +701,10 @@ void ccvHandSandBox::loadXMLSettings()
     tmpFlashPort				= XML.getValue("CONFIG:NETWORK:TUIOFLASHPORT_OUT", 3000);
     maxBlobs					= XML.getValue("CONFIG:BLOBS:MAXNUMBER", 20);
     aamModelFileName			= XML.getValue("CONFIG:AAM:MODEL", "hand.amf");
+    cascadeFileName			= XML.getValue("CONFIG:HAAR:CASCADE", "haarcascade.xml");
     myTUIO.bHandInfo			= XML.getValue("CONFIG:BOOLEAN:HANDINFO",0);
+    tmplImageName			= XML.getValue("CONFIG:TEMPLATE:RIGHT","template_hand.bmp");
+    tmplLeftName			= XML.getValue("CONFIG:TEMPLATE:LEFT","template_hand_left.bmp");
 
     myTUIO.setup(tmpLocalHost.c_str(), tmpPort, tmpFlashPort);
 
@@ -524,6 +715,7 @@ void ccvHandSandBox::learnBackGround(ofxCvColorImage& img)
     //Capture full background
     if (bLearnBackground == true)
     {
+        BgImgColor = img;
         floatBgImg = img;
         cvConvertScale( floatBgImg.getCvImage(), grayBg.getCvImage(), 255.0f/65535.0f, 0 );
         grayBg.flagImageChanged();
@@ -556,11 +748,18 @@ void ccvHandSandBox::drawFingerOutlines()
 
         if (bDrawOutlines)
         {
+            /*
+             if( contourFinder.blobs[i].area > 1000)
+             {*/
             //Draw contours (outlines) on the source image
             contourFinder.blobs[i].drawContours(20, 20, camWidth, camHeight, MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT);
+            /*}*/
         }
         if (bShowLabels) //Show ID label;
         {
+            /*
+            if( contourFinder.blobs[i].area > 1000)
+             {*/
             float xpos = contourFinder.blobs[i].centroid.x * (MAIN_WINDOW_WIDTH/camWidth);
             float ypos = contourFinder.blobs[i].centroid.y * (MAIN_WINDOW_HEIGHT/camHeight);
 
@@ -580,6 +779,8 @@ void ccvHandSandBox::drawFingerOutlines()
             verdana.drawString(idStr, xpos + 15, ypos + contourFinder.blobs[i].boundingRect.height/2 + 45);
 
 //			cvEllipseBox(sourceImg, contourFinder.track_box, CV_RGB(255,0,0), 3, CV_AA, 0);
+            /*}*/
+
         }
     }
     ofSetColor(0xFFFFFF);

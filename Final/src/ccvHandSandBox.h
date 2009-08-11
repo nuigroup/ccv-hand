@@ -113,8 +113,10 @@ public:
     ofxCvGrayscaleImage 	grayBg;
     ofxCvGrayscaleImage 	grayDiff;
     ofxCvGrayscaleImage 	originalBg;
+    ofxCvColorImage         processedImgColor;
 
     ofxCvShortImage		    floatBgImg;
+    ofxCvColorImage         BgImgColor;
     ofImage				    background;
 
     ofImage fileImage;
@@ -133,6 +135,7 @@ public:
     bool                newFrame;
 
     CPUImageFilter      processedImg;
+
     ofxCvColorImage		sourceImg;
     CPUImageFilter	blobsCheck;
     ofxCvColorImage		colorBg;
@@ -186,6 +189,11 @@ public:
     float*              hranges;
     ofxCvGrayscaleImage            histImg;
     IplImage*            h_plane;
+    IplImage*               tmpl;
+    IplImage*               tmpl_left;
+    IplImage*     templateImg;
+    IplImage*     templateImgLeft;
+    CPUImageFilter templateImgDraw;
 
     void                drawROIRect();
 
@@ -244,6 +252,12 @@ public:
 
     VJfacedetect facedet;
 
+    string cascadeFileName;
+    string tmplImageName;
+    string tmplLeftName;
+
+    double minF_left, maxF_left;
+    double minF, maxF;
 
 };
 
