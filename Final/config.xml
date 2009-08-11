@@ -5,7 +5,7 @@
         YOU CAN MANUALLY EDIT THE FEATURES BELOW
  
     ///////////////////////////////////////////// -->
-  <!--// CAMERA SETTINGS // -->
+    <!--// CAMERA SETTINGS // -->
     <CAMERA_0>
         <USECAMERA>0</USECAMERA>
         <DEVICE>0</DEVICE>
@@ -13,8 +13,79 @@
         <HEIGHT>480</HEIGHT>
         <FRAMERATE>120</FRAMERATE>
     </CAMERA_0>
+    <!--// NETWORK COMMUNICATION SETTINGS //-->
+    <NETWORK>
+        <LOCALHOST>127.0.0.1</LOCALHOST>
+        <TUIO>0</TUIO>
+        <TUIOPORT_OUT>3333</TUIOPORT_OUT>
+        <TUIOFLASHPORT_OUT>3000</TUIOFLASHPORT_OUT>
+    </NETWORK>
     <!--// VIDEO SETTINGS // -->
     <VIDEO>
-        <FILENAME>test_videos/RearDI.m4v</FILENAME>
+        <FILENAME>test_videos/t1.avi</FILENAME>
     </VIDEO>
+    <!--// BLOB SETTINGS // -->
+    <BLOBS>
+        <MAXNUMBER>20</MAXNUMBER>
+    </BLOBS>
+
+    <!--// AAM SETTINGS // -->
+    <AAM>
+        <MODEL>hand.amf</MODEL>
+    </AAM>
+      <!--// Haar Xml // -->
+    <HAAR>
+        <CASCADE>haarcascade_frontalface_alt2.xml</CASCADE>
+    </HAAR>
+    <!--// Template Matching // -->
+    <TEMPLATE>
+        <RIGHT>template_hand.bmp</RIGHT>
+        <LEFT>template_hand_left.bmp</LEFT>
+    </TEMPLATE>
+    <!--/////////////////////////////////////////
+
+        DO NOT EDIT THE VALUES BELOW
+ 
+    ///////////////////////////////////////////// -->
+    <APPLICATION>
+        <TITLE>CCV HAND TRACKING</TITLE>
+        <VERSION>Beta 1</VERSION>
+    </APPLICATION>
+    <WINDOW>
+        <WIDTH>1024</WIDTH>
+        <HEIGHT>768</HEIGHT>
+    </WINDOW>
+    <BOOLEAN>
+        <PRESSURE>0</PRESSURE>
+        <LABELS>1</LABELS>
+        <OUTLINES>1</OUTLINES>
+        <LEARNBG>0</LEARNBG>
+        <TUIO>0</TUIO>
+        <VMIRROR>0</VMIRROR>
+        <HMIRROR>0</HMIRROR>
+        <PRINTFTOFILE>0</PRINTFTOFILE>
+        <HIGHPASS>1</HIGHPASS>
+        <AMPLIFY>1</AMPLIFY>
+        <SMOOTH>1</SMOOTH>
+        <GPU>0</GPU>
+        <DYNAMICBG>1</DYNAMICBG>
+        <SNAPSHOT>0</SNAPSHOT>
+        <MINIMODE>0</MINIMODE>
+        <HEIGHTWIDTH>0</HEIGHTWIDTH>
+        <OSCMODE>0</OSCMODE>
+        <TCPMODE>0</TCPMODE>
+        <TRACKDARK>0</TRACKDARK>
+    </BOOLEAN>
+    <INT>
+        <MINMOVEMENT>15</MINMOVEMENT>
+        <MINBLOBSIZE>1</MINBLOBSIZE>
+        <MAXBLOBSIZE>229</MAXBLOBSIZE>
+        <!--// FILTERS SETTERS //-->
+        <THRESHOLD>7</THRESHOLD>
+        <HIGHPASSBLUR>12</HIGHPASSBLUR>
+        <HIGHPASSNOISE>3</HIGHPASSNOISE>
+        <HIGHPASSAMP>46</HIGHPASSAMP>
+        <SMOOTH>1</SMOOTH>
+        <BGLEARNRATE>50.900002</BGLEARNRATE>
+    </INT>
 </CONFIG>
