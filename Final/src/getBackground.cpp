@@ -2,19 +2,19 @@
 
 void initBackgroundModel(CvBGStatModel ** bgmodel, IplImage* tmp_frame, CvGaussBGStatModelParams* paramMoG){
 
-	paramMoG->win_size = 200; 
-	paramMoG->n_gauss = 5; 
-	paramMoG->bg_threshold = 0.3;
-	paramMoG->std_threshold = 2.5; 
+	paramMoG->win_size = 200;
+	paramMoG->n_gauss = 5;
+	paramMoG->bg_threshold = 0.9;
+	paramMoG->std_threshold = 2.5;
 	paramMoG->minArea = 600.f;
-	paramMoG->weight_init = 0.03; 
-	paramMoG->variance_init = 30; 
+	paramMoG->weight_init = 0.07;
+	paramMoG->variance_init = 50;
 	*bgmodel = cvCreateGaussianBGModel(tmp_frame, paramMoG);
 
 }
 
 IplImage* updateBackground(CvBGStatModel *bg_model, IplImage * tmp_frame){
-	
+
 	cvUpdateBGStatModel(tmp_frame, bg_model);
 
 	return bg_model->foreground;
