@@ -162,10 +162,11 @@ public:
 
 	//Get Mean Shape of model
 	const AAM_Shape GetMeanShape()const;
+	AAM_Shape			__VJDetectShape;
 
 private:
 	std::vector<AAM*>	__model;
-	AAM_Shape			__VJDetectShape;
+//	AAM_Shape			__VJDetectShape;
 	double				__referenceWidth;
 
 };

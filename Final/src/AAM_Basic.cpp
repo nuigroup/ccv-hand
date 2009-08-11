@@ -316,7 +316,7 @@ void AAM_Basic::Fit(const IplImage* image, AAM_Shape& Shape,
 			mkdir("result", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 			#endif
 			char filename[100];
-			sprintf(filename, "result/Iter-%02d.jpg", iter);
+			sprintf(filename, "result/ter%d.bmp", iter);
 			cvSaveImage(filename, Drawimg);
 		}
 
