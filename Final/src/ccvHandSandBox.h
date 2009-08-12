@@ -73,6 +73,9 @@
 #define MAIN_WINDOW_HEIGHT 240.0f
 #define MAIN_WINDOW_WIDTH  320.0f
 
+#define MAX_N_HANDS					5
+#define MAX_N_TRACKED_FINGERS		20
+
 // AAM-Library
 #include "AAM_IC.h"
 #include "AAM_Basic.h"
@@ -85,6 +88,8 @@
 #include "cvaux.h"
 #include "getBackground.h"
 #include "extractBlob.h"
+#include "videoHandConstants.h"
+#include "videoHandFingerDetector.h"
 
 class ccvHandSandBox : public ofSimpleApp
 {
@@ -163,6 +168,7 @@ public:
     bool                aamTracking;
 
     ContourFinder       contourFinder;
+    ofxCvContourFinder 	handContourFinder;
     BlobTracker			tracker;
 
     int					MIN_BLOB_SIZE;
@@ -263,6 +269,13 @@ public:
     double minF, maxF;
 
     CvRect  win;
+
+    videoHandFingerDetector	fingerFinder;
+
+    handBlob			hands[5];
+    trackedFinger		myFinger[10];
+
+    int nHands;
 
 };
 

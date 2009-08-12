@@ -190,6 +190,9 @@ void ccvHandSandBox::update()
         planes = &h_plane;
 
         cvSub(processedImg.getCvImage(), grayBg.getCvImage(), processedImg.getCvImage());
+
+        handContourFinder.findContours(processedImg, 4000, 640*480/3, 5, true);
+
         cvSub(processedImgColor.getCvImage(), BgImgColor.getCvImage(), processedImgColor.getCvImage());
 
 
@@ -240,7 +243,7 @@ void ccvHandSandBox::update()
 
         if (initBg)
         {
-            initBackgroundModel(&bkgdMdl,templateImgDraw.getCvImage(), &paramMoG);
+            initBackgroundModel(&bkgdMdl,sourceImg.getCvImage(), &paramMoG);
             initBg  = false;
         }
         else
@@ -349,7 +352,9 @@ void ccvHandSandBox::update()
                 Model fitting with the CCV contourFinder
                 **********************************************/
 
-
+                printf("Model fitting begins!: %d\n", contourFinder.nBlobs);
+                if(contourFinder.nBlobs > 0)
+                {
                 for (int i =0; i < contourFinder.nBlobs; i++)
                 {
                     if ( contourFinder.blobs[i].area > 1000)
@@ -359,7 +364,7 @@ void ccvHandSandBox::update()
                         /************************************
                         Template Matching
                         ***************************************/
-                       // templateImg = cvCreateImage(cvSize(processedImgColor.getCvImage()->width - tmpl->width + 1 , processedImgColor.getCvImage()->height - tmpl->height + 1),32, 1);
+                        // templateImg = cvCreateImage(cvSize(processedImgColor.getCvImage()->width - tmpl->width + 1 , processedImgColor.getCvImage()->height - tmpl->height + 1),32, 1);
 
                         win = cvRect(contourFinder.blobs[i].centroid.x, contourFinder.blobs[i].centroid.y, 150,150);
 //                        /* make sure that the search window is still within the frame */
@@ -368,8 +373,8 @@ void ccvHandSandBox::update()
                         if (win.y < 0)
                             win.y = 0;
                         if (win.x + win.width > processedImgColor.getCvImage()->width)
-                        win.x = processedImgColor.getCvImage()->width - win.width;
-                    if (win.y + win.height > processedImgColor.getCvImage()->height)
+                            win.x = processedImgColor.getCvImage()->width - win.width;
+                        if (win.y + win.height > processedImgColor.getCvImage()->height)
                             win.y = processedImgColor.getCvImage()->height - win.height;
 
                         cvSetImageROI(processedImgColor.getCvImage(),win);
@@ -390,21 +395,16 @@ void ccvHandSandBox::update()
                         cvMinMaxLoc(templateImg, &minF, &maxF);
                         printf("Maximum: %lf, Minimum %lf\n", maxF, minF);
 
-                        if(maxF > 0)
-                        {
-                            ofSetColor(0xffffff);
-                           ofLine(win.x, win.y,  0 , 0);
-                        }
 #if DEBUG
                         cvSaveImage("done.bmp", templateImg);
 #endif
                         cvSetImageROI(processedImgColor.getCvImage(),win);
 
-                         templateImgLeft = cvCreateImage(cvSize(win.width - tmpl_left->width + 1 , win.height - tmpl_left->height + 1),32, 1);
+                        templateImgLeft = cvCreateImage(cvSize(win.width - tmpl_left->width + 1 , win.height - tmpl_left->height + 1),32, 1);
 
                         cvMatchTemplate(processedImgColor.getCvImage(), tmpl_left, templateImgLeft, 5);
                         cvResetImageROI(processedImgColor.getCvImage());
-                       // cvReleaseImage(&templateImgLeft);
+                        //cvReleaseImage(&templateImgLeft);
                         cvNormalize(templateImgLeft, templateImgLeft, 1, 0, CV_MINMAX);
 
                         cvMinMaxLoc(templateImgLeft, &minF_left, &maxF_left);
@@ -414,9 +414,14 @@ void ccvHandSandBox::update()
 #if DEBUG
                         cvSaveImage("done_left.bmp", templateImgLeft);
                         cvSaveImage("source.bmp", processedImgColor.getCvImage());
-                        #endif
+#endif
 
-                     //   cvConvertImage(templateImg, templateImgDraw.getCvImage());
+                        if (maxF > 0)
+                        {
+                            ofSetColor(0xffffff);
+                            ofLine(win.x, win.y,  0 , 0);
+                        }
+                        //   cvConvertImage(templateImg, templateImgDraw.getCvImage());
 
 //        processedImg.getPixels(templateImg);
 
@@ -450,6 +455,7 @@ void ccvHandSandBox::update()
 //                            */
 //                        }
                     }
+                }
                 }
 
 //--------------------------------------------------------------------------------------------
@@ -532,7 +538,117 @@ void ccvHandSandBox::update()
 //                        }
 //
                 /*---------------------------------------------------------*/
+                printf("Before array: Ok!\n");
 
+                nHands = handContourFinder.nBlobs;
+                printf("Nhands: %d\n", nHands);
+
+                for (int i = 0; i < handContourFinder.nBlobs; i++)
+                {
+                    /*
+                    if (handContourFinder.nBlobs > 0)
+                    {
+                    myHand.myBlob = handContourFinder.blobs
+                    fingerFinder.findmyFinger(myHand);
+                    printf("How many fingers: %d\n",myHand.nFingers);
+                    }
+                    */
+                    hands[i].myBlob = contourFinder.blobs[i];
+                    fingerFinder.findFingers(hands[i]);
+                }
+
+                printf("Before energy steps: Ok!");
+                /*******************************************************************
+                Malik's
+                ********************************************************************/
+                //---------------------------------------------
+                for (int i = 0; i < MAX_N_TRACKED_FINGERS; i++)
+                {
+                    myFinger[i].energy *= 0.905f;
+                    myFinger[i].bFoundMeThisFrame = false;
+                }
+
+
+                for (int i = 0; i < nHands; i++)
+                {
+                    int nFingers = hands[i].nFingers;
+                    printf("NFingers: %d\n", nFingers);
+                    for (int j = 0; j < nFingers; j++)
+                    {
+
+
+                        bool bFound = false;
+                        int  smallestIndex = -1;
+                        float smallestDist = 10000;
+
+                        for (int k = 0; k < MAX_N_TRACKED_FINGERS; k++)
+                        {
+
+                            if (myFinger[k].energy < 0.01 || myFinger[k].bFoundMeThisFrame) continue;	// skip non energized persistant faces.
+
+
+                            float dx = myFinger[k].pos.x - hands[i].fingerPos[j].x;
+                            float dy = myFinger[k].pos.y - hands[i].fingerPos[j].y;
+                            float len = sqrt((dx*dx) + (dy*dy));
+
+                            if (len < smallestDist)
+                            {
+                                smallestDist 		= len;
+                                smallestIndex		= k;
+                            }
+                        }
+
+
+
+                        if (smallestDist < 80)
+                        {
+                            myFinger[smallestIndex].energy += 0.2f;
+                            myFinger[smallestIndex].energy = MIN(myFinger[smallestIndex].energy, 1);
+                            myFinger[smallestIndex].bFoundMeThisFrame = true;
+                            myFinger[smallestIndex].pos.x = hands[i].fingerPos[j].x;
+                            myFinger[smallestIndex].pos.y = hands[i].fingerPos[j].y;
+                            myFinger[smallestIndex].birthday = ofGetElapsedTimef();
+                            bFound = true;
+                        }
+
+                        if (!bFound)
+                        {
+
+                            int  smallestIndex = -1;
+                            float smallestEnergy = 100000000	;
+                            // ok find the earliest, of first non energized persistant face:
+                            for (int k = 0; k < MAX_N_TRACKED_FINGERS; k++)
+                            {
+                                if (myFinger[k].bFoundMeThisFrame) continue;
+                                if (myFinger[k].birthday < smallestEnergy)
+                                {
+                                    smallestEnergy 	= myFinger[k].birthday;
+                                    smallestIndex 	= k;
+                                }
+                            }
+
+                            if (smallestIndex != -1)
+                            {
+                                myFinger[smallestIndex].pos.x = hands[i].fingerPos[j].x;
+                                myFinger[smallestIndex].pos.y = hands[i].fingerPos[j].y;
+                                myFinger[smallestIndex].energy = 0.2f;
+                                myFinger[smallestIndex].bFoundMeThisFrame = true;
+                                myFinger[smallestIndex].birthday = ofGetElapsedTimef();
+                            }
+                        }
+
+
+                    }
+                }
+
+
+                for (int i = 0; i < MAX_N_TRACKED_FINGERS; i++)
+                {
+                    if (myFinger[i].bFoundMeThisFrame == false)
+                    {
+                        myFinger[i].energy = 0;
+                    }
+                }
 
                 cvEllipseBox( processedImg.getCvImage(), handBox, CV_RGB(255,255,255), 3, CV_AA, 0 );
             }
@@ -636,6 +752,24 @@ void ccvHandSandBox::draw()
     verdana.drawString("Follow the development at:", 485, 270);
     ofSetColor(0xFFFFFF);
     verdana.drawString("nuicode.com |  ~  | thiagodefreitas.wordpress.com", 655, 270);
+
+
+/*******************************************
+
+
+**********************************************/
+
+for (int i = 0; i < hands[0].nFingers; i++)
+{
+		ofCircle(hands[0].fingerPos[i].x+360,hands[0].fingerPos[i].y+280, 10);
+}
+
+
+
+	/*******************************************
+
+
+**********************************************/
 
 
 
