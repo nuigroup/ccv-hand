@@ -83,6 +83,8 @@
 			<Add directory="../../../libs/poco/include/Poco" />
 			<Add directory="../../../../../../usr/include/opencv" />
 			<Add directory="../../../../../../usr/local/include/opencv" />
+			<Add directory="src/hands/lineFitter" />
+			<Add directory="src/hands" />
 		</Compiler>
 		<Linker>
 			<Add library="fmodex" />
@@ -573,18 +575,23 @@
 		</Unit>
 		<Unit filename="src/condensation.cpp" />
 		<Unit filename="src/condensation.h" />
-		<Unit filename="src/execute.cpp" />
-		<Unit filename="src/execute.h" />
+		<Unit filename="src/drawBob.cpp" />
+		<Unit filename="src/drawBob.h" />
 		<Unit filename="src/extractBlob.cpp" />
 		<Unit filename="src/extractBlob.h" />
 		<Unit filename="src/getBackground.cpp" />
 		<Unit filename="src/getBackground.h" />
+		<Unit filename="src/hands/lineFitter/cvLineFitter.cpp" />
+		<Unit filename="src/hands/lineFitter/linreg.cpp" />
+		<Unit filename="src/hands/ofVec3f.cpp" />
+		<Unit filename="src/hands/videoBlob.cpp" />
+		<Unit filename="src/hands/videoHandFingerDetector.cpp" />
 		<Unit filename="src/kalman.cpp" />
 		<Unit filename="src/kalman.h" />
 		<Unit filename="src/main.cpp">
 			<Option virtualFolder="libs/" />
 		</Unit>
-		<Unit filename="src/videotracker.h" />
+		<Unit filename="src/useful.h" />
 		<Unit filename="../../../libs/openFrameworks/app/ofAppBaseWindow.h">
 			<Option virtualFolder="libs/openframeworks/app/" />
 		</Unit>

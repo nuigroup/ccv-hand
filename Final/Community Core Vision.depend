@@ -2551,7 +2551,7 @@
 	"ofxCvGrayscaleImage.h"
 	<algorithm>
 
-1243387823 /home/thiago/gsoc_2009/addons/ofxNCore/src/Tracking/Blob.h
+1249963071 /home/thiago/gsoc_2009/addons/ofxNCore/src/Tracking/Blob.h
 	<vector>
 
 1242518508 /home/thiago/gsoc_2009/addons/ofxNCore/src/Tracking/Tracking.h
@@ -2565,7 +2565,7 @@
 	"CalibrationUtils.h"
 	<cmath>
 
-1249130347 source:/home/thiago/gsoc_2009/addons/ofxNCore/src/Communication/TUIO.cpp
+1249963189 source:/home/thiago/gsoc_2009/addons/ofxNCore/src/Communication/TUIO.cpp
 	"TUIO.h"
 
 1249130186 /home/thiago/gsoc_2009/addons/ofxNCore/src/Communication/TUIO.h
@@ -3384,13 +3384,14 @@
 1228351168 source:/home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/ofxCvConvexHull_hand.cpp
 	"ofxCvConvexHull_hand.h"
 
-1249659321 source:/home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/ccvHandSandBox.cpp
+1250086593 source:/home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/ccvHandSandBox.cpp
 	"ccvHandSandBox.h"
 	<cv.h>
 	<highgui.h>
+	<cxcore.h>
 	<time.h>
 
-1249654095 /home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/ccvHandSandBox.h
+1250087082 /home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/ccvHandSandBox.h
 	"ofMain.h"
 	"ofAddons.h"
 	"ofxXmlSettings.h"
@@ -3402,6 +3403,9 @@
 	"Calibration/CalibrationUtils.h"
 	"Calibration/Calibration.h"
 	<cv.h>
+	<cxcore.h>
+	<cvaux.h>
+	<highgui.h>
 	"AAM_IC.h"
 	"AAM_Basic.h"
 	<time.h>
@@ -3410,6 +3414,8 @@
 	"cvaux.h"
 	"getBackground.h"
 	"extractBlob.h"
+	"videoHandConstants.h"
+	"videoHandFingerDetector.h"
 
 1232919686 /home/thiago/really_temp/agora/src/AAM_IC.h
 	"AAM_Util.h"
@@ -3474,7 +3480,7 @@
 	"AAM_TDM.h"
 	"AAM_PAW.h"
 
-1249616802 /home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/AAM_Util.h
+1249913872 /home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/AAM_Util.h
 	<vector>
 	<string>
 	<iostream>
@@ -3554,7 +3560,7 @@
 
 1249149705 /usr/local/include/opencv/cxcore.hpp
 
-1249091661 source:/home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/AAM_Basic.cpp
+1249914663 source:/home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/AAM_Basic.cpp
 	<ctime>
 	<direct.h>
 	<sys/stat.h>
@@ -3690,7 +3696,7 @@
 	"SampleStat.h"
 	"BlobResult.h"
 
-1249659647 /home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/getBackground.h
+1249661702 /home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/getBackground.h
 	"useful.h"
 
 1249659657 /home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/extractBlob.h
@@ -3703,13 +3709,13 @@
 	"useful.h"
 	"Coord.h"
 
-1249653061 source:/home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/extractBlob.cpp
+1249936898 source:/home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/extractBlob.cpp
 	"extractBlob.h"
 
-1249616283 source:/home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/getBackground.cpp
+1249935795 source:/home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/getBackground.cpp
 	"getBackground.h"
 
-1249605337 source:/home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/kalman.cpp
+1249661483 source:/home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/kalman.cpp
 	"kalman.h"
 
 1242518560 /home/thiago/gsoc_2009/addons/ofxOpenCv/libs/opencv/include/cvaux.h
@@ -3722,8 +3728,7 @@
 1242518560 /home/thiago/gsoc_2009/addons/ofxOpenCv/libs/opencv/include/cvvidsurv.hpp
 	<stdio.h>
 
-1249659636 /home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/drawBob.h
-	"useful.h"
+1249661644 /home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/drawBob.h
 	"Coord.h"
 	"getBackground.h"
 	"extractBlob.h"
@@ -3731,6 +3736,7 @@
 	"condensation.h"
 	"SampleStat.h"
 	"BlobResult.h"
+	"useful.h"
 
 1249659114 source:/home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/drawBob.cpp
 	"drawBob.h"
@@ -3747,4 +3753,42 @@
 	<iostream>
 	"Blob.h"
 	"BlobResult.h"
+
+1240261379 source:/home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/hands/lineFitter/cvLineFitter.cpp
+	"cvLineFitter.h"
+	<string>
+
+1249863583 /home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/hands/lineFitter/cvLineFitter.h
+	"ofxOpenCv.h"
+	"Matrix.h"
+
+916803780 /home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/hands/lineFitter/Matrix.h
+	<assert.h>
+
+1240261379 source:/home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/hands/lineFitter/linreg.cpp
+
+1149401640 source:/home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/hands/ofVec3f.cpp
+
+1240262635 source:/home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/hands/videoBlob.cpp
+	"videoBlob.h"
+
+1249863593 /home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/hands/videoBlob.h
+	"ofMain.h"
+	"ofxOpenCv.h"
+
+1240445494 source:/home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/hands/videoHandFingerDetector.cpp
+	"videoHandFingerDetector.h"
+
+1249863641 /home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/hands/videoHandFingerDetector.h
+	"ofMain.h"
+	"ofxOpenCv.h"
+	"videoHandConstants.h"
+	"cvLineFitter.h"
+	"ofVec3f.h"
+
+1249865246 /home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/hands/videoHandConstants.h
+	"Tracking/Blob.h"
+
+1173608160 /home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/hands/ofVec3f.h
+	"ofConstants.h"
 
