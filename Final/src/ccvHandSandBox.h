@@ -190,6 +190,11 @@ public:
     CvConnectedComp     handComp;
     CvRect              handSelectionRect;
     CvPoint             handPoint;
+    CvPoint            templateRightMin;
+    CvPoint            templateRightMax;
+    CvPoint            templateLeftMin;
+    CvPoint            templateLeftMax;
+
 
     void                HandROIAdjust(int x , int y, IplImage* image);
 
@@ -205,6 +210,8 @@ public:
     CPUImageFilter templateImgDraw;
 
     void                drawROIRect();
+    void                drawTemplateHandPos();
+    void                drawMalikFingers();
 
     IplImage**          planes;
 

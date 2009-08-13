@@ -290,7 +290,7 @@ void ccvHandSandBox::update()
 #if DEBUG
                     printf("How many: %d\n", blobs_total);
 #endif
-                    drawInitialBlobs(blobsCheck.getCvImage(), blobsVector);
+                   // drawInitialBlobs(blobsCheck.getCvImage(), blobsVector);
 
                     coord selectedCoord;
 
@@ -392,7 +392,16 @@ void ccvHandSandBox::update()
                         cvPow(templateImg,templateImg,5);
 
 
-                        cvMinMaxLoc(templateImg, &minF, &maxF);
+                        cvMinMaxLoc(templateImg, &minF, &maxF, &templateRightMin, &templateRightMax);
+
+                        if(maxF > 0)
+                        {
+                            templateRightMax.x += win.x;
+                            templateRightMax.y += win.y;
+                            contourFinder.blobs[i].xHand = templateRightMax.x;
+                            contourFinder.blobs[i].yHand = templateRightMax.y;
+                        }
+
                         printf("Maximum: %lf, Minimum %lf\n", maxF, minF);
 
 #if DEBUG
@@ -402,12 +411,22 @@ void ccvHandSandBox::update()
 
                         templateImgLeft = cvCreateImage(cvSize(win.width - tmpl_left->width + 1 , win.height - tmpl_left->height + 1),32, 1);
 
+
                         cvMatchTemplate(processedImgColor.getCvImage(), tmpl_left, templateImgLeft, 5);
                         cvResetImageROI(processedImgColor.getCvImage());
                         //cvReleaseImage(&templateImgLeft);
                         cvNormalize(templateImgLeft, templateImgLeft, 1, 0, CV_MINMAX);
 
-                        cvMinMaxLoc(templateImgLeft, &minF_left, &maxF_left);
+                        cvMinMaxLoc(templateImgLeft, &minF_left, &maxF_left, &templateLeftMin, &templateLeftMax);
+
+                        if(maxF_left > 0)
+                        {
+                            templateLeftMax.x += win.x;
+                            templateLeftMax.y += win.y;
+                            contourFinder.blobs[i].xHand = templateLeftMax.x;
+                            contourFinder.blobs[i].yHand = templateLeftMax.y;
+                        }
+
                         printf("Maximum: %lf, Minimum %lf\n", maxF_left, minF_left);
                         cvPow(templateImgLeft, templateImgLeft, 5);
 
@@ -416,12 +435,9 @@ void ccvHandSandBox::update()
                         cvSaveImage("source.bmp", processedImgColor.getCvImage());
 #endif
 
-                        if (maxF > 0)
-                        {
-                            ofSetColor(0xffffff);
-                            ofLine(win.x, win.y,  0 , 0);
-                        }
-                        //   cvConvertImage(templateImg, templateImgDraw.getCvImage());
+                        templateImgDraw.resize(templateImg->width, templateImg->height);
+
+                        cvConvertImage(templateImg, templateImgDraw.getCvImage());
 
 //        processedImg.getPixels(templateImg);
 
@@ -679,10 +695,10 @@ void ccvHandSandBox::draw()
 
 
     processedImg.draw(20,20, 320, 240);
-    blobsCheck.draw(360,280);
+    vidPlayer.draw(360,280);
     //grayBg.draw(20,280,320,240);
     templateImgDraw.draw(20,280,320,240);
-    vidPlayer.draw(350,20,320,240);
+    blobsCheck.draw(350,20,320,240);
 
 
     drawFingerOutlines();
@@ -733,11 +749,11 @@ void ccvHandSandBox::draw()
     sprintf(sandBoxStr, " v Activate Viola and Jones:    %s",vJones? "true" : "false");
     verdana.drawString(sandBoxStr, 20, 760);
 
-    verdana.drawString("Tracking View", 20, 10);
+    verdana.drawString("Camshift", 20, 10);
 
-    verdana.drawString("Subtracted Background", 20, 270);
+    verdana.drawString("Matched Template(?)", 20, 270);
 
-    verdana.drawString("Histogram", 350, 10);
+    verdana.drawString("Kalman", 350, 10);
 
 
     ofSetColor(0x000000);
@@ -754,15 +770,22 @@ void ccvHandSandBox::draw()
     verdana.drawString("nuicode.com |  ~  | thiagodefreitas.wordpress.com", 655, 270);
 
 
+    drawTemplateHandPos();
 /*******************************************
 
 
 **********************************************/
 
-for (int i = 0; i < hands[0].nFingers; i++)
+printf("Showing fingers\n");
+for(int j=0; j < 5;j++)
 {
-		ofCircle(hands[0].fingerPos[i].x+360,hands[0].fingerPos[i].y+280, 10);
+for (int i = 0; i < hands[j].nFingers; i++)
+{
+		ofCircle(hands[j].fingerPos[i].x+360,hands[j].fingerPos[i].y+280, 10);
 }
+}
+printf("Showed fingers\n");
+
 
 
 
@@ -954,6 +977,13 @@ void ccvHandSandBox::drawFingerOutlines()
 
 //			cvEllipseBox(sourceImg, contourFinder.track_box, CV_RGB(255,0,0), 3, CV_AA, 0);
             /*}*/
+            if(contourFinder.blobs[i].xHand > 0 || contourFinder.blobs[i].yHand > 0)
+            {
+                 ofSetColor(0,0,0);
+                    ofCircle(contourFinder.blobs[i].xHand + 360, contourFinder.blobs[i].yHand + 280, 40);
+                    contourFinder.blobs[i].xHand = 0;
+                    contourFinder.blobs[i].yHand=0;
+            }
 
         }
     }
@@ -974,6 +1004,14 @@ void ccvHandSandBox::HandROIAdjust(int x, int y, IplImage* image)
     handSelectionRect.height -= handSelectionRect.y;
 }
 
+void ccvHandSandBox::drawTemplateHandPos()
+{
+//        ofSetColor(0,0,0);
+//        ofCircle(templateRightMax.x+360, templateRightMax.y+280, 40);
+//        ofSetColor(0xFFFFFF);
+//        ofCircle(templateLeftMax.x+360, templateLeftMax.y+280, 40);
+
+}
 void ccvHandSandBox::drawROIRect()
 {
 //
