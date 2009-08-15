@@ -5,7 +5,7 @@
 		<Option title="Community Core Vision" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;libs/;src/;libs/openframeworks/;libs/openframeworks/app/;libs/openframeworks/communication/;libs/openframeworks/graphics/;libs/openframeworks/sound/;libs/openframeworks/utils/;libs/openframeworks/video/;libs/openframeworks/events/;addons/ofxDirList/src/;addons/ofNetwork/src/;addons/ofxOpenCv/src/;addons/ofxOsc/src/;addons/ofxThread/src/;addons/ofxVectorGraphics/libs/;addons/ofxVectorGraphics/src/;addons/ofxVectorMath/src/;addons/ofXmlSettings/libs/;addons/ofXmlSettings/src/;addons/ofxNCore/;addons/ofxNCore/src/;addons/ofxNCore/src/Calibration/;addons/ofxNCore/src/Communication/;addons/ofxNCore/src/Controls/;addons/ofxNCore/src/Events/;addons/ofxNCore/src/Filters/;addons/ofxNCore/src/Modules/;addons/ofxNCore/src/Tracking/;addons/ofxNCore/src/Camera/;" />
+		<Option virtualFolders="addons/;libs/;src/;libs/openframeworks/;libs/openframeworks/app/;libs/openframeworks/communication/;libs/openframeworks/graphics/;libs/openframeworks/sound/;libs/openframeworks/utils/;libs/openframeworks/video/;libs/openframeworks/events/;addons/ofxDirList/src/;addons/ofNetwork/src/;addons/ofxOpenCv/src/;addons/ofxOsc/src/;addons/ofxThread/src/;addons/ofxVectorGraphics/libs/;addons/ofxVectorGraphics/src/;addons/ofxVectorMath/src/;addons/ofXmlSettings/libs/;addons/ofXmlSettings/src/;addons/ofxNCore/;addons/ofxNCore/src/;addons/ofxNCore/src/Calibration/;addons/ofxNCore/src/Communication/;addons/ofxNCore/src/Controls/;addons/ofxNCore/src/Events/;addons/ofxNCore/src/Events/Filters/;addons/ofxNCore/src/Modules/;addons/ofxNCore/src/Tracking/;addons/ofxNCore/src/Camera/;apps/addonsExamples/Codeblocks_8_linux/src/;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Community_Core_Vision_debug" prefix_auto="1" extension_auto="1" />
@@ -80,6 +80,11 @@
 			<Add directory="../../../addons/ofx3DModelLoader/src" />
 			<Add directory="../../../addons/ofx3DModelLoader/src/3DS" />
 			<Add directory="../../../addons/ofxNCore/src" />
+			<Add directory="../../../libs/poco/include/Poco" />
+			<Add directory="../../../../../../usr/include/opencv" />
+			<Add directory="../../../../../../usr/local/include/opencv" />
+			<Add directory="src/hands/lineFitter" />
+			<Add directory="src/hands" />
 		</Compiler>
 		<Linker>
 			<Add library="fmodex" />
@@ -99,6 +104,10 @@
 			<Add library="cv" />
 			<Add library="cxcore" />
 			<Add library="oscpack" />
+			<Add library="highgui" />
+			<Add library="src/libblob.a" />
+			<Add library="cvaux" />
+			<Add library="ml" />
 			<Add directory="../../../addons/ofxOpenCv/libs/opencv/lib/linux" />
 			<Add directory="../../../addons/ofxOsc/libs/oscpack/lib/linux" />
 			<Add directory="../../../libs/fmodex/lib" />
@@ -255,28 +264,28 @@
 			<Option virtualFolder="addons/ofxNCore/src/Events/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxNCore/src/Filters/CPUImageFilter.cpp">
-			<Option virtualFolder="addons/ofxNCore/src/Filters/" />
+			<Option virtualFolder="addons/ofxNCore/src/Events/Filters/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxNCore/src/Filters/CPUImageFilter.h">
-			<Option virtualFolder="addons/ofxNCore/src/Filters/" />
+			<Option virtualFolder="addons/ofxNCore/src/Events/Filters/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxNCore/src/Filters/Filters.h">
-			<Option virtualFolder="addons/ofxNCore/src/Filters/" />
+			<Option virtualFolder="addons/ofxNCore/src/Events/Filters/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxNCore/src/Filters/GPUImageFilter.cpp">
-			<Option virtualFolder="addons/ofxNCore/src/Filters/" />
+			<Option virtualFolder="addons/ofxNCore/src/Events/Filters/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxNCore/src/Filters/GPUImageFilter.h">
-			<Option virtualFolder="addons/ofxNCore/src/Filters/" />
+			<Option virtualFolder="addons/ofxNCore/src/Events/Filters/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxNCore/src/Filters/ProcessFilters.h">
-			<Option virtualFolder="addons/ofxNCore/src/Filters/" />
+			<Option virtualFolder="addons/ofxNCore/src/Events/Filters/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxNCore/src/Filters/ShaderProgram.cpp">
-			<Option virtualFolder="addons/ofxNCore/src/Filters/" />
+			<Option virtualFolder="addons/ofxNCore/src/Events/Filters/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxNCore/src/Filters/ShaderProgram.h">
-			<Option virtualFolder="addons/ofxNCore/src/Filters/" />
+			<Option virtualFolder="addons/ofxNCore/src/Events/Filters/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxNCore/src/Modules/ofxNCoreVision.cpp">
 			<Option virtualFolder="addons/ofxNCore/src/Modules/" />
@@ -285,6 +294,12 @@
 			<Option virtualFolder="addons/ofxNCore/src/Modules/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxNCore/src/Tracking/Blob.h">
+			<Option virtualFolder="addons/ofxNCore/src/Tracking/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxNCore/src/Tracking/BlobManager.cpp">
+			<Option virtualFolder="addons/ofxNCore/src/Tracking/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxNCore/src/Tracking/BlobManager.h">
 			<Option virtualFolder="addons/ofxNCore/src/Tracking/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxNCore/src/Tracking/ContourFinder.cpp">
@@ -488,15 +503,95 @@
 		<Unit filename="../../../addons/ofxXmlSettings/src/ofxXmlSettings.h">
 			<Option virtualFolder="addons/ofXmlSettings/src" />
 		</Unit>
+		<Unit filename="src/AAM_Basic.cpp">
+			<Option virtualFolder="apps/addonsExamples/Codeblocks_8_linux/src/" />
+		</Unit>
+		<Unit filename="src/AAM_Basic.h">
+			<Option virtualFolder="apps/addonsExamples/Codeblocks_8_linux/src/" />
+		</Unit>
+		<Unit filename="src/AAM_CAM.cpp">
+			<Option virtualFolder="apps/addonsExamples/Codeblocks_8_linux/src/" />
+		</Unit>
+		<Unit filename="src/AAM_CAM.h">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/AAM_IC.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/AAM_IC.h">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/AAM_MovieAVI.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/AAM_MovieAVI.h">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/AAM_PAW.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/AAM_PAW.h">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/AAM_PDM.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/AAM_PDM.h">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/AAM_Shape.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/AAM_Shape.h">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/AAM_TDM.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/AAM_TDM.h">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/AAM_Util.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/AAM_Util.h">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/Blob.h" />
+		<Unit filename="src/BlobResult.h" />
+		<Unit filename="src/Coord.h" />
+		<Unit filename="src/SampleStat.h" />
+		<Unit filename="src/VJfacedetect.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/VJfacedetect.h">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/ccvHandSandBox.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/ccvHandSandBox.h">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/condensation.cpp" />
+		<Unit filename="src/condensation.h" />
+		<Unit filename="src/drawBob.cpp" />
+		<Unit filename="src/drawBob.h" />
+		<Unit filename="src/extractBlob.cpp" />
+		<Unit filename="src/extractBlob.h" />
+		<Unit filename="src/getBackground.cpp" />
+		<Unit filename="src/getBackground.h" />
+		<Unit filename="src/hands/lineFitter/cvLineFitter.cpp" />
+		<Unit filename="src/hands/lineFitter/linreg.cpp" />
+		<Unit filename="src/hands/ofVec3f.cpp" />
+		<Unit filename="src/hands/videoBlob.cpp" />
+		<Unit filename="src/hands/videoHandFingerDetector.cpp" />
+		<Unit filename="src/kalman.cpp" />
+		<Unit filename="src/kalman.h" />
 		<Unit filename="src/main.cpp">
-			<Option virtualFolder="src/" />
+			<Option virtualFolder="libs/" />
 		</Unit>
-		<Unit filename="src/testApp.cpp">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/testApp.h">
-			<Option virtualFolder="src/" />
-		</Unit>
+		<Unit filename="src/useful.h" />
 		<Unit filename="../../../libs/openFrameworks/app/ofAppBaseWindow.h">
 			<Option virtualFolder="libs/openframeworks/app/" />
 		</Unit>
