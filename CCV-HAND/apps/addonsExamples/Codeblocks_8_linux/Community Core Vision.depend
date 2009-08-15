@@ -3792,3 +3792,2690 @@
 1173608160 /home/thiago/gsoc_2009/apps/addonsExamples/Codeblocks_8_linux/src/hands/ofVec3f.h
 	"ofConstants.h"
 
+1250284987 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxDirList/src/ofxDirList.cpp
+	"ofxDirList.h"
+	<algorithm>
+	<string>
+
+1250284987 /home/thiago/ccv_hand/CCV-HAND/addons/ofxDirList/src/ofxDirList.h
+	"ofMain.h"
+	<stdio.h>
+	<iostream>
+	<string.h>
+	<dirent.h>
+	<windows.h>
+	<tchar.h>
+	<string.h>
+	<assert.h>
+
+1250285641 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks//ofMain.h
+	"ofConstants.h"
+	"ofMath.h"
+	"ofUtils.h"
+	"ofTypes.h"
+	"ofSerial.h"
+	"ofStandardFirmata.h"
+	"ofArduino.h"
+	"ofTexture.h"
+	"ofTrueTypeFont.h"
+	"ofGraphics.h"
+	"ofImage.h"
+	"ofBaseApp.h"
+	"ofAppRunner.h"
+	"ofSoundStream.h"
+	"ofSoundPlayer.h"
+	"ofVideoGrabber.h"
+	"ofVideoPlayer.h"
+	"ofEvents.h"
+
+1250285640 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/utils/ofConstants.h
+	<TargetConditionals.h>
+	<windows.h>
+	"GLee.h"
+	"glu.h"
+	<unistd.h>
+	"GLee.h"
+	<OpenGL/glu.h>
+	<ApplicationServices/ApplicationServices.h>
+	<unistd.h>
+	"GLee.h"
+	<GL/glu.h>
+	<stdio.h>
+	<stdarg.h>
+	<math.h>
+	<time.h>
+	<stdlib.h>
+	<string.h>
+	<iostream>
+	<vector>
+	<string>
+	<sstream>
+	<iomanip>
+
+1250285679 /home/thiago/ccv_hand/CCV-HAND/libs/glee//GLee.h
+	<windows.h>
+	<GL/gl.h>
+	<OpenGL/gl.h>
+	<GL/gl.h>
+	<GL/glx.h>
+	<stddef.h>
+
+1241576024 /usr/include/GL/gl.h
+	"gl_mangle.h"
+	<stdlib.h>
+	<windows.h>
+	<GL/mesa_wgl.h>
+	<GL/glext.h>
+
+1241576024 /usr/include/GL/gl_mangle.h
+
+1239265054 /usr/include/stdlib.h
+	<features.h>
+	<stddef.h>
+	<bits/waitflags.h>
+	<bits/waitstatus.h>
+	<xlocale.h>
+	<sys/types.h>
+	<alloca.h>
+	<bits/stdlib.h>
+	<bits/stdlib-ldbl.h>
+
+1239265014 /usr/include/features.h
+	<sys/cdefs.h>
+	<gnu/stubs.h>
+
+1239265072 /usr/include/sys/cdefs.h
+	<features.h>
+	<bits/wordsize.h>
+
+1239265054 /usr/include/bits/wordsize.h
+
+1239265014 /usr/include/gnu/stubs.h
+	<bits/wordsize.h>
+	<gnu/stubs-32.h>
+	<gnu/stubs-64.h>
+
+1239264283 /usr/include/gnu/stubs-32.h
+
+1239265068 /usr/include/bits/waitflags.h
+
+1239265068 /usr/include/bits/waitstatus.h
+	<endian.h>
+
+1239265061 /usr/include/endian.h
+	<features.h>
+	<bits/endian.h>
+	<bits/byteswap.h>
+
+1239265061 /usr/include/bits/endian.h
+
+1239265061 /usr/include/bits/byteswap.h
+	<bits/wordsize.h>
+
+1239265017 /usr/include/xlocale.h
+
+1239265068 /usr/include/sys/types.h
+	<features.h>
+	<bits/types.h>
+	<time.h>
+	<stddef.h>
+	<endian.h>
+	<sys/select.h>
+	<sys/sysmacros.h>
+	<bits/pthreadtypes.h>
+
+1239265068 /usr/include/bits/types.h
+	<features.h>
+	<bits/wordsize.h>
+	<bits/typesizes.h>
+
+1239265068 /usr/include/bits/typesizes.h
+
+1239265064 /usr/include/time.h
+	<features.h>
+	<stddef.h>
+	<bits/time.h>
+	<bits/types.h>
+	<bits/types.h>
+	<bits/types.h>
+	<bits/types.h>
+	<bits/types.h>
+	<xlocale.h>
+
+1239265064 /usr/include/bits/time.h
+	<bits/types.h>
+	<bits/types.h>
+
+1239265072 /usr/include/sys/select.h
+	<features.h>
+	<bits/types.h>
+	<bits/select.h>
+	<bits/sigset.h>
+	<time.h>
+	<bits/time.h>
+
+1239265073 /usr/include/bits/select.h
+
+1239265053 /usr/include/bits/sigset.h
+
+1239265068 /usr/include/sys/sysmacros.h
+	<features.h>
+
+1239265068 /usr/include/bits/pthreadtypes.h
+	<bits/wordsize.h>
+
+1239265054 /usr/include/alloca.h
+	<features.h>
+	<stddef.h>
+
+1239265054 /usr/include/bits/stdlib.h
+
+1239265054 /usr/include/bits/stdlib-ldbl.h
+
+1241576024 /usr/include/GL/glext.h
+	<windows.h>
+	<stddef.h>
+	<inttypes.h>
+	<inttypes.h>
+	<inttypes.h>
+	<stdint.h>
+	<stdint.h>
+	<inttypes.h>
+
+1239265054 /usr/include/inttypes.h
+	<features.h>
+	<stdint.h>
+	<stddef.h>
+
+1239265054 /usr/include/stdint.h
+	<features.h>
+	<bits/wchar.h>
+	<bits/wordsize.h>
+
+1239265062 /usr/include/bits/wchar.h
+
+1241576025 /usr/include/GL/glx.h
+	<GL/vms_x_fix.h>
+	<X11/Xlib.h>
+	<X11/Xutil.h>
+	<GL/gl.h>
+	"glx_mangle.h"
+	<GL/glxext.h>
+
+1233592870 /usr/include/X11/Xlib.h
+	<sys/types.h>
+	<sys/types.h>
+	<sys/types.h>
+	<stdint.h>
+	<X11/X.h>
+	<X11/Xfuncproto.h>
+	<X11/Xosdefs.h>
+	<stddef.h>
+	<stdlib.h>
+
+1235763256 /usr/include/X11/X.h
+	<X11/Xmd.h>
+
+1235763256 /usr/include/X11/Xmd.h
+	<sys/isa_defs.h>
+
+1235763256 /usr/include/X11/Xfuncproto.h
+
+1235763256 /usr/include/X11/Xosdefs.h
+
+1233592870 /usr/include/X11/Xutil.h
+	<X11/Xlib.h>
+	<X11/keysym.h>
+
+1235763256 /usr/include/X11/keysym.h
+	<X11/keysymdef.h>
+
+1235763256 /usr/include/X11/keysymdef.h
+
+1241576025 /usr/include/GL/glx_mangle.h
+
+1241576025 /usr/include/GL/glxext.h
+	<windows.h>
+	<inttypes.h>
+	<inttypes.h>
+	<inttypes.h>
+	<stdint.h>
+	<stdint.h>
+	<inttypes.h>
+
+1239265068 /usr/include/unistd.h
+	<features.h>
+	<bits/posix_opt.h>
+	<bits/environments.h>
+	<bits/types.h>
+	<stddef.h>
+	<bits/confname.h>
+	<getopt.h>
+	<bits/unistd.h>
+
+1239265068 /usr/include/bits/posix_opt.h
+
+1239265068 /usr/include/bits/environments.h
+	<bits/wordsize.h>
+
+1239265068 /usr/include/bits/confname.h
+
+1239265068 /usr/include/getopt.h
+	<ctype.h>
+
+1239265045 /usr/include/ctype.h
+	<features.h>
+	<bits/types.h>
+	<endian.h>
+	<xlocale.h>
+
+1239265068 /usr/include/bits/unistd.h
+
+1241576025 /usr/include/GL/glu.h
+	"glu_mangle.h"
+	<GL/gl.h>
+
+1241576025 /usr/include/GL/glu_mangle.h
+
+1239265057 /usr/include/stdio.h
+	<features.h>
+	<stddef.h>
+	<bits/types.h>
+	<libio.h>
+	<stdarg.h>
+	<bits/stdio_lim.h>
+	<bits/sys_errlist.h>
+	<getopt.h>
+	<bits/stdio.h>
+	<bits/stdio2.h>
+	<bits/stdio-ldbl.h>
+
+1239265057 /usr/include/libio.h
+	<_G_config.h>
+	<stdarg.h>
+	<sys/cdefs.h>
+	<bits/stdio-lock.h>
+	<shlib-compat.h>
+	<bits/libio-ldbl.h>
+
+1239265057 /usr/include/_G_config.h
+	<bits/types.h>
+	<stddef.h>
+	<wchar.h>
+	<gconv.h>
+
+1239265062 /usr/include/wchar.h
+	<features.h>
+	<stdio.h>
+	<stdarg.h>
+	<bits/wchar.h>
+	<stddef.h>
+	<wctype.h>
+	<xlocale.h>
+	<xlocale.h>
+	<xlocale.h>
+	<wctype.h>
+	<bits/wchar2.h>
+	<bits/wchar-ldbl.h>
+
+1239265077 /usr/include/wctype.h
+	<features.h>
+	<bits/types.h>
+	<wchar.h>
+	<endian.h>
+	<xlocale.h>
+
+1239265062 /usr/include/bits/wchar2.h
+
+1239265062 /usr/include/bits/wchar-ldbl.h
+
+1239265016 /usr/include/gconv.h
+	<features.h>
+	<wchar.h>
+	<stddef.h>
+
+1239265057 /usr/include/bits/stdio-lock.h
+	<bits/libc-lock.h>
+	<lowlevellock.h>
+
+1239265014 /usr/include/bits/libc-lock.h
+	<pthread.h>
+	<stddef.h>
+	<lowlevellock.h>
+	<tls.h>
+	<pthread-functions.h>
+	<bp-sym.h>
+
+1239265083 /usr/include/pthread.h
+	<features.h>
+	<endian.h>
+	<sched.h>
+	<time.h>
+	<signal.h>
+	<bits/pthreadtypes.h>
+	<bits/setjmp.h>
+	<bits/wordsize.h>
+
+1239265068 /usr/include/sched.h
+	<features.h>
+	<bits/types.h>
+	<stddef.h>
+	<time.h>
+	<bits/sched.h>
+
+1239265068 /usr/include/bits/sched.h
+
+1239265053 /usr/include/signal.h
+	<features.h>
+	<bits/sigset.h>
+	<bits/types.h>
+	<bits/signum.h>
+	<time.h>
+	<bits/siginfo.h>
+	<bits/sigaction.h>
+	<bits/sigcontext.h>
+	<stddef.h>
+	<bits/sigstack.h>
+	<sys/ucontext.h>
+	<bits/pthreadtypes.h>
+	<bits/sigthread.h>
+
+1239265053 /usr/include/bits/signum.h
+
+1239265053 /usr/include/bits/siginfo.h
+	<bits/wordsize.h>
+
+1239265053 /usr/include/bits/sigaction.h
+
+1239265053 /usr/include/bits/sigcontext.h
+	<bits/wordsize.h>
+
+1239265053 /usr/include/bits/sigstack.h
+
+1239265054 /usr/include/sys/ucontext.h
+	<features.h>
+	<signal.h>
+	<bits/wordsize.h>
+	<bits/sigcontext.h>
+
+1239265053 /usr/include/bits/sigthread.h
+
+1239265052 /usr/include/bits/setjmp.h
+	<bits/wordsize.h>
+
+1214239007 /usr/include/tls.h
+	<tcl.h>
+
+1239265057 /usr/include/bits/libio-ldbl.h
+
+1239265055 /usr/include/bits/stdio_lim.h
+
+1239265057 /usr/include/bits/sys_errlist.h
+
+1239265057 /usr/include/bits/stdio.h
+
+1239265057 /usr/include/bits/stdio2.h
+
+1239265057 /usr/include/bits/stdio-ldbl.h
+
+1239265049 /usr/include/math.h
+	<features.h>
+	<bits/huge_val.h>
+	<bits/huge_valf.h>
+	<bits/huge_vall.h>
+	<bits/inf.h>
+	<bits/nan.h>
+	<bits/mathdef.h>
+	<bits/mathcalls.h>
+	<bits/mathcalls.h>
+	<bits/mathcalls.h>
+	<bits/mathinline.h>
+
+1239265049 /usr/include/bits/huge_val.h
+	<endian.h>
+
+1239265049 /usr/include/bits/huge_valf.h
+
+1239265049 /usr/include/bits/huge_vall.h
+
+1239265049 /usr/include/bits/inf.h
+
+1239265049 /usr/include/bits/nan.h
+	<endian.h>
+
+1239265049 /usr/include/bits/mathdef.h
+	<bits/wordsize.h>
+
+1239265049 /usr/include/bits/mathcalls.h
+
+1239265049 /usr/include/bits/mathinline.h
+
+1239265060 /usr/include/string.h
+	<features.h>
+	<stddef.h>
+	<xlocale.h>
+	<bits/string.h>
+	<bits/string2.h>
+	<bits/string3.h>
+
+1239265061 /usr/include/bits/string.h
+
+1239265061 /usr/include/bits/string2.h
+	<endian.h>
+	<bits/types.h>
+	<stdlib.h>
+
+1239265061 /usr/include/bits/string3.h
+
+1250285640 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/utils/ofMath.h
+	"ofConstants.h"
+
+1250285640 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/utils/ofUtils.h
+	"ofConstants.h"
+	<shellapi.h>
+
+1250285640 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/utils/ofTypes.h
+	"ofConstants.h"
+
+1250285640 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/communication/ofSerial.h
+	"ofConstants.h"
+	<termios.h>
+	<sys/ioctl.h>
+	<getopt.h>
+	<dirent.h>
+	<winbase.h>
+	<tchar.h>
+	<iostream>
+	<string.h>
+	<setupapi.h>
+	<regstr.h>
+	<winioctl.h>
+	<initguid.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<fcntl.h>
+	<errno.h>
+	<ctype.h>
+
+1239265070 /usr/include/termios.h
+	<features.h>
+	<bits/types.h>
+	<bits/termios.h>
+	<sys/ttydefaults.h>
+
+1239265070 /usr/include/bits/termios.h
+
+1239265070 /usr/include/sys/ttydefaults.h
+
+1239265072 /usr/include/sys/ioctl.h
+	<features.h>
+	<bits/ioctls.h>
+	<bits/ioctl-types.h>
+	<sys/ttydefaults.h>
+
+1239265072 /usr/include/bits/ioctls.h
+	<asm/ioctls.h>
+
+1248489882 /usr/include/asm/ioctls.h
+	<asm/ioctl.h>
+
+1248489882 /usr/include/asm/ioctl.h
+	<asm-generic/ioctl.h>
+
+1248489877 /usr/include/asm-generic/ioctl.h
+
+1239265072 /usr/include/bits/ioctl-types.h
+	<asm/ioctls.h>
+
+1239265065 /usr/include/dirent.h
+	<features.h>
+	<bits/types.h>
+	<bits/dirent.h>
+	<bits/types.h>
+	<bits/posix1_lim.h>
+	<stddef.h>
+
+1239265065 /usr/include/bits/dirent.h
+
+1239265068 /usr/include/bits/posix1_lim.h
+	<bits/local_lim.h>
+
+1239265068 /usr/include/bits/local_lim.h
+	<linux/limits.h>
+
+1248489880 /usr/include/linux/limits.h
+
+1239265069 /usr/include/fcntl.h
+	<features.h>
+	<bits/fcntl.h>
+	<sys/stat.h>
+	<bits/fcntl2.h>
+
+1239265069 /usr/include/bits/fcntl.h
+	<sys/types.h>
+	<bits/wordsize.h>
+	<bits/uio.h>
+
+1239265072 /usr/include/bits/uio.h
+	<sys/types.h>
+
+1239265069 /usr/include/sys/stat.h
+	<features.h>
+	<bits/types.h>
+	<time.h>
+	<bits/stat.h>
+
+1239265069 /usr/include/bits/stat.h
+
+1239265070 /usr/include/bits/fcntl2.h
+
+1239265054 /usr/include/errno.h
+	<features.h>
+	<bits/errno.h>
+
+1239265054 /usr/include/bits/errno.h
+	<linux/errno.h>
+
+1248489880 /usr/include/linux/errno.h
+	<asm/errno.h>
+
+1248489882 /usr/include/asm/errno.h
+	<asm-generic/errno.h>
+
+1248489877 /usr/include/asm-generic/errno.h
+	<asm-generic/errno-base.h>
+
+1248489877 /usr/include/asm-generic/errno-base.h
+
+1250285640 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/communication/ofStandardFirmata.h
+	<list>
+	<vector>
+	<string>
+	<iostream>
+	"ofEvents.h"
+	"ofSerial.h"
+
+1250285640 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/events/ofEvents.h
+	"ofConstants.h"
+	"ofEventUtils.h"
+	"ofxEventUtils.h"
+
+1250285640 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/events/ofEventUtils.h
+	"ofConstants.h"
+	"Poco/FIFOEvent.h"
+	"Poco/Delegate.h"
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/FIFOEvent.h
+	"Poco/AbstractEvent.h"
+	"Poco/FIFOStrategy.h"
+	"Poco/AbstractDelegate.h"
+	"Poco/CompareFunctions.h"
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/AbstractEvent.h
+	"Poco/Foundation.h"
+	"Poco/SingletonHolder.h"
+	"Poco/SharedPtr.h"
+	"Poco/ActiveResult.h"
+	"Poco/ActiveMethod.h"
+	"Poco/Mutex.h"
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/Foundation.h
+	"Poco/Config.h"
+	"Poco/Platform.h"
+	"Poco/Platform_WIN32.h"
+	"Poco/Platform_VMS.h"
+	"Poco/Platform_POSIX.h"
+	"Poco/Bugcheck.h"
+	"Poco/Types.h"
+	<string>
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/Config.h
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/Platform.h
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/Platform_WIN32.h
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/Platform_VMS.h
+
+1250285553 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/Platform_POSIX.h
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/Bugcheck.h
+	"Poco/Foundation.h"
+	<string>
+
+1250285553 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/Types.h
+	"Poco/Foundation.h"
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/SingletonHolder.h
+	"Poco/Foundation.h"
+	"Poco/Mutex.h"
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/Mutex.h
+	"Poco/Foundation.h"
+	"Poco/Exception.h"
+	"Poco/ScopedLock.h"
+	"Poco/Mutex_WIN32.h"
+	"Poco/Mutex_POSIX.h"
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/Exception.h
+	"Poco/Foundation.h"
+	<stdexcept>
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/ScopedLock.h
+	"Poco/Foundation.h"
+
+1250285553 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/Mutex_WIN32.h
+	"Poco/Foundation.h"
+	"Poco/Exception.h"
+	"Poco/UnWindows.h"
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/UnWindows.h
+	<windows.h>
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/Mutex_POSIX.h
+	"Poco/Foundation.h"
+	"Poco/Exception.h"
+	<pthread.h>
+	<errno.h>
+
+1250285553 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/SharedPtr.h
+	"Poco/Foundation.h"
+	"Poco/Exception.h"
+	"Poco/Mutex.h"
+	<algorithm>
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/ActiveResult.h
+	"Poco/Foundation.h"
+	"Poco/Mutex.h"
+	"Poco/Event.h"
+	"Poco/RefCountedObject.h"
+	"Poco/Exception.h"
+	<algorithm>
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/Event.h
+	"Poco/Foundation.h"
+	"Poco/Exception.h"
+	"Poco/Event_WIN32.h"
+	"Poco/Event_POSIX.h"
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/Event_WIN32.h
+	"Poco/Foundation.h"
+	"Poco/Exception.h"
+	"Poco/UnWindows.h"
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/Event_POSIX.h
+	"Poco/Foundation.h"
+	"Poco/Exception.h"
+	<pthread.h>
+	<errno.h>
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/RefCountedObject.h
+	"Poco/Foundation.h"
+	"Poco/Mutex.h"
+
+1250285553 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/ActiveMethod.h
+	"Poco/Foundation.h"
+	"Poco/ActiveResult.h"
+	"Poco/ActiveRunnable.h"
+	"Poco/ActiveStarter.h"
+	"Poco/AutoPtr.h"
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/ActiveRunnable.h
+	"Poco/Foundation.h"
+	"Poco/ActiveResult.h"
+	"Poco/Runnable.h"
+	"Poco/RefCountedObject.h"
+	"Poco/AutoPtr.h"
+	"Poco/Exception.h"
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/Runnable.h
+	"Poco/Foundation.h"
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/AutoPtr.h
+	"Poco/Foundation.h"
+	"Poco/Exception.h"
+	<algorithm>
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/ActiveStarter.h
+	"Poco/Foundation.h"
+	"Poco/ThreadPool.h"
+	"Poco/ActiveRunnable.h"
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/ThreadPool.h
+	"Poco/Foundation.h"
+	"Poco/Thread.h"
+	"Poco/Mutex.h"
+	<vector>
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/Thread.h
+	"Poco/Foundation.h"
+	"Poco/Mutex.h"
+	"Poco/Thread_WIN32.h"
+	"Poco/Thread_POSIX.h"
+
+1250285553 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/Thread_WIN32.h
+	"Poco/Foundation.h"
+	"Poco/Runnable.h"
+	"Poco/UnWindows.h"
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/Thread_POSIX.h
+	"Poco/Foundation.h"
+	"Poco/Runnable.h"
+	"Poco/SignalHandler.h"
+	"Poco/Event.h"
+	"Poco/RefCountedObject.h"
+	"Poco/AutoPtr.h"
+	<pthread.h>
+	<sys/select.h>
+	<errno.h>
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/SignalHandler.h
+	"Poco/Foundation.h"
+	<vector>
+	<setjmp.h>
+
+1239265052 /usr/include/setjmp.h
+	<features.h>
+	<bits/setjmp.h>
+	<bits/sigset.h>
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/FIFOStrategy.h
+	"Poco/NotificationStrategy.h"
+	<map>
+	<list>
+	<memory>
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/NotificationStrategy.h
+	"Poco/Foundation.h"
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/AbstractDelegate.h
+	"Poco/Foundation.h"
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/CompareFunctions.h
+	"Poco/Foundation.h"
+	<functional>
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/Delegate.h
+	"Poco/Foundation.h"
+	"Poco/AbstractDelegate.h"
+	"Poco/FunctionDelegate.h"
+	"Poco/Expire.h"
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/FunctionDelegate.h
+	"Poco/Foundation.h"
+	"Poco/AbstractDelegate.h"
+
+1250285553 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/Expire.h
+	"Poco/Foundation.h"
+	"Poco/AbstractDelegate.h"
+	"Poco/Timestamp.h"
+
+1250285552 /home/thiago/ccv_hand/CCV-HAND/libs/poco/include/Poco/Timestamp.h
+	"Poco/Foundation.h"
+	<ctime>
+
+1250285640 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/communication/ofArduino.h
+	"ofStandardFirmata.h"
+
+1250285640 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/graphics/ofTexture.h
+	"ofConstants.h"
+	"ofGraphics.h"
+
+1250285640 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/graphics/ofGraphics.h
+	"ofConstants.h"
+	"ofTypes.h"
+
+1250285640 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/graphics/ofTrueTypeFont.h
+	"ofConstants.h"
+	"ofGraphics.h"
+	"ofUtils.h"
+	"ofTypes.h"
+
+1250285640 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/graphics/ofImage.h
+	"ofConstants.h"
+	"ofTexture.h"
+	"ofGraphics.h"
+	"ofAppRunner.h"
+	"FreeImage.h"
+	"ofUtils.h"
+
+1250285639 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/app/ofAppRunner.h
+	"ofMain.h"
+	"ofBaseApp.h"
+	"ofAppBaseWindow.h"
+	"ofAppGlutWindow.h"
+
+1250285639 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/app/ofBaseApp.h
+	"ofTypes.h"
+
+1250285639 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/app/ofAppBaseWindow.h
+	"ofTypes.h"
+
+1250285639 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/app/ofAppGlutWindow.h
+	"ofConstants.h"
+	"ofAppBaseWindow.h"
+	"glut.h"
+	<GLUT/glut.h>
+	<GL/glut.h>
+
+1227098034 /usr/include/GL/glut.h
+	"freeglut_std.h"
+
+1227098034 /usr/include/GL/freeglut_std.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1250285673 /home/thiago/ccv_hand/CCV-HAND/libs/FreeImage/FreeImage.h
+	<wchar.h>
+	<inttypes.h>
+
+1250285641 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/sound/ofSoundStream.h
+	"ofConstants.h"
+	"ofBaseApp.h"
+	"ofEvents.h"
+	"ofMath.h"
+
+1250285641 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/sound/ofSoundPlayer.h
+	"ofConstants.h"
+	"fmod.h"
+	"fmod_errors.h"
+
+1250285639 /home/thiago/ccv_hand/CCV-HAND/libs/fmodex/inc/fmod.h
+	"fmod_codec.h"
+	"fmod_dsp.h"
+	"fmod_memoryinfo.h"
+
+1250285639 /home/thiago/ccv_hand/CCV-HAND/libs/fmodex/inc/fmod_codec.h
+
+1250285639 /home/thiago/ccv_hand/CCV-HAND/libs/fmodex/inc/fmod_dsp.h
+
+1250285639 /home/thiago/ccv_hand/CCV-HAND/libs/fmodex/inc/fmod_memoryinfo.h
+
+1250285639 /home/thiago/ccv_hand/CCV-HAND/libs/fmodex/inc/fmod_errors.h
+	"fmod.h"
+
+1250285641 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/video/ofVideoGrabber.h
+	"ofConstants.h"
+	"ofTexture.h"
+	"ofGraphics.h"
+	"ofTypes.h"
+	"ofQtUtils.h"
+	"videoInput.h"
+	"ofUCUtils.h"
+
+1250285641 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/video/ofQtUtils.h
+	"ofConstants.h"
+	"ofGraphics.h"
+	<QuickTime/QuickTime.h>
+	<CoreServices/CoreServices.h>
+	<ApplicationServices/ApplicationServices.h>
+	<QTML.h>
+	<FixMath.h>
+	<QuickTimeComponents.h>
+	<TextUtils.h>
+	<MediaHandlers.h>
+
+1250285641 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/video/ofUCUtils.h
+	"ofConstants.h"
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	<unicap.h>
+	<unistd.h>
+	<string.h>
+	<pthread.h>
+
+1250285533 /home/thiago/ccv_hand/CCV-HAND/libs/unicap/include/unicap.h
+	<sys/types.h>
+	<sys/time.h>
+	<unistd.h>
+	<unicap_status.h>
+	<unicap_version.h>
+
+1239265064 /usr/include/sys/time.h
+	<features.h>
+	<bits/types.h>
+	<time.h>
+	<bits/time.h>
+	<sys/select.h>
+
+1250285533 /home/thiago/ccv_hand/CCV-HAND/libs/unicap/include/unicap_status.h
+
+1250285533 /home/thiago/ccv_hand/CCV-HAND/libs/unicap/include/unicap_version.h
+
+1250285641 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/video/ofVideoPlayer.h
+	"ofConstants.h"
+	"ofTexture.h"
+	<gst/gst.h>
+	<pthread.h>
+	"ofQtUtils.h"
+
+1239380674 /usr/include/glib.h
+	<glib/galloca.h>
+	<glib/garray.h>
+	<glib/gasyncqueue.h>
+	<glib/gatomic.h>
+	<glib/gbacktrace.h>
+	<glib/gbase64.h>
+	<glib/gbookmarkfile.h>
+	<glib/gcache.h>
+	<glib/gchecksum.h>
+	<glib/gcompletion.h>
+	<glib/gconvert.h>
+	<glib/gdataset.h>
+	<glib/gdate.h>
+	<glib/gdir.h>
+	<glib/gerror.h>
+	<glib/gfileutils.h>
+	<glib/ghash.h>
+	<glib/ghook.h>
+	<glib/giochannel.h>
+	<glib/gkeyfile.h>
+	<glib/glist.h>
+	<glib/gmacros.h>
+	<glib/gmain.h>
+	<glib/gmappedfile.h>
+	<glib/gmarkup.h>
+	<glib/gmem.h>
+	<glib/gmessages.h>
+	<glib/gnode.h>
+	<glib/goption.h>
+	<glib/gpattern.h>
+	<glib/gpoll.h>
+	<glib/gprimes.h>
+	<glib/gqsort.h>
+	<glib/gquark.h>
+	<glib/gqueue.h>
+	<glib/grand.h>
+	<glib/grel.h>
+	<glib/gregex.h>
+	<glib/gscanner.h>
+	<glib/gsequence.h>
+	<glib/gshell.h>
+	<glib/gslice.h>
+	<glib/gslist.h>
+	<glib/gspawn.h>
+	<glib/gstrfuncs.h>
+	<glib/gstring.h>
+	<glib/gtestutils.h>
+	<glib/gthread.h>
+	<glib/gthreadpool.h>
+	<glib/gtimer.h>
+	<glib/gtree.h>
+	<glib/gtypes.h>
+	<glib/gunicode.h>
+	<glib/gurifuncs.h>
+	<glib/gutils.h>
+	<glib/gwin32.h>
+
+1239380674 /usr/include/glib/galloca.h
+	<glib/gtypes.h>
+	<alloca.h>
+	<malloc.h>
+
+1239380675 /usr/include/glib/gtypes.h
+	<glibconfig.h>
+	<glib/gmacros.h>
+
+1239380673 /usr/include/glibconfig.h
+	<glib/gmacros.h>
+	<limits.h>
+	<float.h>
+
+1239380674 /usr/include/glib/gmacros.h
+	<stddef.h>
+
+1239265014 /usr/include/limits.h
+	<features.h>
+	<bits/wordsize.h>
+	<bits/posix1_lim.h>
+	<bits/posix2_lim.h>
+	<bits/xopen_lim.h>
+
+1239265068 /usr/include/bits/posix2_lim.h
+
+1239265014 /usr/include/bits/xopen_lim.h
+	<bits/stdio_lim.h>
+	<bits/wordsize.h>
+
+1239265059 /usr/include/malloc.h
+	<features.h>
+	<stddef.h>
+
+1239380674 /usr/include/glib/garray.h
+	<glib/gtypes.h>
+
+1239380674 /usr/include/glib/gasyncqueue.h
+	<glib/gthread.h>
+
+1239380675 /usr/include/glib/gthread.h
+	<glib/gerror.h>
+	<glib/gtypes.h>
+	<glib/gutils.h>
+	<glib/gatomic.h>
+
+1239380674 /usr/include/glib/gerror.h
+	<glib/gquark.h>
+
+1239380674 /usr/include/glib/gquark.h
+	<glib/gtypes.h>
+
+1239380675 /usr/include/glib/gutils.h
+	<glib/gtypes.h>
+	<stdarg.h>
+
+1239380674 /usr/include/glib/gatomic.h
+	<glib/gtypes.h>
+
+1239380674 /usr/include/glib/gbacktrace.h
+	<glib/gtypes.h>
+	<signal.h>
+
+1239380674 /usr/include/glib/gbase64.h
+	<glib/gtypes.h>
+
+1239380674 /usr/include/glib/gbookmarkfile.h
+	<glib/gerror.h>
+	<time.h>
+
+1239380674 /usr/include/glib/gcache.h
+	<glib/glist.h>
+
+1239380674 /usr/include/glib/glist.h
+	<glib/gmem.h>
+
+1239380674 /usr/include/glib/gmem.h
+	<glib/gslice.h>
+	<glib/gtypes.h>
+
+1239380675 /usr/include/glib/gslice.h
+	<glib/gtypes.h>
+
+1239380674 /usr/include/glib/gchecksum.h
+	<glib/gtypes.h>
+
+1239380674 /usr/include/glib/gcompletion.h
+	<glib/glist.h>
+
+1239380674 /usr/include/glib/gconvert.h
+	<glib/gerror.h>
+
+1239380674 /usr/include/glib/gdataset.h
+	<glib/gquark.h>
+
+1239380674 /usr/include/glib/gdate.h
+	<time.h>
+	<glib/gtypes.h>
+	<glib/gquark.h>
+
+1239380674 /usr/include/glib/gdir.h
+	<glib/gerror.h>
+
+1239380674 /usr/include/glib/gfileutils.h
+	<glib/gerror.h>
+
+1239380674 /usr/include/glib/ghash.h
+	<glib/gtypes.h>
+	<glib/glist.h>
+
+1239380674 /usr/include/glib/ghook.h
+	<glib/gmem.h>
+
+1239380674 /usr/include/glib/giochannel.h
+	<glib/gconvert.h>
+	<glib/gmain.h>
+	<glib/gstring.h>
+
+1239380674 /usr/include/glib/gmain.h
+	<glib/gpoll.h>
+	<glib/gslist.h>
+	<glib/gthread.h>
+
+1239380674 /usr/include/glib/gpoll.h
+	<glib/gtypes.h>
+
+1239380675 /usr/include/glib/gslist.h
+	<glib/gmem.h>
+
+1239380675 /usr/include/glib/gstring.h
+	<glib/gtypes.h>
+	<glib/gunicode.h>
+	<glib/gutils.h>
+
+1239380675 /usr/include/glib/gunicode.h
+	<glib/gerror.h>
+	<glib/gtypes.h>
+
+1239380674 /usr/include/glib/gkeyfile.h
+	<glib/gerror.h>
+
+1239380674 /usr/include/glib/gmappedfile.h
+	<glib/gerror.h>
+
+1239380674 /usr/include/glib/gmarkup.h
+	<stdarg.h>
+	<glib/gerror.h>
+	<glib/gslist.h>
+
+1239380674 /usr/include/glib/gmessages.h
+	<stdarg.h>
+	<glib/gtypes.h>
+	<glib/gmacros.h>
+
+1239380674 /usr/include/glib/gnode.h
+	<glib/gmem.h>
+
+1239380674 /usr/include/glib/goption.h
+	<glib/gerror.h>
+	<glib/gquark.h>
+
+1239380674 /usr/include/glib/gpattern.h
+	<glib/gtypes.h>
+
+1239380674 /usr/include/glib/gprimes.h
+	<glib/gtypes.h>
+
+1239380674 /usr/include/glib/gqsort.h
+	<glib/gtypes.h>
+
+1239380674 /usr/include/glib/gqueue.h
+	<glib/glist.h>
+
+1239380674 /usr/include/glib/grand.h
+	<glib/gtypes.h>
+
+1239380674 /usr/include/glib/grel.h
+	<glib/gtypes.h>
+
+1239380674 /usr/include/glib/gregex.h
+	<glib/gerror.h>
+	<glib/gstring.h>
+
+1239380674 /usr/include/glib/gscanner.h
+	<glib/gdataset.h>
+	<glib/ghash.h>
+
+1239380675 /usr/include/glib/gsequence.h
+	<glib/gtypes.h>
+
+1239380675 /usr/include/glib/gshell.h
+	<glib/gerror.h>
+
+1239380675 /usr/include/glib/gspawn.h
+	<glib/gerror.h>
+
+1239380675 /usr/include/glib/gstrfuncs.h
+	<stdarg.h>
+	<glib/gtypes.h>
+
+1239380675 /usr/include/glib/gtestutils.h
+	<glib.h>
+
+1239380675 /usr/include/glib/gthreadpool.h
+	<glib/gthread.h>
+
+1239380675 /usr/include/glib/gtimer.h
+	<glib/gtypes.h>
+
+1239380675 /usr/include/glib/gtree.h
+	<glib/gnode.h>
+
+1239380675 /usr/include/glib/gurifuncs.h
+	<glib.h>
+
+1239380675 /usr/include/glib/gwin32.h
+	<glib/gtypes.h>
+
+1239380674 /usr/include/glib-object.h
+	<gobject/gboxed.h>
+	<gobject/genums.h>
+	<gobject/gobject.h>
+	<gobject/gparam.h>
+	<gobject/gparamspecs.h>
+	<gobject/gsignal.h>
+	<gobject/gsourceclosure.h>
+	<gobject/gtype.h>
+	<gobject/gtypemodule.h>
+	<gobject/gtypeplugin.h>
+	<gobject/gvalue.h>
+	<gobject/gvaluearray.h>
+	<gobject/gvaluetypes.h>
+
+1239380677 /usr/include/gobject/gboxed.h
+	<gobject/gtype.h>
+
+1239380677 /usr/include/gobject/gtype.h
+	<glib.h>
+
+1239380677 /usr/include/gobject/genums.h
+	<gobject/gtype.h>
+
+1239380677 /usr/include/gobject/gobject.h
+	<gobject/gtype.h>
+	<gobject/gvalue.h>
+	<gobject/gparam.h>
+	<gobject/gclosure.h>
+	<gobject/gsignal.h>
+
+1239380677 /usr/include/gobject/gvalue.h
+	<gobject/gtype.h>
+
+1239380677 /usr/include/gobject/gparam.h
+	<gobject/gvalue.h>
+
+1239380677 /usr/include/gobject/gclosure.h
+	<gobject/gtype.h>
+
+1239380677 /usr/include/gobject/gsignal.h
+	<gobject/gclosure.h>
+	<gobject/gvalue.h>
+	<gobject/gparam.h>
+	<gobject/gmarshal.h>
+
+1239380677 /usr/include/gobject/gmarshal.h
+
+1239380677 /usr/include/gobject/gparamspecs.h
+	<gobject/gvalue.h>
+	<gobject/genums.h>
+	<gobject/gboxed.h>
+	<gobject/gobject.h>
+
+1239380677 /usr/include/gobject/gsourceclosure.h
+	<gobject/gclosure.h>
+
+1239380677 /usr/include/gobject/gtypemodule.h
+	<gobject/gobject.h>
+	<gobject/genums.h>
+
+1239380677 /usr/include/gobject/gtypeplugin.h
+	<gobject/gtype.h>
+
+1239380677 /usr/include/gobject/gvaluearray.h
+	<gobject/gvalue.h>
+
+1239380677 /usr/include/gobject/gvaluetypes.h
+	<gobject/gvalue.h>
+
+1239224982 /usr/include/libxml/parser.h
+	<stdarg.h>
+	<libxml/xmlversion.h>
+	<libxml/tree.h>
+	<libxml/dict.h>
+	<libxml/hash.h>
+	<libxml/valid.h>
+	<libxml/entities.h>
+	<libxml/xmlerror.h>
+	<libxml/xmlstring.h>
+	<libxml/encoding.h>
+	<libxml/xmlIO.h>
+	<libxml/globals.h>
+
+1239224982 /usr/include/libxml/xmlversion.h
+	<libxml/xmlexports.h>
+	<ansidecl.h>
+
+1239224982 /usr/include/libxml/xmlexports.h
+
+1239224982 /usr/include/libxml/tree.h
+	<stdio.h>
+	<libxml/xmlversion.h>
+	<libxml/xmlstring.h>
+	<libxml/xmlregexp.h>
+	<libxml/xmlmemory.h>
+
+1239224982 /usr/include/libxml/xmlstring.h
+	<stdarg.h>
+	<libxml/xmlversion.h>
+
+1239224982 /usr/include/libxml/xmlregexp.h
+	<libxml/xmlversion.h>
+	<libxml/tree.h>
+	<libxml/dict.h>
+
+1239224982 /usr/include/libxml/dict.h
+	<libxml/xmlversion.h>
+	<libxml/tree.h>
+
+1239224982 /usr/include/libxml/xmlmemory.h
+	<stdio.h>
+	<libxml/xmlversion.h>
+	<libxml/threads.h>
+	<libxml/globals.h>
+
+1239224982 /usr/include/libxml/threads.h
+	<libxml/xmlversion.h>
+	<libxml/globals.h>
+
+1239224982 /usr/include/libxml/globals.h
+	<libxml/xmlversion.h>
+	<libxml/parser.h>
+	<libxml/xmlerror.h>
+	<libxml/SAX.h>
+	<libxml/SAX2.h>
+	<libxml/xmlmemory.h>
+	<libxml/threads.h>
+
+1239224982 /usr/include/libxml/xmlerror.h
+	<libxml/parser.h>
+
+1239224982 /usr/include/libxml/SAX.h
+	<stdio.h>
+	<stdlib.h>
+	<libxml/xmlversion.h>
+	<libxml/parser.h>
+	<libxml/xlink.h>
+
+1239224982 /usr/include/libxml/xlink.h
+	<libxml/xmlversion.h>
+	<libxml/tree.h>
+
+1239224982 /usr/include/libxml/SAX2.h
+	<stdio.h>
+	<stdlib.h>
+	<libxml/xmlversion.h>
+	<libxml/parser.h>
+	<libxml/xlink.h>
+
+1239224982 /usr/include/libxml/hash.h
+	<libxml/xmlversion.h>
+	<libxml/parser.h>
+	<libxml/dict.h>
+
+1239224982 /usr/include/libxml/valid.h
+	<libxml/xmlversion.h>
+	<libxml/xmlerror.h>
+	<libxml/tree.h>
+	<libxml/list.h>
+	<libxml/xmlautomata.h>
+	<libxml/xmlregexp.h>
+
+1239224982 /usr/include/libxml/list.h
+	<libxml/xmlversion.h>
+
+1239224982 /usr/include/libxml/xmlautomata.h
+	<libxml/xmlversion.h>
+	<libxml/tree.h>
+	<libxml/xmlregexp.h>
+
+1239224982 /usr/include/libxml/entities.h
+	<libxml/xmlversion.h>
+	<libxml/tree.h>
+
+1239224982 /usr/include/libxml/encoding.h
+	<libxml/xmlversion.h>
+	<iconv.h>
+	<libxml/tree.h>
+
+1239265016 /usr/include/iconv.h
+	<features.h>
+	<stddef.h>
+
+1239224982 /usr/include/libxml/xmlIO.h
+	<stdio.h>
+	<libxml/xmlversion.h>
+	<libxml/globals.h>
+	<libxml/tree.h>
+	<libxml/parser.h>
+	<libxml/encoding.h>
+
+1239380676 /usr/include/gmodule.h
+	<glib.h>
+
+1239265044 /usr/include/assert.h
+	<features.h>
+
+1250284973 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Calibration/Calibration.cpp
+	"Calibration.h"
+
+1250284973 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Calibration/Calibration.h
+	"ofxXmlSettings.h"
+	"ofMain.h"
+	"CalibrationUtils.h"
+	"../Events/TouchMessenger.h"
+	"../Tracking/ContourFinder.h"
+	"../Tracking/Tracking.h"
+
+1250285532 /home/thiago/ccv_hand/CCV-HAND/addons/ofxXmlSettings/src/ofxXmlSettings.h
+	"ofMain.h"
+	<string.h>
+	"tinyxml.h"
+
+1250285532 /home/thiago/ccv_hand/CCV-HAND/addons/ofxXmlSettings/libs/tinyxml.h
+	<ctype.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<string>
+	<iostream>
+	<sstream>
+	"tinystr.h"
+
+1250284973 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Calibration/CalibrationUtils.h
+	"ofxXmlSettings.h"
+	"rect2d.h"
+	"vector2d.h"
+
+1250284973 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Calibration/rect2d.h
+	"vector2d.h"
+
+1250284973 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Calibration/vector2d.h
+	<math.h>
+
+1250284973 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Events/TouchMessenger.h
+	"Poco/FIFOEvent.h"
+	"Poco/Delegate.h"
+	"ofTypes.h"
+	"../Tracking/ContourFinder.h"
+
+1248460421 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/ContourFinder.h
+	"ofMain.h"
+	"ofxOpenCv.h"
+	"Blob.h"
+
+1250285021 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/src/ofxOpenCv.h
+	"ofxCvConstants.h"
+	"ofxCvImage.h"
+	"ofxCvGrayscaleImage.h"
+	"ofxCvColorImage.h"
+	"ofxCvFloatImage.h"
+	"ofxCvShortImage.h"
+	"ofxCvContourFinder.h"
+
+1250285021 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/src/ofxCvConstants.h
+	"cv.h"
+	<vector>
+	"ofMain.h"
+
+1250285023 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/libs/opencv/include/cv.h
+	<chdl.h>
+	"cxcore.h"
+	"cvtypes.h"
+	"cv.hpp"
+	"cvcompat.h"
+
+1250285023 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/libs/opencv/include/cxcore.h
+	"ipl.h"
+	"ipl/ipl.h"
+	"cxtypes.h"
+	"cxerror.h"
+	"cvver.h"
+	"cxcore.hpp"
+
+1250285023 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/libs/opencv/include/cxtypes.h
+	<assert.h>
+	<stdlib.h>
+	<string.h>
+	<float.h>
+	<emmintrin.h>
+	<fastmath.h>
+	<mathimf.h>
+	<math.h>
+	<ipl.h>
+	<ipl/ipl.h>
+
+1250285023 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/libs/opencv/include/cxerror.h
+
+1250285023 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/libs/opencv/include/cvver.h
+
+1250285023 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/libs/opencv/include/cxcore.hpp
+
+1250285023 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/libs/opencv/include/cvtypes.h
+	<assert.h>
+	<stdlib.h>
+
+1250285023 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/libs/opencv/include/cv.hpp
+
+1250285023 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/libs/opencv/include/cvcompat.h
+	<string.h>
+
+1250285021 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/src/ofxCvImage.h
+	"ofxCvConstants.h"
+
+1250285021 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/src/ofxCvGrayscaleImage.h
+	"ofxCvImage.h"
+	"ofxCvBlob.h"
+
+1250285021 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/src/ofxCvBlob.h
+	"ofxCvConstants.h"
+
+1250285021 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/src/ofxCvColorImage.h
+	"ofxCvImage.h"
+
+1250285021 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/src/ofxCvFloatImage.h
+	"ofxCvImage.h"
+
+1250285021 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/src/ofxCvShortImage.h
+	"ofxCvImage.h"
+
+1250285021 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/src/ofxCvContourFinder.h
+	"ofxCvConstants.h"
+	"ofxCvBlob.h"
+	"ofxCvGrayscaleImage.h"
+	<algorithm>
+
+1249963071 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/Blob.h
+	<vector>
+
+1242518508 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/Tracking.h
+	<list>
+	<map>
+	"ContourFinder.h"
+	"../Events/TouchMessenger.h"
+	"../Calibration/CalibrationUtils.h"
+
+1250284973 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Calibration/CalibrationUtils.cpp
+	"CalibrationUtils.h"
+	<cmath>
+
+1249963189 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Communication/TUIO.cpp
+	"TUIO.h"
+
+1249130186 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Communication/TUIO.h
+	"../Tracking/ContourFinder.h"
+	"ofxOsc.h"
+	"ofxNetwork.h"
+
+1250284961 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOsc/src/ofxOsc.h
+	"ofxOscArg.h"
+	"ofxOscMessage.h"
+	"ofxOscSender.h"
+	"ofxOscReceiver.h"
+
+1250284961 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOsc/src/ofxOscArg.h
+	<ofConstants.h>
+	<string>
+
+1250284961 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOsc/src/ofxOscMessage.h
+	"ofxOscArg.h"
+	<vector>
+	<string>
+
+1250284961 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOsc/src/ofxOscSender.h
+	<string>
+	"OscTypes.h"
+	"OscOutboundPacketStream.h"
+	"ofxOscBundle.h"
+	"ofxOscMessage.h"
+
+1250284962 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOsc/libs/oscpack/include/osc/OscTypes.h
+
+1250284962 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOsc/libs/oscpack/include/osc/OscOutboundPacketStream.h
+	"OscTypes.h"
+	"OscException.h"
+
+1250284962 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOsc/libs/oscpack/include/osc/OscException.h
+	<exception>
+
+1250284961 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOsc/src/ofxOscBundle.h
+	<vector>
+	"ofxOscMessage.h"
+
+1250284961 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOsc/src/ofxOscReceiver.h
+	<deque>
+	<ofMain.h>
+	<windows.h>
+	<pthread.h>
+	<OscTypes.h>
+	<OscPacketListener.h>
+	<UdpSocket.h>
+	"ofxOscMessage.h"
+
+1250284962 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOsc/libs/oscpack/include/osc/OscPacketListener.h
+	"OscReceivedElements.h"
+	"../ip/PacketListener.h"
+
+1250284962 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOsc/libs/oscpack/include/osc/OscReceivedElements.h
+	"OscTypes.h"
+	"OscException.h"
+
+1250284962 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOsc/libs/oscpack/include/ip/PacketListener.h
+
+1250284962 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOsc/libs/oscpack/include/ip/UdpSocket.h
+	"NetworkingUtils.h"
+	"IpEndpointName.h"
+
+1250284962 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOsc/libs/oscpack/include/ip/NetworkingUtils.h
+
+1250284962 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOsc/libs/oscpack/include/ip/IpEndpointName.h
+
+1250284974 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNetwork/src/ofxNetwork.h
+	"ofxThread.h"
+	"ofxTCPClient.h"
+	"ofxTCPManager.h"
+	"ofxTCPServer.h"
+	"ofxUDPManager.h"
+
+1250284974 /home/thiago/ccv_hand/CCV-HAND/addons/ofxThread/src/ofxThread.h
+	"ofConstants.h"
+	<process.h>
+	<pthread.h>
+	<semaphore.h>
+
+1239265083 /usr/include/semaphore.h
+	<features.h>
+	<sys/types.h>
+	<time.h>
+	<bits/semaphore.h>
+
+1239265083 /usr/include/bits/semaphore.h
+	<bits/wordsize.h>
+
+1250284974 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNetwork/src/ofxTCPClient.h
+	"ofConstants.h"
+	"ofxTCPManager.h"
+
+1250284974 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNetwork/src/ofxTCPManager.h
+	"ofConstants.h"
+	<string.h>
+	<wchar.h>
+	<stdio.h>
+	<ctype.h>
+	<netdb.h>
+	<string.h>
+	<fcntl.h>
+	<time.h>
+	<errno.h>
+	<unistd.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<sys/timeb.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<sys/time.h>
+	<sys/ioctl.h>
+	<sys/signal.h>
+	<winsock2.h>
+	<Ws2tcpip.h>
+
+1239265086 /usr/include/netdb.h
+	<features.h>
+	<netinet/in.h>
+	<stdint.h>
+	<rpc/netdb.h>
+	<bits/siginfo.h>
+	<time.h>
+	<bits/netdb.h>
+
+1239265095 /usr/include/netinet/in.h
+	<features.h>
+	<stdint.h>
+	<sys/socket.h>
+	<bits/types.h>
+	<bits/in.h>
+	<endian.h>
+	<bits/byteswap.h>
+
+1239265074 /usr/include/sys/socket.h
+	<features.h>
+	<sys/uio.h>
+	<stddef.h>
+	<bits/sigset.h>
+	<bits/socket.h>
+	<bits/socket2.h>
+
+1239265072 /usr/include/sys/uio.h
+	<features.h>
+	<sys/types.h>
+	<bits/uio.h>
+
+1239265074 /usr/include/bits/socket.h
+	<stddef.h>
+	<sys/types.h>
+	<bits/sockaddr.h>
+	<asm/socket.h>
+
+1239265074 /usr/include/bits/sockaddr.h
+
+1248489882 /usr/include/asm/socket.h
+	<asm/sockios.h>
+
+1248489882 /usr/include/asm/sockios.h
+
+1239265074 /usr/include/bits/socket2.h
+
+1239265095 /usr/include/bits/in.h
+
+1239265098 /usr/include/rpc/netdb.h
+	<features.h>
+	<stddef.h>
+
+1239265086 /usr/include/bits/netdb.h
+
+1239265095 /usr/include/arpa/inet.h
+	<features.h>
+	<netinet/in.h>
+
+1239265064 /usr/include/sys/timeb.h
+	<features.h>
+	<time.h>
+
+1239265053 /usr/include/sys/signal.h
+	<signal.h>
+
+1250284974 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNetwork/src/ofxTCPServer.h
+	"ofConstants.h"
+	"ofxThread.h"
+	"ofxTCPManager.h"
+
+1250284974 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNetwork/src/ofxUDPManager.h
+	"ofConstants.h"
+	<string.h>
+	<wchar.h>
+	<stdio.h>
+	<ctype.h>
+	<netdb.h>
+	<string.h>
+	<fcntl.h>
+	<errno.h>
+	<unistd.h>
+	<arpa/inet.h>
+	<netinet/in.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<sys/time.h>
+	<sys/ioctl.h>
+	<netinet/tcp.h>
+	<winsock2.h>
+	<Ws2tcpip.h>
+
+1239265095 /usr/include/netinet/tcp.h
+	<features.h>
+	<sys/types.h>
+	<sys/socket.h>
+
+1250284973 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGui.cpp
+	"ofxGui.h"
+
+1250284973 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGui.h
+	"ofxGuiTypes.h"
+	"ofxGuiPanel.h"
+	"ofxGuiObject.h"
+	"ofxGuiGlobals.h"
+
+1250284973 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiTypes.h
+	"ofxXmlSettings.h"
+	"ofxVectorMath.h"
+	"ofxDirList.h"
+	"ofMain.h"
+
+1250285531 /home/thiago/ccv_hand/CCV-HAND/addons/ofxVectorMath/src/ofxVectorMath.h
+	"ofxPoint2f.h"
+	"ofxPoint3f.h"
+	"ofxPoint4f.h"
+	"ofxVec2f.h"
+	"ofxVec3f.h"
+	"ofxVec4f.h"
+	"ofxMatrix3x3.h"
+
+1250285531 /home/thiago/ccv_hand/CCV-HAND/addons/ofxVectorMath/src/ofxPoint2f.h
+	"ofxVec2f.h"
+
+1250285531 /home/thiago/ccv_hand/CCV-HAND/addons/ofxVectorMath/src/ofxVec2f.h
+	"ofConstants.h"
+	"ofTypes.h"
+
+1250285531 /home/thiago/ccv_hand/CCV-HAND/addons/ofxVectorMath/src/ofxPoint3f.h
+	"ofxVec3f.h"
+	"ofTypes.h"
+
+1250285531 /home/thiago/ccv_hand/CCV-HAND/addons/ofxVectorMath/src/ofxVec3f.h
+	"ofConstants.h"
+	"ofTypes.h"
+
+1250285531 /home/thiago/ccv_hand/CCV-HAND/addons/ofxVectorMath/src/ofxPoint4f.h
+	"ofxVec4f.h"
+	"ofTypes.h"
+
+1250285531 /home/thiago/ccv_hand/CCV-HAND/addons/ofxVectorMath/src/ofxVec4f.h
+	"ofConstants.h"
+	"ofTypes.h"
+
+1250285531 /home/thiago/ccv_hand/CCV-HAND/addons/ofxVectorMath/src/ofxMatrix3x3.h
+
+1250284973 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiPanel.h
+	"ofxGuiObject.h"
+	"ofxGuiGlobals.h"
+	"ofxGuiSlider.h"
+	"ofxGuiXYPad.h"
+	"ofxGuiPoints.h"
+	"ofxGuiButton.h"
+	"ofxGuiFiles.h"
+	"ofxGuiColor.h"
+	"ofxGuiMatrix.h"
+	"ofxGuiScope.h"
+	"ofxGuiKnob.h"
+
+1250284973 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiObject.h
+	"ofxGuiTypes.h"
+	"ofxGuiGlobals.h"
+
+1250284973 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiGlobals.h
+	"ofxGuiTypes.h"
+
+1250284973 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiSlider.h
+	"ofxGuiTypes.h"
+	"ofxGuiObject.h"
+
+1250284973 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiXYPad.h
+	"ofxGuiTypes.h"
+	"ofxGuiObject.h"
+
+1250284973 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiPoints.h
+	"ofxGuiTypes.h"
+	"ofxGuiObject.h"
+
+1250284973 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiButton.h
+	"ofxGuiTypes.h"
+	"ofxGuiObject.h"
+
+1250284973 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiFiles.h
+	"ofxGuiTypes.h"
+	"ofxGuiObject.h"
+
+1250284973 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiColor.h
+	"ofxGuiTypes.h"
+	"ofxGuiObject.h"
+
+1250284973 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiMatrix.h
+	"ofxGuiTypes.h"
+	"ofxGuiObject.h"
+
+1250284973 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiScope.h
+	"ofxGuiTypes.h"
+	"ofxGuiObject.h"
+
+1250284973 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiKnob.h
+	"ofxGuiTypes.h"
+	"ofxGuiObject.h"
+
+1250284973 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiButton.cpp
+	"ofxGuiButton.h"
+
+1250284973 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiColor.cpp
+	"ofxGuiColor.h"
+
+1250284973 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiFiles.cpp
+	"ofxGuiFiles.h"
+
+1250284973 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiGlobals.cpp
+	"ofxGuiGlobals.h"
+
+1250284973 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiKnob.cpp
+	"ofxGuiKnob.h"
+
+1250284973 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiMatrix.cpp
+	"ofxGuiMatrix.h"
+
+1250284973 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiObject.cpp
+	"ofxGuiObject.h"
+
+1250284973 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiPanel.cpp
+	"ofxGuiPanel.h"
+
+1250284973 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiPoints.cpp
+	"ofxGuiPoints.h"
+
+1250284973 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiRadar.cpp
+	"ofxGuiRadar.h"
+
+1250284973 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiRadar.h
+	"ofxGuiTypes.h"
+	"ofxGuiObject.h"
+
+1250284973 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiScope.cpp
+	"ofxGuiScope.h"
+
+1250284973 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiSlider.cpp
+	"ofxGuiSlider.h"
+
+1250284973 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/ofxGuiXYPad.cpp
+	"ofxGuiXYPad.h"
+
+1250284973 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Events/TouchMessenger.cpp
+	"TouchMessenger.h"
+
+1248266093 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Filters/CPUImageFilter.cpp
+	"CPUImageFilter.h"
+	"ofxCvColorImage.h"
+	"ofxCvGrayscaleImage.h"
+	"ofxCvFloatImage.h"
+	<highgui.h>
+	<cv.h>
+
+1242518509 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Filters/CPUImageFilter.h
+	"ofxCvGrayscaleImage.h"
+
+1242518509 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Filters/GPUImageFilter.cpp
+	"GPUImageFilter.h"
+	<stdio.h>
+	"tinyxml.h"
+	"ofUtils.h"
+
+1242518509 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Filters/GPUImageFilter.h
+	"ShaderProgram.h"
+	<map>
+	<string>
+
+1242518509 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Filters/ShaderProgram.h
+	"GLee.h"
+	<OpenGL/gl.h>
+	<GLUT/glut.h>
+	<stdlib.h>
+	"GLee.h"
+	<GL/gl.h>
+
+1242518509 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Filters/ShaderProgram.cpp
+	"ShaderProgram.h"
+	<stdio.h>
+	<stdlib.h>
+
+1250352763 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Modules/ofxNCoreVision.cpp
+	"ofxNCoreVision.h"
+	"../Controls/gui.h"
+
+1250352296 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Modules/ofxNCoreVision.h
+	"ofMain.h"
+	"ofxffmv.h"
+	"ofxPS3.h"
+	"ofxDSVL.h"
+	"ofxOpenCv.h"
+	"ofxDirList.h"
+	"ofxVectorMath.h"
+	"ofxNetwork.h"
+	"ofxOsc.h"
+	"ofxThread.h"
+	"ofxXmlSettings.h"
+	"ofxNCore.h"
+	<cv.h>
+	<cxcore.h>
+	<cvaux.h>
+	<highgui.h>
+	"AAM_IC.h"
+	"AAM_Basic.h"
+	<time.h>
+	"Coord.h"
+	"BlobResult.h"
+	"cvaux.h"
+	"getBackground.h"
+	"extractBlob.h"
+	"videoHandConstants.h"
+	"videoHandFingerDetector.h"
+
+1250284974 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/ofxNCore.h
+	"Events/TouchMessenger.h"
+	"Tracking/BlobManager.h"
+	"Tracking/Tracking.h"
+	"Filters/GPUImageFilter.h"
+	"Filters/CPUImageFilter.h"
+	"Filters/ProcessFilters.h"
+	"Calibration/CalibrationUtils.h"
+	"Calibration/Calibration.h"
+	"Communication/TUIO.h"
+	"Controls/ofxGui.h"
+	"Controls/ofxGuiTypes.h"
+	"Modules/ofxNCoreVision.h"
+
+1242518508 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/BlobManager.h
+	"../ofxNCore.h"
+
+1242518509 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Filters/ProcessFilters.h
+	"Filters.h"
+
+1248487518 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Filters/Filters.h
+	"ofMain.h"
+	"ofxOpenCv.h"
+	"CPUImageFilter.h"
+	"GPUImageFilter.h"
+
+1250352619 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/gui.h
+	"../Modules/ofxNCoreVision.h"
+	"../Camera/CameraUtils.h"
+
+1250284973 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Camera/CameraUtils.h
+	"ofQtUtils.h"
+	"videoInput.h"
+	"ofUCUtils.h"
+	"ofV4LUtils.h"
+
+1250285641 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/video/ofV4LUtils.h
+	"ofConstants.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<errno.h>
+	<fcntl.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/stat.h>
+	<sys/mman.h>
+	<sys/types.h>
+	<time.h>
+	<linux/videodev.h>
+
+1239265072 /usr/include/sys/mman.h
+	<features.h>
+	<bits/types.h>
+	<stddef.h>
+	<bits/mman.h>
+
+1239265073 /usr/include/bits/mman.h
+
+1248489881 /usr/include/linux/videodev.h
+	<linux/ioctl.h>
+	<linux/videodev2.h>
+
+1248489880 /usr/include/linux/ioctl.h
+	<asm/ioctl.h>
+
+1248489881 /usr/include/linux/videodev2.h
+	<sys/time.h>
+	<linux/ioctl.h>
+	<linux/types.h>
+
+1248489881 /usr/include/linux/types.h
+	<linux/posix_types.h>
+	<asm/types.h>
+
+1248489881 /usr/include/linux/posix_types.h
+	<linux/stddef.h>
+	<asm/posix_types.h>
+
+1248489881 /usr/include/linux/stddef.h
+
+1248489882 /usr/include/asm/posix_types.h
+	"posix_types_32.h"
+	"posix_types_64.h"
+
+1248489882 /usr/include/asm/posix_types_32.h
+
+1248489882 /usr/include/asm/posix_types_64.h
+
+1248489882 /usr/include/asm/types.h
+	<asm-generic/int-ll64.h>
+
+1248489877 /usr/include/asm-generic/int-ll64.h
+
+1242518508 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/BlobManager.cpp
+	"BlobManager.h"
+
+1248471534 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/ContourFinder.cpp
+	"ContourFinder.h"
+	<cv.h>
+
+1248612535 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/Tracking.cpp
+	"Tracking.h"
+
+1250284974 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNetwork/src/ofxTCPClient.cpp
+	"ofxTCPClient.h"
+	"ofAppRunner.h"
+
+1250284974 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNetwork/src/ofxTCPManager.cpp
+	"ofxTCPManager.h"
+	<stdio.h>
+
+1250284974 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNetwork/src/ofxTCPServer.cpp
+	"ofxTCPServer.h"
+	"ofxTCPClient.h"
+
+1250284974 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNetwork/src/ofxUDPManager.cpp
+	"ofxUDPManager.h"
+
+1250285021 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/src/ofxCvColorImage.cpp
+	"ofxCvGrayscaleImage.h"
+	"ofxCvColorImage.h"
+	"ofxCvFloatImage.h"
+
+1250285021 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/src/ofxCvContourFinder.cpp
+	"ofxCvContourFinder.h"
+
+1250285021 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/src/ofxCvFloatImage.cpp
+	"ofxCvGrayscaleImage.h"
+	"ofxCvColorImage.h"
+	"ofxCvFloatImage.h"
+
+1250285021 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/src/ofxCvGrayscaleImage.cpp
+	"ofxCvGrayscaleImage.h"
+	"ofxCvColorImage.h"
+	"ofxCvFloatImage.h"
+
+1250285021 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/src/ofxCvImage.cpp
+	"ofxCvImage.h"
+	"ofxCvGrayscaleImage.h"
+	"ofxCvColorImage.h"
+	"ofxCvFloatImage.h"
+
+1250285021 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/src/ofxCvShortImage.cpp
+	"ofxCvGrayscaleImage.h"
+	"ofxCvColorImage.h"
+	"ofxCvFloatImage.h"
+	"ofxCvShortImage.h"
+
+1250284961 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxOsc/src/ofxOscBundle.cpp
+	"ofxOscBundle.h"
+
+1250284961 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxOsc/src/ofxOscMessage.cpp
+	"ofxOscMessage.h"
+	<iostream>
+	<assert.h>
+
+1250284961 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxOsc/src/ofxOscReceiver.cpp
+	"ofxOscReceiver.h"
+	<pthread.h>
+	<iostream>
+	<assert.h>
+
+1250284961 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxOsc/src/ofxOscSender.cpp
+	"ofxOscSender.h"
+	<UdpSocket.h>
+	<assert.h>
+
+1250284974 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxThread/src/ofxThread.cpp
+	"ofxThread.h"
+
+1250284961 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxVectorGraphics/libs/CreEPS.cpp
+	"CreEPS.hpp"
+	<stdlib.h>
+	<stdarg.h>
+	<string.h>
+	<stdio.h>
+	<math.h>
+	<time.h>
+
+1250284961 /home/thiago/ccv_hand/CCV-HAND/addons/ofxVectorGraphics/libs/CreEPS.hpp
+	<stdio.h>
+
+1250284961 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxVectorGraphics/src/ofxVectorGraphics.cpp
+	"ofxVectorGraphics.h"
+
+1250284961 /home/thiago/ccv_hand/CCV-HAND/addons/ofxVectorGraphics/src/ofxVectorGraphics.h
+	"CreEPS.hpp"
+	"ofMain.h"
+	<vector>
+
+1250285531 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxVectorMath/src/ofxMatrix3x3.cpp
+	"ofxMatrix3x3.h"
+
+1250285531 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxVectorMath/src/ofxPoint2f.cpp
+	"ofxPoint2f.h"
+
+1250285531 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxVectorMath/src/ofxPoint3f.cpp
+	"ofxPoint3f.h"
+
+1250285531 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxVectorMath/src/ofxPoint4f.cpp
+	"ofxPoint4f.h"
+
+1250285531 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxVectorMath/src/ofxVec2f.cpp
+	"ofxVec2f.h"
+
+1250285531 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxVectorMath/src/ofxVec3f.cpp
+	"ofxVec3f.h"
+
+1250285531 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxVectorMath/src/ofxVec4f.cpp
+	"ofxVec4f.h"
+
+1250285532 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxXmlSettings/libs/tinyxml.cpp
+	<ctype.h>
+	<sstream>
+	<iostream>
+	"tinyxml.h"
+
+1250285532 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxXmlSettings/libs/tinyxmlerror.cpp
+	"tinyxml.h"
+
+1250285532 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxXmlSettings/libs/tinyxmlparser.cpp
+	<ctype.h>
+	<stddef.h>
+	"tinyxml.h"
+	<windows.h>
+
+1250285532 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxXmlSettings/src/ofxXmlSettings.cpp
+	"ofxXmlSettings.h"
+	<vector>
+	<string>
+	<iostream>
+
+1250298743 source:/home/thiago/ccv_hand/CCV-HAND/apps/addonsExamples/Codeblocks_8_linux/src/main.cpp
+	"ofMain.h"
+	"testApp.h"
+	"ofAppGlutWindow.h"
+
+1250284931 /home/thiago/ccv_hand/CCV-HAND/apps/addonsExamples/Codeblocks_8_linux/src/testApp.h
+	"ofMain.h"
+	"ofxNCore.h"
+
+1250285639 source:/home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/app/ofAppGlutWindow.cpp
+	"ofAppGlutWindow.h"
+	"ofBaseApp.h"
+	"ofMain.h"
+
+1250285639 source:/home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/app/ofAppRunner.cpp
+	"ofAppRunner.h"
+	"ofAppiPhoneWindow.h"
+	"ofAppGlutWindow.h"
+
+1250285640 source:/home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/communication/ofArduino.cpp
+	"ofArduino.h"
+	"ofUtils.h"
+
+1250285640 source:/home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/communication/ofSerial.cpp
+	"ofSerial.h"
+	"ofMain.h"
+
+1250285640 source:/home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/communication/ofStandardFirmata.cpp
+	"ofStandardFirmata.h"
+
+1250285640 source:/home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/graphics/ofBitmapFont.cpp
+	"ofBitmapFont.h"
+
+1250285640 /home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/graphics/ofBitmapFont.h
+	"ofConstants.h"
+
+1250285640 source:/home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/graphics/ofGraphics.cpp
+	"ofGraphics.h"
+	"ofAppRunner.h"
+	"ofBitmapFont.h"
+	<OpenGL/glu.h>
+	"glu.h"
+	"GL/glu.h"
+	"glu.h"
+	<vector>
+
+1250285640 source:/home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/graphics/ofImage.cpp
+	"ofImage.h"
+
+1250285640 source:/home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/graphics/ofTexture.cpp
+	"ofTexture.h"
+	"ofUtils.h"
+	"ofAppRunner.h"
+
+1250285640 source:/home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/graphics/ofTrueTypeFont.cpp
+	"ofTrueTypeFont.h"
+	<ft2build.h>
+	<freetype/freetype.h>
+	<freetype/ftglyph.h>
+	<freetype/ftoutln.h>
+	<freetype/fttrigon.h>
+	"ft2build.h"
+	"freetype.h"
+	"ftglyph.h"
+	"ftoutln.h"
+	"fttrigon.h"
+
+1250285643 /home/thiago/ccv_hand/CCV-HAND/libs/freetype/include/ft2build.h
+	<freetype/config/ftheader.h>
+
+1250285643 /home/thiago/ccv_hand/CCV-HAND/libs/freetype/include/freetype2/freetype/config/ftheader.h
+
+1250285643 /home/thiago/ccv_hand/CCV-HAND/libs/freetype/include/freetype2/freetype/freetype.h
+	<ft2build.h>
+
+1250285643 /home/thiago/ccv_hand/CCV-HAND/libs/freetype/include/freetype2/freetype/ftglyph.h
+	<ft2build.h>
+
+1250285643 /home/thiago/ccv_hand/CCV-HAND/libs/freetype/include/freetype2/freetype/ftoutln.h
+	<ft2build.h>
+
+1250285643 /home/thiago/ccv_hand/CCV-HAND/libs/freetype/include/freetype2/freetype/fttrigon.h
+
+1250285641 source:/home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/sound/ofSoundPlayer.cpp
+	"ofSoundPlayer.h"
+	"ofUtils.h"
+
+1250285641 source:/home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/sound/ofSoundStream.cpp
+	"ofSoundStream.h"
+	"RtAudio.h"
+
+1250285673 /home/thiago/ccv_hand/CCV-HAND/libs/rtAudio/RtAudio.h
+	"RtError.h"
+	<string>
+	<vector>
+	<windows.h>
+	<process.h>
+	<pthread.h>
+	<CoreAudio/AudioHardware.h>
+
+1250285673 /home/thiago/ccv_hand/CCV-HAND/libs/rtAudio/RtError.h
+	<iostream>
+	<string>
+
+1250285640 source:/home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/utils/ofMath.cpp
+	"ofMath.h"
+	"ofAppRunner.h"
+	<sys/time.h>
+
+1250285640 source:/home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/utils/ofUtils.cpp
+	"ofUtils.h"
+	"ofImage.h"
+	"sys/time.h"
+	<mmsystem.h>
+	<direct.h>
+
+1250296977 source:/home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/video/ofUCUtils.cpp
+	"ofUCUtils.h"
+	"ofConstants.h"
+	<stdio.h>
+	<stdint.h>
+	"ofUtils.h"
+	<libswscale/swscale.h>
+	<libavformat/avformat.h>
+
+1239405999 /usr/include/libswscale/swscale.h
+	"libavutil/avutil.h"
+
+1239406000 /usr/include/libavutil/avutil.h
+	"common.h"
+	"mathematics.h"
+	"rational.h"
+	"intfloat_readwrite.h"
+	"log.h"
+	"pixfmt.h"
+
+1239406000 /usr/include/libavutil/common.h
+	<ctype.h>
+	<errno.h>
+	<inttypes.h>
+	<limits.h>
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"mem.h"
+	"config.h"
+	"internal.h"
+
+1239406000 /usr/include/libavutil/mem.h
+	"common.h"
+
+1239406000 /usr/include/libavutil/mathematics.h
+	<stdint.h>
+	<math.h>
+	"common.h"
+	"rational.h"
+
+1239406000 /usr/include/libavutil/rational.h
+	<stdint.h>
+	"common.h"
+
+1239406000 /usr/include/libavutil/intfloat_readwrite.h
+	<stdint.h>
+	"common.h"
+
+1239406000 /usr/include/libavutil/log.h
+	<stdarg.h>
+	"avutil.h"
+
+1239406000 /usr/include/libavutil/pixfmt.h
+
+1242569324 /usr/include/libavformat/avformat.h
+	<time.h>
+	<stdio.h>
+	"libavcodec/avcodec.h"
+	"avio.h"
+
+1239406000 /usr/include/libavcodec/avcodec.h
+	<errno.h>
+	"libavutil/avutil.h"
+
+1239406000 /usr/include/libavformat/avio.h
+	<stdint.h>
+	"libavutil/common.h"
+
+1250285641 source:/home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/video/ofVideoGrabber.cpp
+	"ofVideoGrabber.h"
+	"ofUtils.h"
+	"ofV4LUtils.h"
+
+1250285641 source:/home/thiago/ccv_hand/CCV-HAND/libs/openFrameworks/video/ofVideoPlayer.cpp
+	"ofVideoPlayer.h"
+	"ofUtils.h"
+	<gst/video/video.h>
+	"gst/app/gstappsink.h"
+
+1250285658 /home/thiago/ccv_hand/CCV-HAND/libs/gstappsink/include/gst/app/gstappsink.h
+	<gst/gst.h>
+	<gst/base/gstbasesink.h>
+
+1249914663 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_Basic.cpp
+	<ctime>
+	<direct.h>
+	<sys/stat.h>
+	"AAM_Basic.h"
+	<cv.h>
+	<highgui.h>
+
+1249091665 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_Basic.h
+	"AAM_Util.h"
+	"AAM_TDM.h"
+	"AAM_CAM.h"
+
+1249913872 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_Util.h
+	<vector>
+	<string>
+	<iostream>
+	<fstream>
+	<cv.h>
+	<highgui.h>
+	"AAM_Shape.h"
+	"VJfacedetect.h"
+
+1249091742 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_Shape.h
+	<vector>
+	<string>
+	<iostream>
+	<fstream>
+	"cv.h"
+	"highgui.h"
+
+1249091777 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/VJfacedetect.h
+	<iostream>
+	<vector>
+	<string>
+	<cmath>
+	"cv.h"
+	"highgui.h"
+	"AAM_Shape.h"
+
+1249091752 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_TDM.h
+	"AAM_Util.h"
+	"AAM_Shape.h"
+	"AAM_PAW.h"
+
+1249091717 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_PAW.h
+	"AAM_Util.h"
+	"AAM_Shape.h"
+
+1249091675 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_CAM.h
+	"AAM_TDM.h"
+	"AAM_PDM.h"
+
+1249091728 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_PDM.h
+	"AAM_Util.h"
+	"AAM_Shape.h"
+
+1249091670 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_CAM.cpp
+	"AAM_CAM.h"
+
+1249091680 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_IC.cpp
+	<direct.h>
+	<sys/stat.h>
+	"AAM_IC.h"
+
+1249091684 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_IC.h
+	"AAM_Util.h"
+	"AAM_Shape.h"
+	"AAM_PDM.h"
+	"AAM_TDM.h"
+	"AAM_PAW.h"
+
+1249091694 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_MovieAVI.cpp
+	<iostream>
+	"AAM_MovieAVI.h"
+
+1249091703 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_MovieAVI.h
+	"cv.h"
+	"highgui.h"
+
+1249091709 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_PAW.cpp
+	<set>
+	<cstdio>
+	"AAM_PAW.h"
+	"AAM_TDM.h"
+
+1249091723 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_PDM.cpp
+	"AAM_PDM.h"
+
+1249091734 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_Shape.cpp
+	<string>
+	<iostream>
+	<fstream>
+	"AAM_Shape.h"
+
+1249091746 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_TDM.cpp
+	"AAM_TDM.h"
+	"AAM_PAW.h"
+	<direct.h>
+	<sys/stat.h>
+
+1249618467 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_Util.cpp
+	<fstream>
+	"AAM_Util.h"
+	"AAM_Basic.h"
+	"AAM_IC.h"
+	<dirent.h>
+	<sys/types.h>
+	<sys/stat.h>
+
+1249091771 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/VJfacedetect.cpp
+	"VJfacedetect.h"
+
+1249585225 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/Statistics/condensation.cpp
+	"condensation.h"
+
+1249659673 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/Statistics/condensation.h
+	"useful.h"
+	"Coord.h"
+	"SampleStat.h"
+
+1249659537 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/Statistics/useful.h
+	"cvaux.h"
+	"highgui.h"
+	<stdio.h>
+	"cv.h"
+	"cxcore.h"
+	<vector>
+	<math.h>
+	<iostream>
+	"Blob.h"
+	"BlobResult.h"
+
+1250285023 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/libs/opencv/include/cvaux.h
+	"cv.h"
+	"cvaux.hpp"
+	"cvvidsurv.hpp"
+
+1250285023 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/libs/opencv/include/cvaux.hpp
+
+1250285023 /home/thiago/ccv_hand/CCV-HAND/addons/ofxOpenCv/libs/opencv/include/cvvidsurv.hpp
+	<stdio.h>
+
+1249586813 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/Statistics/Blob.h
+	"cxcore.h"
+	<functional>
+	<vector>
+	<algorithm>
+
+1249586820 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/Statistics/BlobResult.h
+	<math.h>
+	"cxcore.h"
+	"matrixCV.h"
+	"vector"
+	<vector>
+	<functional>
+	"Blob.h"
+
+1249585476 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/Statistics/Coord.h
+
+1249585988 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/Statistics/SampleStat.h
+
+1249659114 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/Statistics/drawBob.cpp
+	"drawBob.h"
+	"BlobResult.h"
+
+1249661644 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/Statistics/drawBob.h
+	"Coord.h"
+	"getBackground.h"
+	"extractBlob.h"
+	"kalman.h"
+	"condensation.h"
+	"SampleStat.h"
+	"BlobResult.h"
+	"useful.h"
+
+1249661702 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/Statistics/getBackground.h
+	"useful.h"
+
+1249659657 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/Statistics/extractBlob.h
+	"Blob.h"
+	"BlobResult.h"
+	"useful.h"
+	"drawBob.h"
+
+1249659666 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/Statistics/kalman.h
+	"useful.h"
+	"Coord.h"
+
+1249936898 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/Statistics/extractBlob.cpp
+	"extractBlob.h"
+
+1249935795 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/Statistics/getBackground.cpp
+	"getBackground.h"
+
+1249661483 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/Statistics/kalman.cpp
+	"kalman.h"
+
+1240261379 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/hands/lineFitter/cvLineFitter.cpp
+	"cvLineFitter.h"
+	<string>
+
+1249863583 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/hands/lineFitter/cvLineFitter.h
+	"ofxOpenCv.h"
+	"Matrix.h"
+
+916803780 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/hands/lineFitter/Matrix.h
+	<assert.h>
+
+1240261379 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/hands/lineFitter/linreg.cpp
+
+1149401640 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/hands/ofVec3f.cpp
+
+1240262635 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/hands/videoBlob.cpp
+	"videoBlob.h"
+
+1249863593 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/hands/videoBlob.h
+	"ofMain.h"
+	"ofxOpenCv.h"
+
+1250170769 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/hands/videoHandFingerDetector.cpp
+	"videoHandFingerDetector.h"
+
+1249863641 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/hands/videoHandFingerDetector.h
+	"ofMain.h"
+	"ofxOpenCv.h"
+	"videoHandConstants.h"
+	"cvLineFitter.h"
+	"ofVec3f.h"
+
+1249865246 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/hands/videoHandConstants.h
+	"Tracking/Blob.h"
+
+1173608160 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/hands/ofVec3f.h
+	"ofConstants.h"
+
+1250284931 source:/home/thiago/ccv_hand/CCV-HAND/apps/addonsExamples/Codeblocks_8_linux/src/testApp.cpp
+	"testApp.h"
+	"stdio.h"
+	"ofUtils.h"
+

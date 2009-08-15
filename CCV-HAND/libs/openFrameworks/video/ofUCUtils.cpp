@@ -61,7 +61,7 @@ static const PixelFormatTag pixelFormatTags[] = {
     { PIX_FMT_YUV411P, 	FOURCC('4', '1', '1', 'P') },
     { PIX_FMT_NV12,    	FOURCC('N', 'V', '1', '2') },
     { PIX_FMT_NV21,    	FOURCC('N', 'V', '2', '1') },
-    { PIX_FMT_YUV422,  	FOURCC('Y', 'Y', 'U', 'V') },
+//    { PIX_FMT_YUV422,  	FOURCC('Y', 'Y', 'U', 'V') },
     { PIX_FMT_RGB32_1, 	FOURCC('R', 'G', 'B', '1') },	// is this correct?
     { PIX_FMT_RGB555,  	FOURCC('R', 'G', 'B', 'O') },
     { PIX_FMT_RGB565,  	FOURCC('R', 'G', 'B', 'P') },
