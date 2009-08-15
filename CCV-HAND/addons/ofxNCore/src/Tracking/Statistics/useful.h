@@ -19,7 +19,7 @@
 using namespace std;
 
 #define NUMBER_OF_MATRIX 6
-#define PI 3.14159265
+//#define PI 3.14159265
 
 struct coordinate {
 	int Minx,Maxx,Maxy,Miny;

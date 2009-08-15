@@ -82,9 +82,11 @@ void ofxNCoreVision::setupControls()
 
     ofxGuiPanel* hpanel = controls->addPanel(appPtr->hPanel, "Hand Tracking", 0, 600, OFXGUI_PANEL_BORDER, OFXGUI_PANEL_SPACING);
     hpanel->addButton(appPtr->hPanel_use_Template, "Template Matching", OFXGUI_BUTTON_HEIGHT, OFXGUI_BUTTON_HEIGHT, kofxGui_Button_Off, kofxGui_Button_Switch, "");
+    hpanel->addButton(appPtr->hPanel_use_Camshift, "Camshift", OFXGUI_BUTTON_HEIGHT, OFXGUI_BUTTON_HEIGHT, kofxGui_Button_Off, kofxGui_Button_Switch, "");
+    hpanel->addButton(appPtr->hPanel_use_Kalman, "Kalman", OFXGUI_BUTTON_HEIGHT, OFXGUI_BUTTON_HEIGHT, kofxGui_Button_Off, kofxGui_Button_Switch, "");
     hpanel->addButton(appPtr->hPanel_use_AAM, "AAM", OFXGUI_BUTTON_HEIGHT, OFXGUI_BUTTON_HEIGHT, kofxGui_Button_Off, kofxGui_Button_Switch, "");
     hpanel->addButton(appPtr->hPanel_use_Vjones, "Vjones", OFXGUI_BUTTON_HEIGHT, OFXGUI_BUTTON_HEIGHT, kofxGui_Button_Off, kofxGui_Button_Switch, "");
-    hpanel->mObjWidth = 1024;
+    hpanel->mObjWidth = 150;
 
     //Tracked Image
     ofxGuiPanel* trackPanel = controls->addPanel(appPtr->trackedPanel, "Tracked Image", 386, 270, OFXGUI_PANEL_BORDER, OFXGUI_PANEL_SPACING);
@@ -509,6 +511,14 @@ void ofxNCoreVision ::handleGui(int parameterId, int task, void* data, int lengt
     case hPanel_use_Template:
         if (length == sizeof(bool))
             bTemplate = *(bool*)data;
+        break;
+        case hPanel_use_Kalman:
+        if (length == sizeof(bool))
+            bKalman = *(bool*)data;
+        break;
+        case hPanel_use_Camshift:
+        if (length == sizeof(bool))
+            bCamshift = *(bool*)data;
         break;
         /*************************************
         End of Hand Tracking cases

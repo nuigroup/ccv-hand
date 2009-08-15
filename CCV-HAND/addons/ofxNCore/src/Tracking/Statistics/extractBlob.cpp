@@ -30,7 +30,7 @@ void drawInitialBlobs(IplImage * tmp_frame, CBlobResult blobs){
 
 		drawCoord.set( (int) blobs.GetBlob(i).MaxX(), (int) blobs.GetBlob(i).MinX(), (int) blobs.GetBlob(i).MaxY(), (int) blobs.GetBlob(i).MinY());
 
-		drawBlob(tmp_frame, drawCoord, 255, 255, 255);
+		drawBlob2(tmp_frame, drawCoord, 255, 255, 255);
 	}
 }
 

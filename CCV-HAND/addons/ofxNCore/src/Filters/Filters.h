@@ -70,6 +70,7 @@ class Filters {
     ofxCvGrayscaleImage highpassImg;
     ofxCvGrayscaleImage ampImg;
 	ofxCvShortImage		floatBgImg;
+	ofxCvColorImage     BgImgColor;
 
 
     //GPU

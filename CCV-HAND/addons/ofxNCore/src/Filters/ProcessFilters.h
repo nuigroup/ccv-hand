@@ -1,6 +1,6 @@
 /*
 *  ProcessFilters.h
-*  
+*
 *
 *  Created on 2/2/09.
 *  Copyright 2009 NUI Group. All rights reserved.
@@ -34,6 +34,8 @@ class ProcessFilters : public Filters {
         highpassImg.allocate(camWidth, camHeight);  //Highpass Image
         ampImg.allocate(camWidth, camHeight);		//Amplied Image
         floatBgImg.allocate(camWidth, camHeight);	//ofxShortImage used for simple dynamic background subtraction
+        BgImgColor.allocate(camWidth, camHeight);
+        	//ofxShortImage used for simple dynamic background subtraction
 
         //GPU Setup
 		gpuReadBackBuffer = new unsigned char[camWidth*camHeight*3];
@@ -85,7 +87,7 @@ class ProcessFilters : public Filters {
         if(bDynamicBG){
             floatBgImg.addWeighted( img, fLearnRate);
 			//grayBg = floatBgImg;  // not yet implemented
-			 cvConvertScale( floatBgImg.getCvImage(), grayBg.getCvImage(), 255.0f/65535.0f, 0 );       
+			 cvConvertScale( floatBgImg.getCvImage(), grayBg.getCvImage(), 255.0f/65535.0f, 0 );
 			 grayBg.flagImageChanged();
         }
 
@@ -95,22 +97,23 @@ class ProcessFilters : public Filters {
         //Capture full background
         if (bLearnBakground == true){
             floatBgImg = img;
+//            BgImgColor = img;
 			//grayBg = floatBgImg;  // not yet implemented
-			cvConvertScale( floatBgImg.getCvImage(), grayBg.getCvImage(), 255.0f/65535.0f, 0 );       
+			cvConvertScale( floatBgImg.getCvImage(), grayBg.getCvImage(), 255.0f/65535.0f, 0 );
 			grayBg.flagImageChanged();
             bLearnBakground = false;
         }
 
 		//Background Subtraction
-        //img.absDiff(grayBg, img); 		
+        //img.absDiff(grayBg, img);
 		if(bTrackDark)
 			cvSub(grayBg.getCvImage(), img.getCvImage(), img.getCvImage());
 		else
 			cvSub(img.getCvImage(), grayBg.getCvImage(), img.getCvImage());
 
 		img.flagImageChanged();
-    
-		
+
+
 		if(bSmooth){//Smooth
             img.blur((smooth * 2) + 1); //needs to be an odd number
             if(!bMiniMode)

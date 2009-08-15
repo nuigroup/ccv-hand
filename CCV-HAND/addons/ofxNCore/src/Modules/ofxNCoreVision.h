@@ -122,6 +122,8 @@ class ofxNCoreVision : public ofxGuiListener//, public BlobManager
         hPanel_use_AAM,
         hPanel_use_Vjones,
         hPanel_use_Template,
+        hPanel_use_Kalman,
+        hPanel_use_Camshift,
     };
 
 public:
@@ -260,7 +262,7 @@ public:
     ofxCvColorImage         processedImgColor;
 
     ofxCvShortImage		    floatBgImg;
-    ofxCvColorImage         BgImgColor;
+//    ofxCvColorImage         BgImgColor;
 //    ofImage				    background;
 
     ofImage fileImage;
@@ -282,6 +284,7 @@ public:
 //
 //    ofxCvColorImage		sourceImg;
     CPUImageFilter	blobsCheck;
+    CPUImageFilter  camShiftImage;
     ofxCvColorImage		colorBg;
 
 
@@ -303,6 +306,8 @@ public:
     bool                vJones;
     bool                aamTracking;
     bool                bTemplate;
+    bool                bKalman;
+    bool                bCamshift;
 
 //    ContourFinder       contourFinder;
     ofxCvContourFinder 	handContourFinder;
@@ -321,6 +326,8 @@ public:
     CvPoint            templateRightMax;
     CvPoint            templateLeftMin;
     CvPoint            templateLeftMax;
+
+    bool bLearnBackGround;
 
 
     void                HandROIAdjust(int x , int y, IplImage* image);
@@ -362,7 +369,7 @@ public:
     //Declare the structure for the background subtraction
     CvGaussBGStatModelParams paramMoG;
     CvBGStatModel *bkgdMdl;
-    IplImage * binaryForeground;
+    IplImage* binaryForeground;
 
     bool selected;
     bool firstTime;

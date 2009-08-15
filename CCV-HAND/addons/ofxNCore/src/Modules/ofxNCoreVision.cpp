@@ -21,6 +21,8 @@ New functionalities under development...
 #include "ofxNCoreVision.h"
 #include "../Controls/gui.h"
 
+#define DEBUG 0
+
 
 
 /******************************************************************************
@@ -81,14 +83,39 @@ void ofxNCoreVision::_setup(ofEventArgs &e)
     //set framerate
     ofSetFrameRate(camRate * 1.3);			//This will be based on camera fps in the future
 
+    if ((tmpl = cvLoadImage(tmplImageName.c_str(), 1)))
+    {
+        printf("Succesful at template loading\n");
+    }
+
+    if (tmpl_left = cvLoadImage(tmplLeftName.c_str(), 1))
+    {
+        printf("Succesful at template loading\n");
+    }
+
+    templateImgLeft = cvCreateImage( cvSize(camWidth - tmpl_left->width + 1 ,camHeight - tmpl_left->height + 1),32,1);
+
+    templateImgDraw.allocate(camWidth - tmpl->width + 1, camHeight - tmpl->height + 1);
+//    blobsCheck.allocate(camWidth - tmpl->width + 1, camHeight - tmpl->height + 1);
+
+    blobsCheck.allocate(camWidth, camHeight);
+    camShiftImage.allocate(camWidth,camHeight);
     /*****************************************************************************************************
     * Allocate images (needed for drawing/processing images)
     ******************************************************************************************************/
     processedImg.allocate(camWidth, camHeight); //main Image that'll be processed.
-    processedImg.setUseTexture(false);			//We don't need to draw this so don't create a texture
+    //  processedImg.setUseTexture(false);			//We don't need to draw this so don't create a texture
     sourceImg.allocate(camWidth, camHeight);    //Source Image
     sourceImg.setUseTexture(false);				//We don't need to draw this so don't create a texture
+//    grayBg.allocate(camWidth,camHeight);
+//    grayBg.setUseTexture(false);				//We don't need to draw this so don't create a texture
+    processedImgColor.allocate(camWidth, camHeight);
+    processedImgColor.setUseTexture(false);				//We don't need to draw this so don't create a texture
+//    BgImgColor.allocate(camWidth, camHeight);
+//    BgImgColor.setUseTexture(false);
     /******************************************************************************************************/
+
+    bLearnBackGround = true;
 
     //Fonts - Is there a way to dynamically change font size?
     verdana.loadFont("verdana.ttf", 8, true, true);	   //Font used for small images
@@ -225,6 +252,7 @@ void ofxNCoreVision::loadXMLSettings()
     meanStdDXcondens=0;
     meanStdDYcondens=0;
     stdDXcondens=0;
+    initBg  = true;
     stdDYcondens=0;
     CvSize axesCondens;
 
@@ -232,10 +260,13 @@ void ofxNCoreVision::loadXMLSettings()
 
     theta=0;
     /*---------*/
-/*
-Histogram creation
-*/
-     histDims = 16;
+    /*
+    Histogram creation
+    */
+
+    facedet.LoadCascade(cascadeFileName.c_str());
+
+    histDims = 16;
 
     float hranges_arr[] = {0,180};
 
@@ -254,6 +285,8 @@ Histogram creation
 //    time(&before);
 
     model.ReadModel(aamModelFileName);
+
+    selected = false;
 
     Shape = model.__VJDetectShape;
 
@@ -464,16 +497,507 @@ void ofxNCoreVision::_update(ofEventArgs &e)
         else
         {
             grabFrameToCPU();
+            /*Hand Tracking
+            */
+            h_plane = processedImg.getCvImage();
+            planes = &h_plane;
+
+            learnBackGround(sourceImg);
+
+            //      cvSub(processedImg.getCvImage(), grayBg.getCvImage(), processedImg.getCvImage());
+            cvSub(processedImgColor.getCvImage(), filter->BgImgColor.getCvImage(), processedImgColor.getCvImage());
+
+
+            handContourFinder.findContours(processedImg, 4000, camWidth*camHeight/3, 5, true);
+
+#if DEBUG
+            printf("Got problems here(?)\n");
+#endif
+            cvCalcHist( planes, hist, 0, 0 ); // Compute histogram
+
+#if DEBUG
+            printf("Ok!\n");
+#endif
+            cvCalcBackProject( planes, histImg.getCvImage(), hist );
+
+            /********************/
+
+            /*******************************************************
+            Gaussian Background Model
+            *******************************************************/
+
+            if (initBg)
+            {
+                initBackgroundModel(&bkgdMdl,sourceImg.getCvImage(), &paramMoG);
+                initBg  = false;
+            }
+
+            else
+            {
+#if DEBUG
+                printf("AfterBackground initialization:\n");
+#endif
+
+                blobsCheck = sourceImg;
+                camShiftImage = sourceImg;
+                //cvSub(blobsCheck.getCvImage(), grayBg.getCvImage(), blobsCheck.getCvImage());
+#if DEBUG
+                printf("Copied Image\n");
+#endif
+
+                binaryForeground = updateBackground(bkgdMdl,blobsCheck.getCvImage());
+#if DEBUG
+                printf("Updated background\n");
+#endif
+                blobsVector = getBlobs2(blobsCheck.getCvImage(),binaryForeground);
+#if DEBUG
+                printf("BLobs Vector\n");
+#endif
+                blobs_total = blobsVector.GetNumBlobs();
+#if DEBUG
+                printf("Blobs Total:\n");
+#endif
+                /*
+                            if (blur)blobsCheck.blur( 3 );
+                            if (dilate)blobsCheck.dilate( );
+                            if (erode)blobsCheck.erode( );
+                            if (eqHist)blobsCheck.equalizeHist();
+                            if (highpass)blobsCheck.highpass(12,3);
+                            if (amplify)blobsCheck.amplify(blobsCheck, 300);
+                */
+#if DEBUG
+                printf("Before Selection:\n");
+#endif
+
+                if ( blobs_total > 0 )
+                {
+                    if (selected == false)
+                    {
+
+#if DEBUG
+                        printf("How many: %d\n", blobs_total);
+#endif
+                        // drawInitialBlobs(blobsCheck.getCvImage(), blobsVector);
+
+                        coord selectedCoord;
+
+                        selectedCoord = extractBlob( blobsVector, selectedCoord);
+
+
+                        //Init Kalman
+                        printf("Kalman has started\n");
+                        kalman = initKalman(indexMat, selectedCoord);
+                        printf("Passed from Kalman\n");
+
+                        state=cvCreateMat(kalman->DP,1,CV_32FC1);
+                        measurement = cvCreateMat( kalman->MP, 1, CV_32FC1 );
+                        process_noise = cvCreateMat(kalman->DP, 1, CV_32FC1);
+
+                        coordReal=selectedCoord;
+                        coordPredict=coordReal;
+                        muX=camWidth/2;
+                        muY=camHeight/2;
+
+                        selected = true;
+
+
+                    } //end from selection if
+                    else
+                    {
+                        printf("How many: %d\n", blobs_total);
+                        coordReal = extractBlob( blobsVector, coordReal);
+
+
+                        drawBlob2(blobsCheck.getCvImage(), coordReal, 255,255,255);
+                        /*******************************************************
+                        Kalman Tracking Usage
+                        *******************************************************/
+
+                        if (bKalman)
+                        {
+                            printf("Before Kalman> %lf, %lf, %lf, %lf,%d, %d, %d, %d \n", coordPredict.cX, coordPredict.cY, coordReal.cX, coordReal.cY, coordReal.MaxX, coordReal.MaxY, coordReal.MinX, coordReal.MinY);
+
+                            predict = updateKalman(kalman,coordReal);
+
+
+                            coordPredict.set (coordReal.MaxX, coordReal.MinX, coordReal.MaxY, coordReal.MinY);
+
+                            coordPredict.set ((int)predict[0], (int)predict[1]);
+                            printf("After Kalman> %lf, %lf, %lf, %lf,%d, %d, %d, %d \n", coordPredict.cX, coordPredict.cY, coordReal.cX, coordReal.cY, coordReal.MaxX, coordReal.MaxY, coordReal.MinX, coordReal.MinY);
+
+                            muX = sqrt(kalman->error_cov_pre->data.fl[0]);
+                            muY = sqrt(kalman->error_cov_pre->data.fl[5]);
+
+                            axes = cvSize( muX , muY );
+
+                            printf("Ellipse Kalman\n");
+                            cvEllipse( blobsCheck.getCvImage(), cvPoint(coordPredict.cX,coordPredict.cY), axes, theta, 0, 360, CV_RGB(255,255,0),1);
+                            cvLine( blobsCheck.getCvImage(),  cvPoint(coordPredict.cX,coordPredict.cY), cvPoint(coordPredict.cX,coordPredict.cY), CV_RGB(255,0, 0), 4, 8, 0 );
+                            cvLine( blobsCheck.getCvImage(),  cvPoint(coordPredict.cX,coordPredict.cY), cvPoint(coordReal.cX,coordReal.cY), CV_RGB(255,0, 0), 1, 8, 0 );
+
+
+                            //distance from real
+                            resultDistance = sqrt((double)(coordReal.cX - coordPredict.cX)*(coordReal.cX - coordPredict.cX) + (coordReal.cY - coordPredict.cY)*(coordReal.cY - coordPredict.cY));
+                            meanKalmanDistance+=resultDistance;
+                        }
+                        /*******************************************************
+                        End Kalman Tracking Usage
+                        *******************************************************/
+                    }
+                }
+            }
+
+            /****************************************************
+            End of the Gaussian Background Model
+            ***************************************************/
+
             filter->applyCPUFilters( processedImg );
             contourFinder.findContours(processedImg,  (MIN_BLOB_SIZE * 2) + 1, ((camWidth * camHeight) * .4) * (MAX_BLOB_SIZE * .001), maxBlobs, false);
+
+            /*****************************
+            Begin of other Tracking Methods
+            *********************************/
+            /******************************************
+            Model fitting with the CCV contourFinder
+            **********************************************/
+
+            printf("Model fitting begins!: %d\n", contourFinder.nBlobs);
+            if (contourFinder.nBlobs > 0)
+            {
+                for (int i =0; i < contourFinder.nBlobs; i++)
+                {
+                    if ( contourFinder.blobs[i].area > 100)
+                    {
+
+
+                        /************************************
+                        Template Matching
+                        ***************************************/
+                        // templateImg = cvCreateImage(cvSize(processedImgColor.getCvImage()->width - tmpl->width + 1 , processedImgColor.getCvImage()->height - tmpl->height + 1),32, 1);
+
+                        win = cvRect(contourFinder.blobs[i].centroid.x, contourFinder.blobs[i].centroid.y, 150,150);
+//                        /* make sure that the search window is still within the frame */
+                        if (win.x < 0)
+                            win.x = 0;
+                        if (win.y < 0)
+                            win.y = 0;
+                        if (win.x + win.width > processedImgColor.getCvImage()->width)
+                            win.x = processedImgColor.getCvImage()->width - win.width;
+                        if (win.y + win.height > processedImgColor.getCvImage()->height)
+                            win.y = processedImgColor.getCvImage()->height - win.height;
+
+#if DEBUG
+                        cvSaveImage("sourceTemplate.bmp", processedImgColor.getCvImage());
+#endif
+
+                        cvSetImageROI(processedImgColor.getCvImage(),win);
+
+
+                        templateImg = cvCreateImage(cvSize(win.width - tmpl->width + 1 , win.height - tmpl->height + 1),32, 1);
+
+                        printf("Widths: %d %d %d, Heights: %d, %d, %d\n", win.width, tmpl->width, templateImg->width, win.height, tmpl->height, templateImg->height);
+                        cvMatchTemplate(processedImgColor.getCvImage(), tmpl, templateImg, 1);
+
+
+                        cvResetImageROI(processedImgColor.getCvImage());
+                        //cvReleaseImage(&templateImg);
+
+                        cvNormalize(templateImg, templateImg, 1, 0, CV_MINMAX);
+                        cvPow(templateImg,templateImg,5);
+
+
+                        cvMinMaxLoc(templateImg, &minF, &maxF, &templateRightMin, &templateRightMax);
+
+                        if (maxF > 0)
+                        {
+                            templateRightMax.x += win.x;
+                            templateRightMax.y += win.y;
+                            contourFinder.blobs[i].xHand = templateRightMax.x;
+                            contourFinder.blobs[i].yHand = templateRightMax.y;
+                        }
+
+                        printf("Maximum: %lf, Minimum %lf\n", maxF, minF);
+
+#if DEBUG
+                        cvSaveImage("done.bmp", templateImg);
+#endif
+                        cvSetImageROI(processedImgColor.getCvImage(),win);
+
+                        templateImgLeft = cvCreateImage(cvSize(win.width - tmpl_left->width + 1 , win.height - tmpl_left->height + 1),32, 1);
+
+
+                        cvMatchTemplate(processedImgColor.getCvImage(), tmpl_left, templateImgLeft, 5);
+                        cvResetImageROI(processedImgColor.getCvImage());
+                        //cvReleaseImage(&templateImgLeft);
+                        cvNormalize(templateImgLeft, templateImgLeft, 1, 0, CV_MINMAX);
+
+                        cvMinMaxLoc(templateImgLeft, &minF_left, &maxF_left, &templateLeftMin, &templateLeftMax);
+
+                        if (maxF_left > 0)
+                        {
+                            templateLeftMax.x += win.x;
+                            templateLeftMax.y += win.y;
+                            contourFinder.blobs[i].xHand = templateLeftMax.x;
+                            contourFinder.blobs[i].yHand = templateLeftMax.y;
+                        }
+
+                        printf("Maximum: %lf, Minimum %lf\n", maxF_left, minF_left);
+                        cvPow(templateImgLeft, templateImgLeft, 5);
+
+#if DEBUG
+                        cvSaveImage("done_left.bmp", templateImgLeft);
+                        cvSaveImage("source.bmp", processedImgColor.getCvImage());
+#endif
+
+                        templateImgDraw.resize(templateImg->width, templateImg->height);
+
+                        cvConvertImage(templateImg, templateImgDraw.getCvImage());
+
+//        processedImg.getPixels(templateImg);
+
+//                        //flag = model.InitShapeFromDetBox(Shape,blobsCheck.getCvImage(),facedet);
+//                        Shape[0].x = contourFinder.blobs[i].centroid.x;
+//                        Shape[0].y = contourFinder.blobs[i].centroid.y;
+//                        Shape[1].x = contourFinder.blobs[i].centroid.x + contourFinder.blobs[i].boundingRect.width;
+//                        Shape[1].y = contourFinder.blobs[i].centroid.x + contourFinder.blobs[i].boundingRect.height;
+//
+//
+//                        flag = true;
+//                        /*
+//                        modelIC.InitParams(blobsCheck.getCvImage());
+//                        */
+//                        if (flag == false)
+//                        {
+//                            printf("False model fitting\n");
+//                        }
+//                        else
+//                        {
+//
+//                            model.Fit(blobsCheck.getCvImage(), Shape, 30, true);
+//                            //printf("Pyramid OK\n");
+//                            /*
+//                            modelIC.Fit(blobsCheck.getCvImage(), Shape, 30, false);
+//                            printf ("Inverse Compositional OK\n");
+//                            */
+//                            model.Draw(blobsCheck.getCvImage(), Shape, 2);
+//                            /*
+//                            modelIC.Draw(blobsCheck.getCvImage(), Shape, 1);
+//                            */
+//                        }
+                    }
+                }
+//--------------------------------------------------------------------------------------------
+                //Working on ROI-Camshift
+                printf("Before Camshift\n");
+                printf("COord Real x: %lf, Coord Real y: %lf\n", coordReal.cX, coordReal.cY);
+                HandROIAdjust(coordReal.cX,coordReal.cY, processedImg.getCvImage());
+                cvCamShift(processedImg.getCvImage(), handSelectionRect, cvTermCriteria( CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 10, 1 ), &handComp, &handBox);
+                handSelectionRect = handComp.rect;
+            }
+            /****************************************************************
+            AAM-Fitting with Kalman
+            ****************************************************************/
+//                        printf("Kalman + fitting \n");
+//                        if( contourFinder.nBlobs > 5)
+//                        {
+//                        Shape[0].x = coordReal.MinX;
+//                        Shape[0].y = coordReal.MinY;
+//                        Shape[1].x = coordReal.lX;
+//                        Shape[1].y = coordReal.lY;
+//
+//
+//                        flag = true;
+//                        /*
+//                        modelIC.InitParams(blobsCheck.getCvImage());
+//                        */
+//                        if (flag == false)
+//                        {
+//                            printf("False model fitting\n");
+//                        }
+//                        else
+//                        {
+//
+//                            model.Fit(blobsCheck.getCvImage(), Shape, 30, true);
+//                            printf("Pyramid OK\n");
+//                            /*
+//                            modelIC.Fit(blobsCheck.getCvImage(), Shape, 30, false);
+//                            printf ("Inverse Compositional OK\n");
+//                            */
+//                            model.Draw(blobsCheck.getCvImage(), Shape, 2);
+//                            /*
+//                            modelIC.Draw(blobsCheck.getCvImage(), Shape, 1);
+//                            */
+//                        }
+//                        }
+
+            /*---------------------------------------------------------*/
+
+            /****************************************************************
+            //AAM-Fitting with Camshift
+            //****************************************************************/
+//                        if( contourFinder.nBlobs > 5)
+//                        {
+//                        Shape[0].x = handSelectionRect.x;
+//                        Shape[0].y = handSelectionRect.y;
+//                        Shape[1].x = handSelectionRect.x + handSelectionRect.width/2;
+//                        Shape[1].y = handSelectionRect.x + handSelectionRect.height/2;
+//
+//
+//                        flag = true;
+//                        /*
+//                        modelIC.InitParams(blobsCheck.getCvImage());
+//                        */
+//                        if (flag == false)
+//                        {
+//                            printf("False model fitting\n");
+//                        }
+//                        else
+//                        {
+//
+//                            model.Fit(blobsCheck.getCvImage(), Shape, 30, true);
+//                            //printf("Pyramid OK\n");
+//                            /*
+//                            modelIC.Fit(blobsCheck.getCvImage(), Shape, 30, false);
+//                            printf ("Inverse Compositional OK\n");
+//                            */
+//                            model.Draw(blobsCheck.getCvImage(), Shape, 2);
+//                            /*
+//                            modelIC.Draw(blobsCheck.getCvImage(), Shape, 1);
+//                            */
+//                        }
+//                        }
+//
+            /*---------------------------------------------------------*/
+            printf("Before array: Ok!\n");
+
+            nHands = handContourFinder.nBlobs;
+            printf("Nhands: %d\n", nHands);
+
+            for (int i = 0; i < handContourFinder.nBlobs; i++)
+            {
+                /*
+                if (handContourFinder.nBlobs > 0)
+                {
+                myHand.myBlob = handContourFinder.blobs
+                fingerFinder.findmyFinger(myHand);
+                printf("How many fingers: %d\n",myHand.nFingers);
+                }
+                */
+                hands[i].myBlob = contourFinder.blobs[i];
+                fingerFinder.findFingers(hands[i]);
+            }
+
+            printf("Before energy steps: Ok!");
+            /*******************************************************************
+            Malik's Finger Detection Algorithm
+            ********************************************************************/
+            //---------------------------------------------
+            for (int i = 0; i < MAX_N_TRACKED_FINGERS; i++)
+            {
+                myFinger[i].energy *= 0.905f;
+                myFinger[i].bFoundMeThisFrame = false;
+            }
+
+
+            for (int i = 0; i < nHands; i++)
+            {
+                int nFingers = hands[i].nFingers;
+                printf("NFingers: %d\n", nFingers);
+                for (int j = 0; j < nFingers; j++)
+                {
+
+
+                    bool bFound = false;
+                    int  smallestIndex = -1;
+                    float smallestDist = 10000;
+
+                    for (int k = 0; k < MAX_N_TRACKED_FINGERS; k++)
+                    {
+
+                        if (myFinger[k].energy < 0.01 || myFinger[k].bFoundMeThisFrame) continue;	// skip non energized persistant faces.
+
+
+                        float dx = myFinger[k].pos.x - hands[i].fingerPos[j].x;
+                        float dy = myFinger[k].pos.y - hands[i].fingerPos[j].y;
+                        float len = sqrt((dx*dx) + (dy*dy));
+
+                        if (len < smallestDist)
+                        {
+                            smallestDist 		= len;
+                            smallestIndex		= k;
+                        }
+                    }
+
+
+
+                    if (smallestDist < 80)
+                    {
+                        myFinger[smallestIndex].energy += 0.2f;
+                        myFinger[smallestIndex].energy = MIN(myFinger[smallestIndex].energy, 1);
+                        myFinger[smallestIndex].bFoundMeThisFrame = true;
+                        myFinger[smallestIndex].pos.x = hands[i].fingerPos[j].x;
+                        myFinger[smallestIndex].pos.y = hands[i].fingerPos[j].y;
+                        myFinger[smallestIndex].birthday = ofGetElapsedTimef();
+                        bFound = true;
+                    }
+
+                    if (!bFound)
+                    {
+
+                        int  smallestIndex = -1;
+                        float smallestEnergy = 100000000	;
+                        // ok find the earliest, of first non energized persistant face:
+                        for (int k = 0; k < MAX_N_TRACKED_FINGERS; k++)
+                        {
+                            if (myFinger[k].bFoundMeThisFrame) continue;
+                            if (myFinger[k].birthday < smallestEnergy)
+                            {
+                                smallestEnergy 	= myFinger[k].birthday;
+                                smallestIndex 	= k;
+                            }
+                        }
+
+                        if (smallestIndex != -1)
+                        {
+                            myFinger[smallestIndex].pos.x = hands[i].fingerPos[j].x;
+                            myFinger[smallestIndex].pos.y = hands[i].fingerPos[j].y;
+                            myFinger[smallestIndex].energy = 0.2f;
+                            myFinger[smallestIndex].bFoundMeThisFrame = true;
+                            myFinger[smallestIndex].birthday = ofGetElapsedTimef();
+                        }
+                    }
+
+
+                }
+            }
+
+
+            for (int i = 0; i < MAX_N_TRACKED_FINGERS; i++)
+            {
+                if (myFinger[i].bFoundMeThisFrame == false)
+                {
+                    myFinger[i].energy = 0;
+                }
+            }
+
+            /*******************************************************************
+            End of Malik's Finger Detection Algorithm
+            ********************************************************************/
+
+            cvEllipseBox( camShiftImage.getCvImage(), handBox, CV_RGB(255,255,255), 5, CV_AA, 0 );
         }
 
-        //Track found contours/blobss
+
+        /*****************************
+        End of other Tracking Methods
+        *********************************/
+
+//Track found contours/blobss
         tracker.track(&contourFinder);
-        //get DSP time
+//get DSP time
         differenceTime = ofGetElapsedTimeMillis() - beforeTime;
 
-        //Dynamic Background subtraction LearRate
+//Dynamic Background subtraction LearRate
         if (filter->bDynamicBG)
         {
             filter->fLearnRate = backgroundLearnRate * .0001; //If there are no blobs, add the background faster.
@@ -545,12 +1069,14 @@ void ofxNCoreVision::grabFrameToCPU()
         sourceImg.setFromPixels(vidGrabber->getPixels(), camWidth, camHeight);
         //convert to grayscale
         processedImg = sourceImg;
+        processedImgColor = sourceImg;
 #endif
     }
     else
     {
         sourceImg.setFromPixels(vidPlayer->getPixels(), camWidth, camHeight);
         //convert to grayscale
+        processedImgColor = sourceImg;
         processedImg = sourceImg;
     }
 }
@@ -685,53 +1211,84 @@ void ofxNCoreVision::drawFullMode()
     ofSetColor(0xFFFFFF);
     info.drawString("thiagodefreitas.wordpress.com", 740, 550);
 
-    /*****************************
-    End of Hand-Tracking draw strings
-    ******************************/
+    sourceImg.draw(160, 610, 160, 120);
+    info.drawString("Template Matching Tracking", 170, 745);
 
-    //Display Application information in bottom right
-    string str = "Calc. Time [ms]:  ";
-    str+= ofToString(differenceTime, 0)+"\n\n";
+    camShiftImage.draw(340, 610, 160, 120);
+    info.drawString("Camshift Tracking", 370, 745);
 
-    if (bcamera)
+    blobsCheck.draw(520, 610, 160, 120);
+    info.drawString("Kalman Tracking/Gaussian Blobs", 530, 745);
+
+    blobsCheck.draw(700, 610, 160, 120);
+    info.drawString("AAM-Fitting", 755, 745);
+
+
+    /***********************************
+    Drawing Malik Fingers
+    ****************************/
+    printf("Showing fingers\n");
+    for (int j=0; j < 5;j++)
     {
-        string str2 = "Camera [Res]:     ";
-        str2+= ofToString(camWidth, 0) + " x " + ofToString(camWidth, 0)  + "\n";
-        string str4 = "Camera [fps]:     ";
-        str4+= ofToString(fps, 0)+"\n";
-        ofSetColor(0xFFFFFF);
-        verdana.drawString(str + str2 + str4, 740, 410);
+        for (int i = 0; i < hands[j].nFingers; i++)
+        {
+            ofCircle((hands[j].fingerPos[i].x*160)/camWidth+160,(hands[j].fingerPos[i].y*120)/camHeight+610, 10);
+        }
     }
+    printf("Showed fingers\n");
+
+
+    /*******************************************
+    End Malik Draw
+
+    **********************************************/
+    /*****************************
+End of Hand-Tracking draw strings
+******************************/
+
+//Display Application information in bottom right
+string str = "Calc. Time [ms]:  ";
+str+= ofToString(differenceTime, 0)+"\n\n";
+
+if (bcamera)
+{
+    string str2 = "Camera [Res]:     ";
+    str2+= ofToString(camWidth, 0) + " x " + ofToString(camWidth, 0)  + "\n";
+    string str4 = "Camera [fps]:     ";
+    str4+= ofToString(fps, 0)+"\n";
+    ofSetColor(0xFFFFFF);
+    verdana.drawString(str + str2 + str4, 740, 470);
+}
+else
+{
+    string str2 = "Video [Res]:       ";
+    str2+= ofToString(vidPlayer->width, 0) + " x " + ofToString(vidPlayer->height, 0)  + "\n";
+    string str4 = "Video [fps]:        ";
+    str4+= ofToString(fps, 0)+"\n";
+    ofSetColor(0xFFFFFF);
+    verdana.drawString(str + str2 + str4, 740, 470);
+}
+
+if (bTUIOMode)
+{
+    //Draw Port and IP to screen
+    ofSetColor(0xffffff);
+    char buf[256];
+    if (myTUIO.bOSCMode)
+        sprintf(buf, "Sending OSC messages to:\nHost: %s\nPort: %i", myTUIO.localHost, myTUIO.TUIOPort);
     else
     {
-        string str2 = "Video [Res]:       ";
-        str2+= ofToString(vidPlayer->width, 0) + " x " + ofToString(vidPlayer->height, 0)  + "\n";
-        string str4 = "Video [fps]:        ";
-        str4+= ofToString(fps, 0)+"\n";
-        ofSetColor(0xFFFFFF);
-        verdana.drawString(str + str2 + str4, 740, 410);
-    }
-
-    if (bTUIOMode)
-    {
-        //Draw Port and IP to screen
-        ofSetColor(0xffffff);
-        char buf[256];
-        if (myTUIO.bOSCMode)
-            sprintf(buf, "Sending OSC messages to:\nHost: %s\nPort: %i", myTUIO.localHost, myTUIO.TUIOPort);
+        if (myTUIO.bIsConnected)
+            sprintf(buf, "Sending TCP messages to:\nPort: %i", myTUIO.TUIOFlashPort);
         else
-        {
-            if (myTUIO.bIsConnected)
-                sprintf(buf, "Sending TCP messages to:\nPort: %i", myTUIO.TUIOFlashPort);
-            else
-                sprintf(buf, "Could not bind or send TCP to:\nPort: %i", myTUIO.TUIOFlashPort);
-        }
-
-        verdana.drawString(buf, 740, 480);
+            sprintf(buf, "Could not bind or send TCP to:\nPort: %i", myTUIO.TUIOFlashPort);
     }
 
-    ofSetColor(0xFF0000);
-    verdana.drawString("Press spacebar to toggle fast mode", 730, 572);
+    verdana.drawString(buf, 740, 450);
+}
+
+ofSetColor(0xFF0000);
+verdana.drawString("Press spacebar to toggle fast mode", 730, 542);
 }
 
 void ofxNCoreVision::drawMiniMode()
@@ -826,10 +1383,10 @@ void ofxNCoreVision::drawFingerOutlines()
             /*}*/
             if (contourFinder.blobs[i].xHand > 0 || contourFinder.blobs[i].yHand > 0)
             {
-                ofSetColor(0,0,0);
-                ofCircle(contourFinder.blobs[i].xHand + 360, contourFinder.blobs[i].yHand + 280, 40);
+                ofSetColor(255,255,255);
+                ofCircle((contourFinder.blobs[i].xHand*160)/camWidth + 160, (contourFinder.blobs[i].yHand*120)/camHeight + 610, 40);
                 contourFinder.blobs[i].xHand = 0;
-                contourFinder.blobs[i].yHand=0;
+                contourFinder.blobs[i].yHand = 0;
             }
 
         }
@@ -997,6 +1554,34 @@ std::map<int, Blob> ofxNCoreVision::getBlobs()
 {
 
     return tracker.getTrackedBlobs();
+}
+
+/****************************************************************************
+Hand ROI adjust for Camshift
+*****************************************************************************/
+void ofxNCoreVision::HandROIAdjust(int x, int y, IplImage* image)
+{
+    handSelectionRect.x = MIN(x,handPoint.x);
+    handSelectionRect.y = MIN(y,handPoint.y);
+    handSelectionRect.width = handSelectionRect.x + CV_IABS(x - handPoint.x);
+    handSelectionRect.height = handSelectionRect.y + CV_IABS(y - handPoint.y);
+    handSelectionRect.x = MAX( handSelectionRect.x, 0 );
+    handSelectionRect.y = MAX( handSelectionRect.y, 0 );
+    handSelectionRect.width = MIN( handSelectionRect.width, image->width );
+    handSelectionRect.height = MIN( handSelectionRect.height, image->height );
+    handSelectionRect.width -= handSelectionRect.x;
+    handSelectionRect.height -= handSelectionRect.y;
+}
+
+void ofxNCoreVision::learnBackGround(ofxCvColorImage& img)
+{
+    //Capture full background
+    if (bLearnBackGround == true)
+    {
+        filter->BgImgColor = img;
+        filter->BgImgColor.flagImageChanged();
+        bLearnBackGround == false;
+    }
 }
 
 /*****************************************************************************

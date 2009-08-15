@@ -12,7 +12,7 @@
 #include "useful.h"
 
 
-void drawBlob (IplImage *, coord , int, int , int );
+void drawBlob2 (IplImage *, coord , int, int , int );
 
 
 #endif
