@@ -244,7 +244,7 @@ public:
 	float				backgroundLearnRate;
 
 	bool				showConfiguration;
-	
+
 	bool				printfToFile;
 
 	bool				bcamera;

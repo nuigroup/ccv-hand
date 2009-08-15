@@ -14,13 +14,13 @@
 * The setup function is run once to perform initializations in the application
 *****************************************************************************/
 void ofxNCoreVision::_setup(ofEventArgs &e)
-{	
+{
 	//set the title
 	ofSetWindowTitle(" Community Core Vision ");
-	
+
 	//create filter
 	if ( filter == NULL ){filter = new ProcessFilters();}
-	
+
 	//Load Settings from config.xml file
 	loadXMLSettings();
 
@@ -32,7 +32,7 @@ void ofxNCoreVision::_setup(ofEventArgs &e)
 		RemoveMenu(hMnu, SC_CLOSE, MF_BYCOMMAND);
 	#endif
 
-	
+
 	if(printfToFile) {
 		/*****************************************************************************************************
 		* LOGGING
@@ -46,15 +46,15 @@ void ofxNCoreVision::_setup(ofEventArgs &e)
 		if((stream = freopen(fileName, "w", stdout)) == NULL){}
 		/******************************************************************************************************/
 	}
-	
+
 	printf("printfToFile %i!\n", printfToFile);
 
-	
+
 
 	//Setup Window Properties
 	ofSetWindowShape(winWidth,winHeight);
 	ofSetVerticalSync(false);	            //Set vertical sync to false for better performance?
-	
+
 	printf("freedom?");
 
 	//load camera/video
@@ -84,7 +84,7 @@ void ofxNCoreVision::_setup(ofEventArgs &e)
 	//GUI Controls
 	controls = ofxGui::Instance(this);
 	setupControls();
-	
+
 	printf("freedom4?");
 
 	//Setup Calibration
@@ -114,7 +114,7 @@ void ofxNCoreVision::_setup(ofEventArgs &e)
 		bShowInterface = true;
 		printf("Starting in full mode...\n\n");
 	}
-	
+
 	#ifdef TARGET_WIN32
 	    //get rid of the console window
         FreeConsole();
@@ -135,7 +135,7 @@ void ofxNCoreVision::loadXMLSettings()
 		message = "Settings Loaded!\n\n";
 	else
 		message = "No Settings Found...\n\n"; //FAIL
-	
+
 	//--------------------------------------------------------------
 	//  START BINDING XML TO VARS
 	//--------------------------------------------------------------
@@ -153,10 +153,10 @@ void ofxNCoreVision::loadXMLSettings()
 	filter->bLearnBakground		= XML.getValue("CONFIG:BOOLEAN:LEARNBG",0);
 	filter->bVerticalMirror		= XML.getValue("CONFIG:BOOLEAN:VMIRROR",0);
 	filter->bHorizontalMirror	= XML.getValue("CONFIG:BOOLEAN:HMIRROR",0);
-	
+
 	//Logging
 	printfToFile				= XML.getValue("CONFIG:BOOLEAN:PRINTFTOFILE",0);
-	
+
 	//Filters
 	filter->bTrackDark			= XML.getValue("CONFIG:BOOLEAN:TRACKDARK", 0);
 	filter->bHighpass			= XML.getValue("CONFIG:BOOLEAN:HIGHPASS",1);
@@ -183,9 +183,9 @@ void ofxNCoreVision::loadXMLSettings()
 	myTUIO.bTCPMode				= XML.getValue("CONFIG:BOOLEAN:TCPMODE",1);
 	myTUIO.bHeightWidth			= XML.getValue("CONFIG:BOOLEAN:HEIGHTWIDTH",0);
 	tmpLocalHost				= XML.getValue("CONFIG:NETWORK:LOCALHOST", "localhost");
-	tmpPort						= XML.getValue("CONFIG:NETWORK:TUIOPORT_OUT", 3333); 
+	tmpPort						= XML.getValue("CONFIG:NETWORK:TUIOPORT_OUT", 3333);
 	tmpFlashPort				= XML.getValue("CONFIG:NETWORK:TUIOFLASHPORT_OUT", 3000);
-	myTUIO.setup(tmpLocalHost.c_str(), tmpPort, tmpFlashPort); //have to convert tmpLocalHost to a const char*	
+	myTUIO.setup(tmpLocalHost.c_str(), tmpPort, tmpFlashPort); //have to convert tmpLocalHost to a const char*
 	//--------------------------------------------------------------
 	//  END XML SETUP
 }
@@ -281,7 +281,7 @@ void ofxNCoreVision::initDevice(){
 				camHeight = dsvl->getCamHeight();
 				return;
 			}
-		#else 
+		#else
 			if( vidGrabber == NULL ) {
 			vidGrabber = new ofVideoGrabber();
 			vidGrabber->listDevices();
@@ -440,7 +440,7 @@ void ofxNCoreVision::getPixels(){
 			processedImg.setFromPixels(dsvl->getPixels(), camWidth, camHeight);
 		}
 	}
-#endif	
+#endif
 }
 
 
@@ -515,7 +515,7 @@ void ofxNCoreVision::_draw(ofEventArgs &e)
 {
 	if(exited) return;
 
-	if (showConfiguration) 
+	if (showConfiguration)
 	{
 		//if calibration
 		if (bCalibration)
@@ -537,7 +537,7 @@ void ofxNCoreVision::_draw(ofEventArgs &e)
 		}
 		//draw gui controls
 		if (!bCalibration && !bMiniMode) {controls->draw();}
-	}	
+	}
 }
 
 void ofxNCoreVision::drawFullMode(){
@@ -610,8 +610,8 @@ void ofxNCoreVision::drawFullMode(){
 			sprintf(buf, "Sending TCP messages to:\nPort: %i", myTUIO.TUIOFlashPort);
 			else
 			sprintf(buf, "Could not bind or send TCP to:\nPort: %i", myTUIO.TUIOFlashPort);
-		}		
-		
+		}
+
 		verdana.drawString(buf, 740, 480);
 	}
 
@@ -666,7 +666,12 @@ void ofxNCoreVision::drawFingerOutlines()
 {
 	//Find the blobs for drawing
 	for (int i=0; i<contourFinder.nBlobs; i++)
+
 	{
+	    char debugNumber[1024];
+	    sprintf(debugNumber, "dist: %i", contourFinder.nBlobs);
+        verdana.drawString(debugNumber, 365, contourFinder.blobs[i].boundingRect.height/2 + 185);
+
 		if (bDrawOutlines)
 		{
 			//Draw contours (outlines) on the source image
@@ -677,10 +682,22 @@ void ofxNCoreVision::drawFingerOutlines()
 			float xpos = contourFinder.blobs[i].centroid.x * (MAIN_WINDOW_WIDTH/camWidth);
 			float ypos = contourFinder.blobs[i].centroid.y * (MAIN_WINDOW_HEIGHT/camHeight);
 
+			if (i > 0)
+			{
+			float distance = sqrt(pow(contourFinder.blobs[i].centroid.x - contourFinder.blobs[i-1].centroid.x, 2)+pow(contourFinder.blobs[i].centroid.x - contourFinder.blobs[i-1].centroid.x,2));
+
+			char distStr[1024];
+			sprintf(distStr, "dist: %f", distance);
+			verdana.drawString(distStr, xpos + 365, ypos + contourFinder.blobs[i].boundingRect.height/2 + 85);
+
+			}
+            ofCircle(contourFinder.blobs[i].centroid.x* (MAIN_WINDOW_WIDTH/camWidth), contourFinder.blobs[i].centroid.y* (MAIN_WINDOW_HEIGHT/camHeight), 10);
 			ofSetColor(0xCCFFCC);
 			char idStr[1024];
 			sprintf(idStr, "id: %i", contourFinder.blobs[i].id);
 			verdana.drawString(idStr, xpos + 365, ypos + contourFinder.blobs[i].boundingRect.height/2 + 45);
+
+//			cvEllipseBox(sourceImg, contourFinder.track_box, CV_RGB(255,0,0), 3, CV_AA, 0);
 		}
 	}
 	ofSetColor(0xFFFFFF);
@@ -852,13 +869,13 @@ void ofxNCoreVision::_exit(ofEventArgs &e)
     #ifdef TARGET_WIN32
 		if(PS3!=NULL) delete PS3;
 		if(ffmv!=NULL) delete ffmv;
-		if(dsvl!=NULL) delete dsvl;	
+		if(dsvl!=NULL) delete dsvl;
 	#endif
 
 	if(vidGrabber!=NULL) delete vidGrabber;
 	if(vidPlayer !=NULL) delete vidPlayer;
 	// -------------------------------- SAVE STATE ON EXIT
-	
+
 	printf("Vision module has exited!\n");
 }
 

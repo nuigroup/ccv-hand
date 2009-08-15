@@ -1,6 +1,6 @@
 /*
 *  Filters.h
-*  
+*
 *
 *  Created on 2/2/09.
 *  Copyright 2009 NUI Group. All rights reserved.
@@ -18,7 +18,7 @@
 #define CAMERA_EXPOSURE_TIME  2200.0f
 
 class Filters {
-  
+
 	public:
 
 	  Filters(){
