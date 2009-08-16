@@ -11,7 +11,7 @@ int							width, height;
 ofAppBaseWindow *			window = NULL;
 
 //========================================================================
-// core events instance & arguments
+//// core events instance & arguments
 #ifdef OF_USING_POCO
 ofCoreEvents 				ofEvents;
 ofEventArgs					voidEventArgs;

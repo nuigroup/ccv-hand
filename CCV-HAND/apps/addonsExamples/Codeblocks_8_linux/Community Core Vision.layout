@@ -13,7 +13,7 @@
 	<File name="../../../addons/ofxNCore/src/Camera/CameraUtils.h" open="0" top="0" tabpos="0">
 		<Cursor position="0" topLine="3" />
 	</File>
-	<File name="../../../addons/ofxNCore/src/Communication/TUIO.cpp" open="1" top="1" tabpos="3">
+	<File name="../../../addons/ofxNCore/src/Communication/TUIO.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="5335" topLine="165" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Communication/TUIO.h" open="0" top="0" tabpos="24">
@@ -31,6 +31,9 @@
 	<File name="../../../addons/ofxNCore/src/Controls/ofxGuiGlobals.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="640" topLine="17" />
 	</File>
+	<File name="../../../addons/ofxNCore/src/Controls/ofxGuiKnob.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="2537" topLine="50" />
+	</File>
 	<File name="../../../addons/ofxNCore/src/Controls/ofxGuiTypes.h" open="0" top="0" tabpos="2">
 		<Cursor position="5773" topLine="303" />
 	</File>
@@ -41,21 +44,21 @@
 		<Cursor position="536" topLine="10" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Filters/Filters.h" open="0" top="0" tabpos="4">
-		<Cursor position="1324" topLine="61" />
+		<Cursor position="2071" topLine="81" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Filters/GPUImageFilter.cpp" open="0" top="0" tabpos="18">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="../../../addons/ofxNCore/src/Filters/ProcessFilters.h" open="0" top="0" tabpos="2">
-		<Cursor position="7954" topLine="195" />
+	<File name="../../../addons/ofxNCore/src/Filters/ProcessFilters.h" open="1" top="0" tabpos="2">
+		<Cursor position="6283" topLine="137" />
 	</File>
-	<File name="../../../addons/ofxNCore/src/Modules/ofxNCoreVision.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="25131" topLine="1597" />
+	<File name="../../../addons/ofxNCore/src/Modules/ofxNCoreVision.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="19167" topLine="511" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Modules/ofxNCoreVision.h" open="0" top="0" tabpos="6">
 		<Cursor position="2660" topLine="112" />
 	</File>
-	<File name="../../../addons/ofxNCore/src/Tracking/Blob.h" open="1" top="0" tabpos="2">
+	<File name="../../../addons/ofxNCore/src/Tracking/Blob.h" open="0" top="0" tabpos="2">
 		<Cursor position="1513" topLine="55" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Tracking/BlobManager.cpp" open="0" top="0" tabpos="20">

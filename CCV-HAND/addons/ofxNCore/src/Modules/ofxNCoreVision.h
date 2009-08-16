@@ -282,7 +282,7 @@ public:
 
     bool                newFrame;
 
-//    CPUImageFilter      processedImg;
+    CPUImageFilter      processedImgHand;
 //
 //    ofxCvColorImage		sourceImg;
     CPUImageFilter	blobsCheck;
@@ -313,7 +313,7 @@ public:
     bool                bCamshift;
 
 //    ContourFinder       contourFinder;
-    ofxCvContourFinder 	handContourFinder;
+    ContourFinder 	handContourFinder;
 //    BlobTracker			tracker;
 
     //int					MIN_BLOB_SIZE;

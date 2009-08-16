@@ -91,6 +91,7 @@ class Filters {
 
     virtual void allocate( int w, int h ) = 0;
     virtual void applyCPUFilters(CPUImageFilter& img) = 0;
+    virtual void applyCPUFiltersHand(CPUImageFilter& img) = 0;
     virtual void draw() = 0;
 
     virtual void allocateGPU() = 0;

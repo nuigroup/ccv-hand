@@ -139,6 +139,49 @@ class ProcessFilters : public Filters {
         grayDiff = img; //for drawing
     }
 
+    /****************************************************************
+ *	CPU Filters
+ ****************************************************************/
+     void applyCPUFiltersHand(CPUImageFilter& img){
+
+        //Set Mirroring Horizontal/Vertical
+        if(bVerticalMirror || bHorizontalMirror) img.mirror(bVerticalMirror, bHorizontalMirror);
+
+		//Background Subtraction
+        //img.absDiff(grayBg, img);
+		if(bTrackDark)
+			cvSub(grayBg.getCvImage(), img.getCvImage(), img.getCvImage());
+		else
+			cvSub(img.getCvImage(), grayBg.getCvImage(), img.getCvImage());
+
+		img.flagImageChanged();
+
+
+		if(bSmooth){//Smooth
+            img.blur((1 * 2) + 1); //needs to be an odd number
+            if(!bMiniMode)
+            subtractBg = img; //for drawing
+        }
+
+//        if(bHighpass){//HighPass
+//            img.highpass(highpassBlur, highpassNoise);
+//            if(!bMiniMode)
+//            highpassImg = img; //for drawing
+//        }
+
+        if(bAmplify){//Amplify
+            img.amplify(img, 46);
+            if(!bMiniMode)
+            ampImg = img; //for drawing
+        }
+
+        img.threshold(10); //Threshold
+
+    }
+    /*******************************************
+    ENd of CPU filters for Hand Image
+    ********************************************/
+
 /****************************************************************
  *	GPU Filters
  ****************************************************************/

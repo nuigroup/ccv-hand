@@ -106,6 +106,8 @@ void ofxNCoreVision::_setup(ofEventArgs &e)
     ******************************************************************************************************/
     processedImg.allocate(camWidth, camHeight); //main Image that'll be processed.
     processedImg.setUseTexture(false);			//We don't need to draw this so don't create a texture
+    processedImgHand.allocate(camWidth, camHeight);
+    processedImgHand.setUseTexture(false);
     sourceImg.allocate(camWidth, camHeight);    //Source Image
     sourceImg.setUseTexture(false);				//We don't need to draw this so don't create a texture
 //    grayBg.allocate(camWidth,camHeight);
@@ -497,7 +499,9 @@ void ofxNCoreVision::_update(ofEventArgs &e)
         }
         else
         {
+            printf("Frame ok!");
             grabFrameToCPU();
+            printf("Frame not fault!");
             /*Hand Tracking
             */
             h_plane = processedImg.getCvImage();
@@ -506,11 +510,20 @@ void ofxNCoreVision::_update(ofEventArgs &e)
             learnBackGround(sourceImg);
 
             processedImg = sourceImg;
+
+            processedImgHand = sourceImg;
             //      cvSub(processedImg.getCvImage(), grayBg.getCvImage(), processedImg.getCvImage());
             cvSub(processedImgColor.getCvImage(), filter->BgImgColor.getCvImage(), processedImgColor.getCvImage());
 
+            filter->applyCPUFiltersHand(processedImgHand);
 
-            handContourFinder.findContours(processedImg, 4000, camWidth*camHeight/3, 5, true);
+            #if !DEBUG
+                            cvSaveImage("subtractionHand.bmp", processedImgHand.getCvImage());
+#endif
+            handContourFinder.findContours(processedImgHand, (4 * 2) + 1, ((camWidth * camHeight) * .4) * (714 * .001), 5, false);
+
+
+
 
 #if DEBUG
             printf("Got problems here(?)\n");
@@ -560,6 +573,11 @@ void ofxNCoreVision::_update(ofEventArgs &e)
 #if DEBUG
                 printf("Blobs Total:\n");
 #endif
+
+            #if DEBUG
+                            cvSaveImage("blobsCheck.bmp", blobsCheck.getCvImage());
+#endif
+
                 /*
                             if (blur)blobsCheck.blur( 3 );
                             if (dilate)blobsCheck.dilate( );
@@ -977,123 +995,134 @@ void ofxNCoreVision::_update(ofEventArgs &e)
             End of AAM-Fitting
             ****************************************************************/
 //
-            /*---------------------------------------------------------*/
-            /*******************************************************************
-            Malik's Finger Detection Algorithm
-            ********************************************************************/
-            printf("Before array: Ok!\n");
-
-            nHands = handContourFinder.nBlobs;
-            printf("Nhands: %d\n", nHands);
-
-            for (int i = 0; i < handContourFinder.nBlobs; i++)
-            {
-                /*
-                if (handContourFinder.nBlobs > 0)
-                {
-                myHand.myBlob = handContourFinder.blobs
-                fingerFinder.findmyFinger(myHand);
-                printf("How many fingers: %d\n",myHand.nFingers);
-                }
-                */
-                hands[i].myBlob = contourFinder.blobs[i];
-                fingerFinder.findFingers(hands[i]);
-            }
-
-            printf("Before energy steps: Ok!");
-
-            //---------------------------------------------
-            for (int i = 0; i < MAX_N_TRACKED_FINGERS; i++)
-            {
-                myFinger[i].energy *= 0.905f;
-                myFinger[i].bFoundMeThisFrame = false;
-            }
-
-
-            for (int i = 0; i < nHands; i++)
-            {
-                int nFingers = hands[i].nFingers;
-                printf("NFingers: %d\n", nFingers);
-                for (int j = 0; j < nFingers; j++)
-                {
-
-
-                    bool bFound = false;
-                    int  smallestIndex = -1;
-                    float smallestDist = 10000;
-
-                    for (int k = 0; k < MAX_N_TRACKED_FINGERS; k++)
-                    {
-
-                        if (myFinger[k].energy < 0.01 || myFinger[k].bFoundMeThisFrame) continue;	// skip non energized persistant faces.
-
-
-                        float dx = myFinger[k].pos.x - hands[i].fingerPos[j].x;
-                        float dy = myFinger[k].pos.y - hands[i].fingerPos[j].y;
-                        float len = sqrt((dx*dx) + (dy*dy));
-
-                        if (len < smallestDist)
-                        {
-                            smallestDist 		= len;
-                            smallestIndex		= k;
-                        }
-                    }
-
-
-
-                    if (smallestDist < 80)
-                    {
-                        myFinger[smallestIndex].energy += 0.2f;
-                        myFinger[smallestIndex].energy = MIN(myFinger[smallestIndex].energy, 1);
-                        myFinger[smallestIndex].bFoundMeThisFrame = true;
-                        myFinger[smallestIndex].pos.x = hands[i].fingerPos[j].x;
-                        myFinger[smallestIndex].pos.y = hands[i].fingerPos[j].y;
-                        myFinger[smallestIndex].birthday = ofGetElapsedTimef();
-                        bFound = true;
-                    }
-
-                    if (!bFound)
-                    {
-
-                        int  smallestIndex = -1;
-                        float smallestEnergy = 100000000	;
-                        // ok find the earliest, of first non energized persistant face:
-                        for (int k = 0; k < MAX_N_TRACKED_FINGERS; k++)
-                        {
-                            if (myFinger[k].bFoundMeThisFrame) continue;
-                            if (myFinger[k].birthday < smallestEnergy)
-                            {
-                                smallestEnergy 	= myFinger[k].birthday;
-                                smallestIndex 	= k;
-                            }
-                        }
-
-                        if (smallestIndex != -1)
-                        {
-                            myFinger[smallestIndex].pos.x = hands[i].fingerPos[j].x;
-                            myFinger[smallestIndex].pos.y = hands[i].fingerPos[j].y;
-                            myFinger[smallestIndex].energy = 0.2f;
-                            myFinger[smallestIndex].bFoundMeThisFrame = true;
-                            myFinger[smallestIndex].birthday = ofGetElapsedTimef();
-                        }
-                    }
-
-
-                }
-            }
-
-
-            for (int i = 0; i < MAX_N_TRACKED_FINGERS; i++)
-            {
-                if (myFinger[i].bFoundMeThisFrame == false)
-                {
-                    myFinger[i].energy = 0;
-                }
-            }
-
-            /*******************************************************************
-            End of Malik's Finger Detection Algorithm
-            ********************************************************************/
+//            /*---------------------------------------------------------*/
+//            /*******************************************************************
+//            Malik's Finger Detection Algorithm
+//            ********************************************************************/
+//            printf("Before array: Ok!\n");
+//
+//            nHands = handContourFinder.nBlobs;
+//            /*
+//            useless thing just to make some tests
+//            */
+//
+//            if (nHands > 5 )
+//            {
+//                nHands = 5;
+//            }
+//            /*
+//            */
+//            //nHands = contourFinder.nBlobs;
+//            printf("Nhands: %d\n", nHands);
+//
+//            for (int i = 0; i < nHands; i++)
+//            {
+//                /*
+//                if (handContourFinder.nBlobs > 0)
+//                {
+//                myHand.myBlob = handContourFinder.blobs
+//                fingerFinder.findmyFinger(myHand);
+//                printf("How many fingers: %d\n",myHand.nFingers);
+//                }
+//                */
+//                hands[i].myBlob = handContourFinder.blobs[i];
+//                fingerFinder.findFingers(hands[i]);
+//            }
+//
+//            printf("Before energy steps: Ok!");
+//
+//            //---------------------------------------------
+//            for (int i = 0; i < MAX_N_TRACKED_FINGERS; i++)
+//            {
+//                myFinger[i].energy *= 0.905f;
+//                myFinger[i].bFoundMeThisFrame = false;
+//            }
+//
+//
+//            for (int i = 0; i < nHands; i++)
+//            {
+//                int nFingers = hands[i].nFingers;
+//                printf("NFingers: %d\n", nFingers);
+//                for (int j = 0; j < nFingers; j++)
+//                {
+//
+//
+//                    bool bFound = false;
+//                    int  smallestIndex = -1;
+//                    float smallestDist = 10000;
+//
+//                    for (int k = 0; k < MAX_N_TRACKED_FINGERS; k++)
+//                    {
+//
+//                        if (myFinger[k].energy < 0.01 || myFinger[k].bFoundMeThisFrame) continue;	// skip non energized persistant faces.
+//
+//
+//                        float dx = myFinger[k].pos.x - hands[i].fingerPos[j].x;
+//                        float dy = myFinger[k].pos.y - hands[i].fingerPos[j].y;
+//                        float len = sqrt((dx*dx) + (dy*dy));
+//
+//                        if (len < smallestDist)
+//                        {
+//                            smallestDist 		= len;
+//                            smallestIndex		= k;
+//                        }
+//                    }
+//
+//
+//
+//                    if (smallestDist < 80)
+//                    {
+//                        myFinger[smallestIndex].energy += 0.2f;
+//                        myFinger[smallestIndex].energy = MIN(myFinger[smallestIndex].energy, 1);
+//                        myFinger[smallestIndex].bFoundMeThisFrame = true;
+//                        myFinger[smallestIndex].pos.x = hands[i].fingerPos[j].x;
+//                        myFinger[smallestIndex].pos.y = hands[i].fingerPos[j].y;
+//                        myFinger[smallestIndex].birthday = ofGetElapsedTimef();
+//                        bFound = true;
+//                    }
+//
+//                    if (!bFound)
+//                    {
+//
+//                        int  smallestIndex = -1;
+//                        float smallestEnergy = 100000000	;
+//                        // ok find the earliest, of first non energized persistant face:
+//                        for (int k = 0; k < MAX_N_TRACKED_FINGERS; k++)
+//                        {
+//                            if (myFinger[k].bFoundMeThisFrame) continue;
+//                            if (myFinger[k].birthday < smallestEnergy)
+//                            {
+//                                smallestEnergy 	= myFinger[k].birthday;
+//                                smallestIndex 	= k;
+//                            }
+//                        }
+//
+//                        if (smallestIndex != -1)
+//                        {
+//                            myFinger[smallestIndex].pos.x = hands[i].fingerPos[j].x;
+//                            myFinger[smallestIndex].pos.y = hands[i].fingerPos[j].y;
+//                            myFinger[smallestIndex].energy = 0.2f;
+//                            myFinger[smallestIndex].bFoundMeThisFrame = true;
+//                            myFinger[smallestIndex].birthday = ofGetElapsedTimef();
+//                        }
+//                    }
+//
+//
+//                }
+//            }
+//
+//
+//            for (int i = 0; i < MAX_N_TRACKED_FINGERS; i++)
+//            {
+//                if (myFinger[i].bFoundMeThisFrame == false)
+//                {
+//                    myFinger[i].energy = 0;
+//                }
+//            }
+//
+//            /*******************************************************************
+//            End of Malik's Finger Detection Algorithm
+//            ********************************************************************/
         }
 
 
@@ -1356,26 +1385,26 @@ void ofxNCoreVision::drawFullMode()
     ******************************/
 
 //Display Application information in bottom right
-    string str = "Calc. Time [ms]:  ";
+    string str = "Calc. Time [ms]:\n     ";
     str+= ofToString(differenceTime, 0)+"\n\n";
 
     if (bcamera)
     {
-        string str2 = "Camera [Res]:     ";
-        str2+= ofToString(camWidth, 0) + " x " + ofToString(camWidth, 0)  + "\n";
-        string str4 = "Camera [fps]:     ";
-        str4+= ofToString(fps, 0)+"\n";
+        string str2 = "Camera [Res]:\n     ";
+        str2+= ofToString(camWidth, 0) + " x " + ofToString(camWidth, 0)  + "\n\n";
+        string str4 = "Camera [fps]:\n     ";
+        str4+= ofToString(fps, 0)+"\n\n";
         ofSetColor(0xFFFFFF);
-        verdana.drawString(str + str2 + str4, 740, 470);
+        info.drawString(str + str2 + str4, 860, 630);
     }
     else
     {
-        string str2 = "Video [Res]:       ";
-        str2+= ofToString(vidPlayer->width, 0) + " x " + ofToString(vidPlayer->height, 0)  + "\n";
-        string str4 = "Video [fps]:        ";
-        str4+= ofToString(fps, 0)+"\n";
+        string str2 = "Video [Res]:\n     ";
+        str2+= ofToString(vidPlayer->width, 0) + " x " + ofToString(vidPlayer->height, 0)  + "\n\n";
+        string str4 = "Video [fps]:\n     ";
+        str4+= ofToString(fps, 0)+"\n\n";
         ofSetColor(0xFFFFFF);
-        verdana.drawString(str + str2 + str4, 740, 470);
+        info.drawString(str + str2 + str4, 860, 630);
     }
 
     if (bTUIOMode)
@@ -1393,11 +1422,11 @@ void ofxNCoreVision::drawFullMode()
                 sprintf(buf, "Could not bind or send TCP to:\nPort: %i", myTUIO.TUIOFlashPort);
         }
 
-        verdana.drawString(buf, 740, 450);
+        info.drawString(buf, 740, 420);
     }
 
     ofSetColor(0xFF0000);
-    verdana.drawString("Press spacebar to toggle fast mode", 730, 542);
+    verdana.drawString("Press spacebar to toggle fast mode", 730, 578);
 }
 
 void ofxNCoreVision::drawMiniMode()
