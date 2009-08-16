@@ -81,7 +81,7 @@
             <MODE>2</MODE>
             <DISPLAY>2</DISPLAY>
             <STEPS>0</STEPS>
-            <VALUE>0</VALUE>
+            <VALUE>1</VALUE>
         </OBJECT>
     </OBJECT>
     <OBJECT>
@@ -135,7 +135,7 @@
             <MODE>2</MODE>
             <DISPLAY>2</DISPLAY>
             <STEPS>0</STEPS>
-            <VALUE>0</VALUE>
+            <VALUE>1</VALUE>
         </OBJECT>
         <OBJECT>
             <ID>9</ID>
@@ -205,7 +205,7 @@
         </OBJECT>
     </OBJECT>
     <OBJECT>
-        <ID>42</ID>
+        <ID>43</ID>
         <TYPE>PANEL</TYPE>
         <NAME>Files</NAME>
         <LEFT>735.000000</LEFT>
@@ -218,7 +218,7 @@
         <BORDER>10</BORDER>
         <SPACING>10</SPACING>
         <OBJECT>
-            <ID>43</ID>
+            <ID>44</ID>
             <TYPE>BUTTON</TYPE>
             <NAME>Save Settings (s)</NAME>
             <LEFT>10.000000</LEFT>
@@ -232,27 +232,53 @@
         </OBJECT>
     </OBJECT>
     <OBJECT>
-        <ID>45</ID>
+        <ID>46</ID>
         <TYPE>PANEL</TYPE>
         <NAME>Hand Tracking</NAME>
         <LEFT>0.000000</LEFT>
         <TOP>600.000000</TOP>
         <WIDTH>159.000000</WIDTH>
-        <HEIGHT>82.000000</HEIGHT>
+        <HEIGHT>122.000000</HEIGHT>
         <MODE>0</MODE>
         <DISPLAY>2</DISPLAY>
         <STEPS>0</STEPS>
         <BORDER>10</BORDER>
         <SPACING>10</SPACING>
         <OBJECT>
-            <ID>46</ID>
+            <ID>49</ID>
             <TYPE>BUTTON</TYPE>
-            <NAME>AAM</NAME>
+            <NAME>Template Matching</NAME>
             <LEFT>10.000000</LEFT>
             <TOP>32.000000</TOP>
             <WIDTH>10.000000</WIDTH>
             <HEIGHT>10.000000</HEIGHT>
-            <MODE>3</MODE>
+            <MODE>2</MODE>
+            <DISPLAY>2</DISPLAY>
+            <STEPS>0</STEPS>
+            <VALUE>1</VALUE>
+        </OBJECT>
+        <OBJECT>
+            <ID>51</ID>
+            <TYPE>BUTTON</TYPE>
+            <NAME>Camshift</NAME>
+            <LEFT>10.000000</LEFT>
+            <TOP>52.000000</TOP>
+            <WIDTH>10.000000</WIDTH>
+            <HEIGHT>10.000000</HEIGHT>
+            <MODE>2</MODE>
+            <DISPLAY>2</DISPLAY>
+            <STEPS>0</STEPS>
+            <VALUE>0</VALUE>
+        </OBJECT>
+        <OBJECT>
+            <ID>50</ID>
+            <TYPE>BUTTON</TYPE>
+            <NAME>Kalman</NAME>
+            <LEFT>10.000000</LEFT>
+            <TOP>72.000000</TOP>
+            <WIDTH>10.000000</WIDTH>
+            <HEIGHT>10.000000</HEIGHT>
+            <MODE>2</MODE>
             <DISPLAY>2</DISPLAY>
             <STEPS>0</STEPS>
             <VALUE>0</VALUE>
@@ -260,12 +286,12 @@
         <OBJECT>
             <ID>47</ID>
             <TYPE>BUTTON</TYPE>
-            <NAME>Vjones</NAME>
+            <NAME>AAM</NAME>
             <LEFT>10.000000</LEFT>
-            <TOP>52.000000</TOP>
+            <TOP>92.000000</TOP>
             <WIDTH>10.000000</WIDTH>
             <HEIGHT>10.000000</HEIGHT>
-            <MODE>3</MODE>
+            <MODE>2</MODE>
             <DISPLAY>2</DISPLAY>
             <STEPS>0</STEPS>
             <VALUE>0</VALUE>
@@ -273,19 +299,19 @@
         <OBJECT>
             <ID>48</ID>
             <TYPE>BUTTON</TYPE>
-            <NAME>Template Matching</NAME>
+            <NAME>Vjones</NAME>
             <LEFT>10.000000</LEFT>
-            <TOP>72.000000</TOP>
+            <TOP>112.000000</TOP>
             <WIDTH>10.000000</WIDTH>
             <HEIGHT>10.000000</HEIGHT>
-            <MODE>3</MODE>
+            <MODE>2</MODE>
             <DISPLAY>2</DISPLAY>
             <STEPS>0</STEPS>
             <VALUE>0</VALUE>
         </OBJECT>
     </OBJECT>
     <OBJECT>
-        <ID>33</ID>
+        <ID>34</ID>
         <TYPE>PANEL</TYPE>
         <NAME>Tracked Image</NAME>
         <LEFT>386.000000</LEFT>
@@ -298,7 +324,7 @@
         <BORDER>10</BORDER>
         <SPACING>10</SPACING>
         <OBJECT>
-            <ID>34</ID>
+            <ID>35</ID>
             <TYPE>BUTTON</TYPE>
             <NAME>Track Dark Blobs</NAME>
             <LEFT>120.000000</LEFT>
@@ -311,7 +337,7 @@
             <VALUE>0</VALUE>
         </OBJECT>
         <OBJECT>
-            <ID>36</ID>
+            <ID>37</ID>
             <TYPE>SLIDER</TYPE>
             <NAME>Image Threshold</NAME>
             <LEFT>10.000000</LEFT>
@@ -323,10 +349,10 @@
             <STEPS>0</STEPS>
             <MIN>0.000000</MIN>
             <MAX>255.000000</MAX>
-            <VALUE>7.000000</VALUE>
+            <VALUE>10.000000</VALUE>
         </OBJECT>
         <OBJECT>
-            <ID>37</ID>
+            <ID>38</ID>
             <TYPE>SLIDER</TYPE>
             <NAME>Movement Threshold</NAME>
             <LEFT>165.000000</LEFT>
@@ -338,10 +364,10 @@
             <STEPS>0</STEPS>
             <MIN>0.000000</MIN>
             <MAX>15.000000</MAX>
-            <VALUE>15.000000</VALUE>
+            <VALUE>10.000000</VALUE>
         </OBJECT>
         <OBJECT>
-            <ID>38</ID>
+            <ID>39</ID>
             <TYPE>SLIDER</TYPE>
             <NAME>Min Blob Size</NAME>
             <LEFT>10.000000</LEFT>
@@ -353,10 +379,10 @@
             <STEPS>0</STEPS>
             <MIN>1.000000</MIN>
             <MAX>500.000000</MAX>
-            <VALUE>11.000000</VALUE>
+            <VALUE>0.000000</VALUE>
         </OBJECT>
         <OBJECT>
-            <ID>39</ID>
+            <ID>40</ID>
             <TYPE>SLIDER</TYPE>
             <NAME>Max Blob Size</NAME>
             <LEFT>165.000000</LEFT>
@@ -368,7 +394,7 @@
             <STEPS>0</STEPS>
             <MIN>1.000000</MIN>
             <MAX>1000.000000</MAX>
-            <VALUE>100.000000</VALUE>
+            <VALUE>350.000000</VALUE>
         </OBJECT>
     </OBJECT>
     <OBJECT>
@@ -385,7 +411,7 @@
         <BORDER>10</BORDER>
         <SPACING>10</SPACING>
         <OBJECT>
-            <ID>40</ID>
+            <ID>41</ID>
             <TYPE>BUTTON</TYPE>
             <NAME>Show Outlines (o)</NAME>
             <LEFT>110.000000</LEFT>
@@ -398,7 +424,7 @@
             <VALUE>1</VALUE>
         </OBJECT>
         <OBJECT>
-            <ID>41</ID>
+            <ID>42</ID>
             <TYPE>BUTTON</TYPE>
             <NAME>Show IDs (i)</NAME>
             <LEFT>230.000000</LEFT>
@@ -470,7 +496,7 @@
         <LEFT>86.000000</LEFT>
         <TOP>487.000000</TOP>
         <WIDTH>151.000000</WIDTH>
-        <HEIGHT>88.000000</HEIGHT>
+        <HEIGHT>105.000000</HEIGHT>
         <MODE>0</MODE>
         <DISPLAY>2</DISPLAY>
         <STEPS>0</STEPS>
@@ -503,11 +529,24 @@
             <VALUE>1</VALUE>
         </OBJECT>
         <OBJECT>
+            <ID>23</ID>
+            <TYPE>BUTTON</TYPE>
+            <NAME>Template Bug</NAME>
+            <LEFT>10.000000</LEFT>
+            <TOP>63.000000</TOP>
+            <WIDTH>10.000000</WIDTH>
+            <HEIGHT>10.000000</HEIGHT>
+            <MODE>2</MODE>
+            <DISPLAY>2</DISPLAY>
+            <STEPS>0</STEPS>
+            <VALUE>0</VALUE>
+        </OBJECT>
+        <OBJECT>
             <ID>22</ID>
             <TYPE>SLIDER</TYPE>
             <NAME>Learn Speed</NAME>
             <LEFT>10.000000</LEFT>
-            <TOP>63.000000</TOP>
+            <TOP>80.000000</TOP>
             <WIDTH>110.000000</WIDTH>
             <HEIGHT>13.000000</HEIGHT>
             <MODE>0</MODE>
@@ -515,11 +554,11 @@
             <STEPS>0</STEPS>
             <MIN>1.000000</MIN>
             <MAX>500.000000</MAX>
-            <VALUE>50.900002</VALUE>
+            <VALUE>69.045456</VALUE>
         </OBJECT>
     </OBJECT>
     <OBJECT>
-        <ID>23</ID>
+        <ID>24</ID>
         <TYPE>PANEL</TYPE>
         <NAME>Smooth</NAME>
         <LEFT>236.000000</LEFT>
@@ -532,7 +571,7 @@
         <BORDER>10</BORDER>
         <SPACING>7</SPACING>
         <OBJECT>
-            <ID>24</ID>
+            <ID>25</ID>
             <TYPE>BUTTON</TYPE>
             <NAME></NAME>
             <LEFT>105.000000</LEFT>
@@ -545,7 +584,7 @@
             <VALUE>1</VALUE>
         </OBJECT>
         <OBJECT>
-            <ID>25</ID>
+            <ID>26</ID>
             <TYPE>SLIDER</TYPE>
             <NAME>Smooth</NAME>
             <LEFT>10.000000</LEFT>
@@ -561,7 +600,7 @@
         </OBJECT>
     </OBJECT>
     <OBJECT>
-        <ID>29</ID>
+        <ID>30</ID>
         <TYPE>PANEL</TYPE>
         <NAME>Highpass</NAME>
         <LEFT>386.000000</LEFT>
@@ -574,7 +613,7 @@
         <BORDER>10</BORDER>
         <SPACING>7</SPACING>
         <OBJECT>
-            <ID>30</ID>
+            <ID>31</ID>
             <TYPE>BUTTON</TYPE>
             <NAME></NAME>
             <LEFT>105.000000</LEFT>
@@ -587,7 +626,7 @@
             <VALUE>1</VALUE>
         </OBJECT>
         <OBJECT>
-            <ID>31</ID>
+            <ID>32</ID>
             <TYPE>SLIDER</TYPE>
             <NAME>Blur</NAME>
             <LEFT>10.000000</LEFT>
@@ -599,10 +638,10 @@
             <STEPS>0</STEPS>
             <MIN>0.000000</MIN>
             <MAX>200.000000</MAX>
-            <VALUE>12.000000</VALUE>
+            <VALUE>56.000000</VALUE>
         </OBJECT>
         <OBJECT>
-            <ID>32</ID>
+            <ID>33</ID>
             <TYPE>SLIDER</TYPE>
             <NAME>Noise</NAME>
             <LEFT>10.000000</LEFT>
@@ -618,7 +657,7 @@
         </OBJECT>
     </OBJECT>
     <OBJECT>
-        <ID>26</ID>
+        <ID>27</ID>
         <TYPE>PANEL</TYPE>
         <NAME>Amplify</NAME>
         <LEFT>536.000000</LEFT>
@@ -631,7 +670,7 @@
         <BORDER>10</BORDER>
         <SPACING>7</SPACING>
         <OBJECT>
-            <ID>27</ID>
+            <ID>28</ID>
             <TYPE>BUTTON</TYPE>
             <NAME></NAME>
             <LEFT>105.000000</LEFT>
@@ -644,7 +683,7 @@
             <VALUE>1</VALUE>
         </OBJECT>
         <OBJECT>
-            <ID>28</ID>
+            <ID>29</ID>
             <TYPE>SLIDER</TYPE>
             <NAME>Amplify</NAME>
             <LEFT>10.000000</LEFT>
@@ -656,7 +695,7 @@
             <STEPS>0</STEPS>
             <MIN>0.000000</MIN>
             <MAX>300.000000</MAX>
-            <VALUE>79.000000</VALUE>
+            <VALUE>46.000000</VALUE>
         </OBJECT>
     </OBJECT>
 </UI>

@@ -86,7 +86,6 @@ void ofxNCoreVision::setupControls()
     hpanel->addButton(appPtr->hPanel_use_Kalman, "Kalman", OFXGUI_BUTTON_HEIGHT, OFXGUI_BUTTON_HEIGHT, kofxGui_Button_Off, kofxGui_Button_Switch, "");
     hpanel->addButton(appPtr->hPanel_use_AAM, "AAM", OFXGUI_BUTTON_HEIGHT, OFXGUI_BUTTON_HEIGHT, kofxGui_Button_Off, kofxGui_Button_Switch, "");
     hpanel->addButton(appPtr->hPanel_use_Vjones, "Vjones", OFXGUI_BUTTON_HEIGHT, OFXGUI_BUTTON_HEIGHT, kofxGui_Button_Off, kofxGui_Button_Switch, "");
-    hpanel->addButton(appPtr->hPanel_colorBackforTemplate, "Background BugTemplate", OFXGUI_BUTTON_HEIGHT, OFXGUI_BUTTON_HEIGHT, kofxGui_Button_Off, kofxGui_Button_Switch, "");
     hpanel->mObjWidth = 150;
 
     //Tracked Image
@@ -134,9 +133,10 @@ void ofxNCoreVision::setupControls()
     ofxGuiPanel* bkPanel1 = controls->addPanel(appPtr->backgroundPanel, "Background", 86, 487, 10, 7);
     bkPanel1->addButton(backgroundPanel_remove, "Remove BG (b)", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
     bkPanel1->addButton(backgroundPanel_dynamic, "Dynamic Subtract", 10, 10, kofxGui_Button_Off, kofxGui_Button_Switch, "");
+    bkPanel1->addButton(appPtr->backgroundPanel_colorBackforTemplate, "Template Bug", 10, 10, kofxGui_Button_Off, kofxGui_Button_Switch, "");
     bkPanel1->addSlider(appPtr->backgroundPanel_learn_rate, "Learn Speed", 110, 13, 1.0f, 500.0f, backgroundLearnRate, kofxGui_Display_Int, 0);
     bkPanel1->mObjWidth = 127;
-    bkPanel1->mObjHeight = 95;
+    bkPanel1->mObjHeight = 110;
 
     //Smooth Image
     ofxGuiPanel* sPanel = controls->addPanel(appPtr->smoothPanel, "Smooth", 236, 487, 10, 7);
@@ -225,7 +225,7 @@ void ofxNCoreVision::setupControls()
     controls->update(appPtr->hPanel_use_AAM, kofxGui_Set_Bool, &appPtr->aamTracking, sizeof(bool));
     controls->update(appPtr->hPanel_use_Vjones, kofxGui_Set_Bool, &appPtr->vJones, sizeof(bool));
     controls->update(appPtr->hPanel_use_Template, kofxGui_Set_Bool, &appPtr->bTemplate, sizeof(bool));
-        controls->update(appPtr->hPanel_colorBackforTemplate, kofxGui_Set_Bool, &appPtr->bLearnBackground2, sizeof(bool));
+        controls->update(appPtr->backgroundPanel_colorBackforTemplate, kofxGui_Set_Bool, &appPtr->bLearnBackground2, sizeof(bool));
 }
 
 void ofxNCoreVision ::handleGui(int parameterId, int task, void* data, int length)
@@ -502,7 +502,7 @@ void ofxNCoreVision ::handleGui(int parameterId, int task, void* data, int lengt
         /**************************************
         Hand Tracking booleans
         **************************************/
-        case hPanel_colorBackforTemplate:
+        case backgroundPanel_colorBackforTemplate:
         if (length == sizeof(bool))
             bLearnBackground2 = *(bool*)data;
         break;

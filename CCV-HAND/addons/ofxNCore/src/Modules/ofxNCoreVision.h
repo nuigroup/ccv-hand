@@ -90,6 +90,7 @@ class ofxNCoreVision : public ofxGuiListener//, public BlobManager
         backgroundPanel_remove,
         backgroundPanel_dynamic,
         backgroundPanel_learn_rate,
+        backgroundPanel_colorBackforTemplate,
 
         smoothPanel,
         smoothPanel_use,
@@ -124,7 +125,7 @@ class ofxNCoreVision : public ofxGuiListener//, public BlobManager
         hPanel_use_Template,
         hPanel_use_Kalman,
         hPanel_use_Camshift,
-        hPanel_colorBackforTemplate,
+
     };
 
 public:
@@ -286,6 +287,7 @@ public:
 //    ofxCvColorImage		sourceImg;
     CPUImageFilter	blobsCheck;
     CPUImageFilter  camShiftImage;
+    CPUImageFilter  aamImage;
     ofxCvColorImage		colorBg;
 
 

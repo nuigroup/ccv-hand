@@ -100,11 +100,12 @@ void ofxNCoreVision::_setup(ofEventArgs &e)
 
     blobsCheck.allocate(camWidth, camHeight);
     camShiftImage.allocate(camWidth,camHeight);
+    aamImage.allocate(camWidth,camHeight);
     /*****************************************************************************************************
     * Allocate images (needed for drawing/processing images)
     ******************************************************************************************************/
     processedImg.allocate(camWidth, camHeight); //main Image that'll be processed.
-    //  processedImg.setUseTexture(false);			//We don't need to draw this so don't create a texture
+    processedImg.setUseTexture(false);			//We don't need to draw this so don't create a texture
     sourceImg.allocate(camWidth, camHeight);    //Source Image
     sourceImg.setUseTexture(false);				//We don't need to draw this so don't create a texture
 //    grayBg.allocate(camWidth,camHeight);
@@ -541,6 +542,7 @@ void ofxNCoreVision::_update(ofEventArgs &e)
 
                 blobsCheck = sourceImg;
                 camShiftImage = sourceImg;
+                aamImage = sourceImg;
                 //cvSub(blobsCheck.getCvImage(), grayBg.getCvImage(), blobsCheck.getCvImage());
 #if DEBUG
                 printf("Copied Image\n");
@@ -801,31 +803,85 @@ void ofxNCoreVision::_update(ofEventArgs &e)
 //                        }
                     }
                 }
-                }
+            }
 //--------------------------------------------------------------------------------------------
-                /**********************************************
+            /**********************************************
 
-                Camshift Tracking
-                *******************************************/
-                //Working on ROI-Camshift
-                if (bCamshift)
+            Camshift Tracking
+            *******************************************/
+            //Working on ROI-Camshift
+            if (bCamshift)
+            {
+                printf("Before Camshift\n");
+                printf("COord Real x: %lf, Coord Real y: %lf\n", coordReal.cX, coordReal.cY);
+                HandROIAdjust(coordReal.cX,coordReal.cY, processedImg.getCvImage());
+                cvCamShift(processedImg.getCvImage(), handSelectionRect, cvTermCriteria( CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 10, 1 ), &handComp, &handBox);
+                handSelectionRect = handComp.rect;
+
+                cvEllipseBox( camShiftImage.getCvImage(), handBox, CV_RGB(255,255,255), 5, CV_AA, 0 );
+
+                /***********************************************
+                End of the Camshift Tracking
+                ***********************************************/
+            }
+
+            if (aamTracking)
+            {
+                printf("AAM fitting(be careful.. :P)\n");
+
+                /****************************************************************
+                AAM-Fitting with Template Matching
+                ****************************************************************/
+                if (bTemplate)
                 {
-                    printf("Before Camshift\n");
-                    printf("COord Real x: %lf, Coord Real y: %lf\n", coordReal.cX, coordReal.cY);
-                    HandROIAdjust(coordReal.cX,coordReal.cY, processedImg.getCvImage());
-                    cvCamShift(processedImg.getCvImage(), handSelectionRect, cvTermCriteria( CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 10, 1 ), &handComp, &handBox);
-                    handSelectionRect = handComp.rect;
+                    printf("Template Matching + AAM fitting \n");
+                    if ( contourFinder.nBlobs > 5)
+                    {
+                        for (int i =0; i < contourFinder.nBlobs; i++)
+                        {
+                            if (contourFinder.blobs[i].xHand > 0)
+                            {
 
-                    cvEllipseBox( camShiftImage.getCvImage(), handBox, CV_RGB(255,255,255), 5, CV_AA, 0 );
+                                Shape[0].x = contourFinder.blobs[i].xHand;
+                                Shape[0].y = contourFinder.blobs[i].yHand;
+                                Shape[1].x = contourFinder.blobs[i].xHand;
+                                Shape[1].y = contourFinder.blobs[i].xHand;
 
-                    /***********************************************
-                    End of the Camshift Tracking
-                    ***********************************************/
+
+                                flag = true;
+                                /*
+                                modelIC.InitParams(blobsCheck.getCvImage());
+                                */
+                                if (flag == false)
+                                {
+                                    printf("False model fitting\n");
+                                }
+                                else
+                                {
+
+                                    model.Fit(aamImage.getCvImage(), Shape, 30, true);
+                                    printf("Pyramid OK\n");
+                                    /*
+                                    modelIC.Fit(blobsCheck.getCvImage(), Shape, 30, false);
+                                    printf ("Inverse Compositional OK\n");
+                                    */
+                                    model.Draw(aamImage.getCvImage(), Shape, 2);
+                                    /*
+                                    modelIC.Draw(blobsCheck.getCvImage(), Shape, 1);
+                                    */
+                                }
+                            }
+                        }
+                    }
                 }
-
-            /****************************************************************
-            AAM-Fitting with Kalman
-            ****************************************************************/
+                else
+                {
+                    /****************************************************************
+                    AAM-Fitting with Kalman
+                    ****************************************************************/
+                    if (bKalman)
+                    {
+                        printf("Kalman Tracking + AAM fitting \n");
 //                        printf("Kalman + fitting \n");
 //                        if( contourFinder.nBlobs > 5)
 //                        {
@@ -858,12 +914,23 @@ void ofxNCoreVision::_update(ofEventArgs &e)
 //                            */
 //                        }
 //                        }
+                    }
 
-            /*---------------------------------------------------------*/
+                    /****************************************************************
+                    End of AAM-Fitting with Kalman
+                    ****************************************************************/
 
-            /****************************************************************
-            //AAM-Fitting with Camshift
-            //****************************************************************/
+                    else
+                    {
+
+                        /*---------------------------------------------------------*/
+
+                        /****************************************************************
+                        //AAM-Fitting with Camshift
+                        //****************************************************************/
+                        if (bCamshift)
+                        {
+                            printf("Camshift Tracking + AAM fitting \n");
 //                        if( contourFinder.nBlobs > 5)
 //                        {
 //                        Shape[0].x = handSelectionRect.x;
@@ -895,8 +962,25 @@ void ofxNCoreVision::_update(ofEventArgs &e)
 //                            */
 //                        }
 //                        }
+                        }
+
+                        /****************************************************************
+                        ENd of AAM-Fitting with Camshift
+                        ****************************************************************/
+
+                    }
+                }
+                printf("AAM fitting.. (ok!) \n");
+            }
+
+            /****************************************************************
+            End of AAM-Fitting
+            ****************************************************************/
 //
             /*---------------------------------------------------------*/
+            /*******************************************************************
+            Malik's Finger Detection Algorithm
+            ********************************************************************/
             printf("Before array: Ok!\n");
 
             nHands = handContourFinder.nBlobs;
@@ -917,9 +1001,7 @@ void ofxNCoreVision::_update(ofEventArgs &e)
             }
 
             printf("Before energy steps: Ok!");
-            /*******************************************************************
-            Malik's Finger Detection Algorithm
-            ********************************************************************/
+
             //---------------------------------------------
             for (int i = 0; i < MAX_N_TRACKED_FINGERS; i++)
             {
@@ -1247,7 +1329,7 @@ void ofxNCoreVision::drawFullMode()
     blobsCheck.draw(520, 610, 160, 120);
     info.drawString("Kalman Tracking/Gaussian Blobs", 530, 745);
 
-    sourceImg.draw(700, 610, 160, 120);
+    aamImage.draw(700, 610, 160, 120);
     info.drawString("AAM-Fitting", 755, 745);
 
 
