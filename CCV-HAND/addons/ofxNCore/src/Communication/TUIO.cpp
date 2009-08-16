@@ -176,11 +176,11 @@ void TUIO::sendTUIO(std::map<int, Blob> * blobs)
 					"<ARGUMENT TYPE=\"f\" VALUE=\""+ofToString(this_blob->second.boundingRect.height)+"\"/>"+
 					// To handle hand info
 					//HAND ID
-					"<ARGUMENT TYPE=\"f\" VALUE=\""+ofToString(this_blob->second.boundingRect.height)+"\"/>"+
+					"<ARGUMENT TYPE=\"f\" VALUE=\""+ofToString(this_blob->second.handID)+"\"/>"+
 					//xHand
-					"<ARGUMENT TYPE=\"f\" VALUE=\""+ofToString(this_blob->second.boundingRect.height)+"\"/>"+
+					"<ARGUMENT TYPE=\"f\" VALUE=\""+ofToString(this_blob->second.xHand )+"\"/>"+
 					//yHand
-					"<ARGUMENT TYPE=\"f\" VALUE=\""+ofToString(this_blob->second.boundingRect.height)+"\"/>"+
+					"<ARGUMENT TYPE=\"f\" VALUE=\""+ofToString(this_blob->second.yHand)+"\"/>"+
 					"</MESSAGE>";
 				}
 				if(bHeightWidth){

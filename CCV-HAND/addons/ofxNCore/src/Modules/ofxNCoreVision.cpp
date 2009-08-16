@@ -662,7 +662,7 @@ void ofxNCoreVision::_update(ofEventArgs &e)
             Model fitting with the CCV contourFinder
             **********************************************/
 
-            printf("Model fitting begins!: %d\n", contourFinder.nBlobs);
+            printf("Template Matching nBlobs!: %d\n", contourFinder.nBlobs);
             if (contourFinder.nBlobs > 0)
             {
                 for (int i =0; i < contourFinder.nBlobs; i++)
