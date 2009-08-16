@@ -2,25 +2,28 @@
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
 	<File name="../../../addons/ofxNCore/src/Calibration/Calibration.cpp" open="0" top="0" tabpos="5">
-		<Cursor position="3631" topLine="80" />
+		<Cursor position="4243" topLine="99" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Calibration/Calibration.h" open="0" top="0" tabpos="0">
-		<Cursor position="1385" topLine="43" />
+		<Cursor position="1385" topLine="45" />
+	</File>
+	<File name="../../../addons/ofxNCore/src/Calibration/CalibrationUtils.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="8188" topLine="312" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Camera/CameraUtils.h" open="0" top="0" tabpos="0">
 		<Cursor position="0" topLine="3" />
 	</File>
-	<File name="../../../addons/ofxNCore/src/Communication/TUIO.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="4" topLine="0" />
+	<File name="../../../addons/ofxNCore/src/Communication/TUIO.cpp" open="1" top="1" tabpos="3">
+		<Cursor position="5335" topLine="165" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Communication/TUIO.h" open="0" top="0" tabpos="24">
 		<Cursor position="2459" topLine="59" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Controls/gui.h" open="0" top="0" tabpos="26">
-		<Cursor position="17455" topLine="378" />
+		<Cursor position="4832" topLine="75" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Controls/ofxGui.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="1310" topLine="0" />
+		<Cursor position="456" topLine="0" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Controls/ofxGui.h" open="0" top="0" tabpos="0">
 		<Cursor position="0" topLine="42" />
@@ -29,31 +32,31 @@
 		<Cursor position="640" topLine="17" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Controls/ofxGuiTypes.h" open="0" top="0" tabpos="2">
-		<Cursor position="5331" topLine="278" />
+		<Cursor position="5773" topLine="303" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Filters/CPUImageFilter.cpp" open="0" top="0" tabpos="12">
 		<Cursor position="1668" topLine="43" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Filters/CPUImageFilter.h" open="0" top="0" tabpos="17">
-		<Cursor position="625" topLine="12" />
+		<Cursor position="536" topLine="10" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Filters/Filters.h" open="0" top="0" tabpos="4">
-		<Cursor position="1118" topLine="56" />
+		<Cursor position="1324" topLine="61" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Filters/GPUImageFilter.cpp" open="0" top="0" tabpos="18">
 		<Cursor position="0" topLine="0" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Filters/ProcessFilters.h" open="0" top="0" tabpos="2">
-		<Cursor position="4146" topLine="96" />
+		<Cursor position="7954" topLine="195" />
 	</File>
-	<File name="../../../addons/ofxNCore/src/Modules/ofxNCoreVision.cpp" open="1" top="0" tabpos="5">
-		<Cursor position="556" topLine="18" />
+	<File name="../../../addons/ofxNCore/src/Modules/ofxNCoreVision.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="25131" topLine="1597" />
 	</File>
-	<File name="../../../addons/ofxNCore/src/Modules/ofxNCoreVision.h" open="1" top="1" tabpos="6">
-		<Cursor position="5153" topLine="215" />
+	<File name="../../../addons/ofxNCore/src/Modules/ofxNCoreVision.h" open="0" top="0" tabpos="6">
+		<Cursor position="2660" topLine="112" />
 	</File>
-	<File name="../../../addons/ofxNCore/src/Tracking/Blob.h" open="0" top="0" tabpos="4">
-		<Cursor position="995" topLine="21" />
+	<File name="../../../addons/ofxNCore/src/Tracking/Blob.h" open="1" top="0" tabpos="2">
+		<Cursor position="1513" topLine="55" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Tracking/BlobManager.cpp" open="0" top="0" tabpos="20">
 		<Cursor position="0" topLine="0" />
@@ -67,11 +70,29 @@
 	<File name="../../../addons/ofxNCore/src/Tracking/ContourFinder.h" open="0" top="0" tabpos="12">
 		<Cursor position="976" topLine="24" />
 	</File>
+	<File name="../../../addons/ofxNCore/src/Tracking/Statistics/Coord.h" open="0" top="0" tabpos="0">
+		<Cursor position="35" topLine="0" />
+	</File>
+	<File name="../../../addons/ofxNCore/src/Tracking/Statistics/drawBob.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="61" topLine="0" />
+	</File>
+	<File name="../../../addons/ofxNCore/src/Tracking/Statistics/drawBob.h" open="0" top="0" tabpos="0">
+		<Cursor position="243" topLine="0" />
+	</File>
+	<File name="../../../addons/ofxNCore/src/Tracking/Statistics/extractBlob.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="667" topLine="45" />
+	</File>
+	<File name="../../../addons/ofxNCore/src/Tracking/Statistics/useful.h" open="0" top="0" tabpos="0">
+		<Cursor position="288" topLine="10" />
+	</File>
 	<File name="../../../addons/ofxNCore/src/Tracking/Tracking.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="16412" topLine="432" />
+		<Cursor position="10889" topLine="276" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Tracking/Tracking.h" open="0" top="0" tabpos="2">
 		<Cursor position="885" topLine="20" />
+	</File>
+	<File name="../../../addons/ofxNCore/src/Tracking/hands/videoBlob.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="3683" topLine="141" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/ofxNCore.h" open="0" top="0" tabpos="10">
 		<Cursor position="1939" topLine="43" />
@@ -118,13 +139,13 @@
 	<File name="../../../addons/ofxVectorMath/src/ofxPoint3f.h" open="0" top="0" tabpos="18">
 		<Cursor position="3392" topLine="145" />
 	</File>
-	<File name="src/main.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="224" topLine="0" />
+	<File name="src/main.cpp" open="0" top="0" tabpos="3">
+		<Cursor position="229" topLine="0" />
 	</File>
-	<File name="src/testApp.cpp" open="1" top="0" tabpos="4">
+	<File name="src/testApp.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="src/testApp.h" open="1" top="0" tabpos="2">
+	<File name="src/testApp.h" open="0" top="0" tabpos="2">
 		<Cursor position="0" topLine="0" />
 	</File>
 	<File name="../../../libs/openFrameworks/communication/ofSerial.cpp" open="0" top="0" tabpos="0">
@@ -133,16 +154,22 @@
 	<File name="../../../libs/openFrameworks/events/ofEventUtils.h" open="0" top="0" tabpos="3">
 		<Cursor position="48" topLine="0" />
 	</File>
+	<File name="../../../libs/openFrameworks/graphics/ofGraphics.h" open="0" top="0" tabpos="0">
+		<Cursor position="860" topLine="17" />
+	</File>
 	<File name="../../../libs/openFrameworks/graphics/ofImage.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="3853" topLine="154" />
 	</File>
 	<File name="../../../libs/openFrameworks/ofMain.h" open="0" top="0" tabpos="28">
 		<Cursor position="781" topLine="20" />
 	</File>
+	<File name="../../../libs/openFrameworks/utils/ofConstants.h" open="0" top="0" tabpos="0">
+		<Cursor position="5787" topLine="211" />
+	</File>
 	<File name="../../../libs/openFrameworks/utils/ofUtils.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="121" topLine="0" />
 	</File>
-	<File name="../../../libs/openFrameworks/video/ofUCUtils.cpp" open="1" top="0" tabpos="1">
+	<File name="../../../libs/openFrameworks/video/ofUCUtils.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="2423" topLine="51" />
 	</File>
 	<File name="../../../libs/openFrameworks/video/ofUCUtils.h" open="0" top="0" tabpos="0">
