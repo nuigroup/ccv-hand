@@ -124,6 +124,7 @@ class ofxNCoreVision : public ofxGuiListener//, public BlobManager
         hPanel_use_Template,
         hPanel_use_Kalman,
         hPanel_use_Camshift,
+        hPanel_colorBackforTemplate,
     };
 
 public:
@@ -274,7 +275,7 @@ public:
     ofTrueTypeFont		info;
 
     //int 				threshold;
-    //bool				bLearnBackground;
+    bool				bLearnBackground2;
     bool                bDynamicBG;
     // bool                bTUIOMode;
 
@@ -327,7 +328,7 @@ public:
     CvPoint            templateLeftMin;
     CvPoint            templateLeftMax;
 
-    bool bLearnBackGround;
+
 
 
     void                HandROIAdjust(int x , int y, IplImage* image);

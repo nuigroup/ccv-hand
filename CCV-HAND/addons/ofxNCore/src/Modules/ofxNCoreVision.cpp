@@ -115,7 +115,7 @@ void ofxNCoreVision::_setup(ofEventArgs &e)
 //    BgImgColor.setUseTexture(false);
     /******************************************************************************************************/
 
-    bLearnBackGround = true;
+    bLearnBackground2 = false;
 
     //Fonts - Is there a way to dynamically change font size?
     verdana.loadFont("verdana.ttf", 8, true, true);	   //Font used for small images
@@ -504,6 +504,7 @@ void ofxNCoreVision::_update(ofEventArgs &e)
 
             learnBackGround(sourceImg);
 
+            processedImg = sourceImg;
             //      cvSub(processedImg.getCvImage(), grayBg.getCvImage(), processedImg.getCvImage());
             cvSub(processedImgColor.getCvImage(), filter->BgImgColor.getCvImage(), processedImgColor.getCvImage());
 
@@ -666,7 +667,7 @@ void ofxNCoreVision::_update(ofEventArgs &e)
             {
                 for (int i =0; i < contourFinder.nBlobs; i++)
                 {
-                    if ( contourFinder.blobs[i].area > 100)
+                    if ( contourFinder.blobs[i].area > 500)
                     {
 
 
@@ -686,7 +687,7 @@ void ofxNCoreVision::_update(ofEventArgs &e)
                         if (win.y + win.height > processedImgColor.getCvImage()->height)
                             win.y = processedImgColor.getCvImage()->height - win.height;
 
-#if DEBUG
+#if !DEBUG
                         cvSaveImage("sourceTemplate.bmp", processedImgColor.getCvImage());
 #endif
 
@@ -708,13 +709,6 @@ void ofxNCoreVision::_update(ofEventArgs &e)
 
                         cvMinMaxLoc(templateImg, &minF, &maxF, &templateRightMin, &templateRightMax);
 
-                        if (maxF > 0)
-                        {
-                            templateRightMax.x += win.x;
-                            templateRightMax.y += win.y;
-                            contourFinder.blobs[i].xHand = templateRightMax.x;
-                            contourFinder.blobs[i].yHand = templateRightMax.y;
-                        }
 
                         printf("Maximum: %lf, Minimum %lf\n", maxF, minF);
 
@@ -733,12 +727,28 @@ void ofxNCoreVision::_update(ofEventArgs &e)
 
                         cvMinMaxLoc(templateImgLeft, &minF_left, &maxF_left, &templateLeftMin, &templateLeftMax);
 
-                        if (maxF_left > 0)
+
+                        if (maxF > 0)
                         {
-                            templateLeftMax.x += win.x;
-                            templateLeftMax.y += win.y;
-                            contourFinder.blobs[i].xHand = templateLeftMax.x;
-                            contourFinder.blobs[i].yHand = templateLeftMax.y;
+                            templateRightMax.x += win.x;
+                            templateRightMax.y += win.y;
+                            contourFinder.blobs[i].xHand = templateRightMax.x;
+                            contourFinder.blobs[i].yHand = templateRightMax.y;
+                        }
+                        else
+                        {
+                            if (maxF_left > 0)
+                            {
+                                templateLeftMax.x += win.x;
+                                templateLeftMax.y += win.y;
+                                contourFinder.blobs[i].xHand = templateLeftMax.x;
+                                contourFinder.blobs[i].yHand = templateLeftMax.y;
+                            }
+                            else
+                            {
+                                contourFinder.blobs[i].xHand = 0;
+                                contourFinder.blobs[i].yHand = 0;
+                            }
                         }
 
                         printf("Maximum: %lf, Minimum %lf\n", maxF_left, minF_left);
@@ -1220,7 +1230,7 @@ void ofxNCoreVision::drawFullMode()
     blobsCheck.draw(520, 610, 160, 120);
     info.drawString("Kalman Tracking/Gaussian Blobs", 530, 745);
 
-    blobsCheck.draw(700, 610, 160, 120);
+    sourceImg.draw(700, 610, 160, 120);
     info.drawString("AAM-Fitting", 755, 745);
 
 
@@ -1243,52 +1253,52 @@ void ofxNCoreVision::drawFullMode()
 
     **********************************************/
     /*****************************
-End of Hand-Tracking draw strings
-******************************/
+    End of Hand-Tracking draw strings
+    ******************************/
 
 //Display Application information in bottom right
-string str = "Calc. Time [ms]:  ";
-str+= ofToString(differenceTime, 0)+"\n\n";
+    string str = "Calc. Time [ms]:  ";
+    str+= ofToString(differenceTime, 0)+"\n\n";
 
-if (bcamera)
-{
-    string str2 = "Camera [Res]:     ";
-    str2+= ofToString(camWidth, 0) + " x " + ofToString(camWidth, 0)  + "\n";
-    string str4 = "Camera [fps]:     ";
-    str4+= ofToString(fps, 0)+"\n";
-    ofSetColor(0xFFFFFF);
-    verdana.drawString(str + str2 + str4, 740, 470);
-}
-else
-{
-    string str2 = "Video [Res]:       ";
-    str2+= ofToString(vidPlayer->width, 0) + " x " + ofToString(vidPlayer->height, 0)  + "\n";
-    string str4 = "Video [fps]:        ";
-    str4+= ofToString(fps, 0)+"\n";
-    ofSetColor(0xFFFFFF);
-    verdana.drawString(str + str2 + str4, 740, 470);
-}
-
-if (bTUIOMode)
-{
-    //Draw Port and IP to screen
-    ofSetColor(0xffffff);
-    char buf[256];
-    if (myTUIO.bOSCMode)
-        sprintf(buf, "Sending OSC messages to:\nHost: %s\nPort: %i", myTUIO.localHost, myTUIO.TUIOPort);
+    if (bcamera)
+    {
+        string str2 = "Camera [Res]:     ";
+        str2+= ofToString(camWidth, 0) + " x " + ofToString(camWidth, 0)  + "\n";
+        string str4 = "Camera [fps]:     ";
+        str4+= ofToString(fps, 0)+"\n";
+        ofSetColor(0xFFFFFF);
+        verdana.drawString(str + str2 + str4, 740, 470);
+    }
     else
     {
-        if (myTUIO.bIsConnected)
-            sprintf(buf, "Sending TCP messages to:\nPort: %i", myTUIO.TUIOFlashPort);
-        else
-            sprintf(buf, "Could not bind or send TCP to:\nPort: %i", myTUIO.TUIOFlashPort);
+        string str2 = "Video [Res]:       ";
+        str2+= ofToString(vidPlayer->width, 0) + " x " + ofToString(vidPlayer->height, 0)  + "\n";
+        string str4 = "Video [fps]:        ";
+        str4+= ofToString(fps, 0)+"\n";
+        ofSetColor(0xFFFFFF);
+        verdana.drawString(str + str2 + str4, 740, 470);
     }
 
-    verdana.drawString(buf, 740, 450);
-}
+    if (bTUIOMode)
+    {
+        //Draw Port and IP to screen
+        ofSetColor(0xffffff);
+        char buf[256];
+        if (myTUIO.bOSCMode)
+            sprintf(buf, "Sending OSC messages to:\nHost: %s\nPort: %i", myTUIO.localHost, myTUIO.TUIOPort);
+        else
+        {
+            if (myTUIO.bIsConnected)
+                sprintf(buf, "Sending TCP messages to:\nPort: %i", myTUIO.TUIOFlashPort);
+            else
+                sprintf(buf, "Could not bind or send TCP to:\nPort: %i", myTUIO.TUIOFlashPort);
+        }
 
-ofSetColor(0xFF0000);
-verdana.drawString("Press spacebar to toggle fast mode", 730, 542);
+        verdana.drawString(buf, 740, 450);
+    }
+
+    ofSetColor(0xFF0000);
+    verdana.drawString("Press spacebar to toggle fast mode", 730, 542);
 }
 
 void ofxNCoreVision::drawMiniMode()
@@ -1381,12 +1391,14 @@ void ofxNCoreVision::drawFingerOutlines()
 
 //			cvEllipseBox(sourceImg, contourFinder.track_box, CV_RGB(255,0,0), 3, CV_AA, 0);
             /*}*/
-            if (contourFinder.blobs[i].xHand > 0 || contourFinder.blobs[i].yHand > 0)
+            if (contourFinder.blobs[i].xHand > 0)
             {
                 ofSetColor(255,255,255);
-                ofCircle((contourFinder.blobs[i].xHand*160)/camWidth + 160, (contourFinder.blobs[i].yHand*120)/camHeight + 610, 40);
+                printf("%d , %d\n", contourFinder.blobs[i].xHand, contourFinder.blobs[i].yHand);
+                ofCircle((contourFinder.blobs[i].xHand*160)/camWidth + 160, (contourFinder.blobs[i].yHand*120)/camHeight + 610, 10);
                 contourFinder.blobs[i].xHand = 0;
                 contourFinder.blobs[i].yHand = 0;
+                printf("Entered Hand Drawing Function\n");
             }
 
         }
@@ -1576,11 +1588,11 @@ void ofxNCoreVision::HandROIAdjust(int x, int y, IplImage* image)
 void ofxNCoreVision::learnBackGround(ofxCvColorImage& img)
 {
     //Capture full background
-    if (bLearnBackGround == true)
+    if (bLearnBackground2 == true)
     {
         filter->BgImgColor = img;
         filter->BgImgColor.flagImageChanged();
-        bLearnBackGround == false;
+        bLearnBackground2 == false;
     }
 }
 
