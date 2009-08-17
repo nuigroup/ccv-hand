@@ -59,5 +59,3 @@ void testApp::TouchUp( Blob b)
 void testApp::TouchMoved( Blob b)
 {
 }
-
-

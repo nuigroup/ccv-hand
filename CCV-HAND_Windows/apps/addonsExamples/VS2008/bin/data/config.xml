@@ -34,7 +34,7 @@
     </AAM>
     <!--// Haar Xml // -->
     <HAAR>
-        <CASCADE>data/haarcascade.xml</CASCADE>
+        <CASCADE>haarcascade.xml</CASCADE>
     </HAAR>
     <!--// Template Matching // -->
     <TEMPLATE>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9.00"
+	Version="9,00"
 	Name="Community Core Vision"
 	ProjectGUID="{7FD42DF7-442E-479A-BA76-D0022F99702A}"
 	RootNamespace="allAddonsExample"
@@ -104,8 +104,8 @@
 			OutputDirectory="bin"
 			IntermediateDirectory="obj\$(ConfigurationName)"
 			ConfigurationType="1"
-			CharacterSet="1"
-			WholeProgramOptimization="1"
+			CharacterSet="2"
+			WholeProgramOptimization="0"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -124,8 +124,9 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				Optimization="0"
 				WholeProgramOptimization="false"
-				AdditionalIncludeDirectories="..\..\..\libs\openFrameworks;..\..\..\libs\openFrameworks\graphics;..\..\..\libs\openFrameworks\app;..\..\..\libs\openFrameworks\sound;..\..\..\libs\openFrameworks\utils;..\..\..\libs\openFrameworks\communication;..\..\..\libs\openFrameworks\video;..\..\..\libs\openFrameworks\events;..\..\..\libs\glut;..\..\..\libs\rtAudio\includes;..\..\..\libs\QTDevWin\CIncludes;..\..\..\libs\free_type_2.1.4\include;..\..\..\libs\free_type_2.1.4\include\freetype2;..\..\..\libs\freeImage;..\..\..\libs\fmodex\inc;..\..\..\libs\videoInput\include;..\..\..\libs\glee\include;..\..\..\libs\glu;..\..\..\libs\Poco\include;..\..\..\addons;..\..\..\addons\ofxNetwork\src;..\..\..\addons\ofxDirList\src;..\..\..\addons\ofxObjLoader\src;..\..\..\addons\ofxOpenCv\src;..\..\..\addons\ofxOpenCv\libs\opencv\include;..\..\..\addons\ofxOsc\src;..\..\..\addons\ofxOsc\libs\oscpack\include\ip;..\..\..\addons\ofxOsc\libs\oscpack\include\osc;..\..\..\addons\ofxThread\src;..\..\..\addons\ofxVectorGraphics\src;..\..\..\addons\ofxVectorGraphics\libs;..\..\..\addons\ofxVectorMath\src;..\..\..\addons\ofxXMLSettings\libs;..\..\..\addons\ofxXMLSettings\src;..\..\..\addons\ofx3DModelLoader\src;..\..\..\addons\ofx3DModelLoader\src\3DS;..\..\..\addons\ofxFFMV\src;..\..\..\addons\ofxNCore\src;..\..\..\addons\ofxDSVL\src;..\..\..\addons\ofxPS3\src"
+				AdditionalIncludeDirectories="..\..\..\libs\openFrameworks;..\..\..\libs\openFrameworks\graphics;..\..\..\libs\openFrameworks\app;..\..\..\libs\openFrameworks\sound;..\..\..\libs\openFrameworks\utils;..\..\..\libs\openFrameworks\communication;..\..\..\libs\openFrameworks\video;..\..\..\libs\openFrameworks\events;..\..\..\libs\glut;..\..\..\libs\rtAudio\includes;..\..\..\libs\QTDevWin\CIncludes;..\..\..\libs\free_type_2.1.4\include;..\..\..\libs\free_type_2.1.4\include\freetype2;..\..\..\libs\freeImage;..\..\..\libs\fmodex\inc;..\..\..\libs\videoInput\include;..\..\..\libs\glee\include;..\..\..\libs\glu;..\..\..\libs\Poco\include;..\..\..\addons;..\..\..\addons\ofxNetwork\src;..\..\..\addons\ofxDirList\src;..\..\..\addons\ofxObjLoader\src;..\..\..\addons\ofxOpenCv\src;..\..\..\addons\ofxOpenCv\libs\opencv\include;..\..\..\addons\ofxOsc\src;..\..\..\addons\ofxOsc\libs\oscpack\include\ip;..\..\..\addons\ofxOsc\libs\oscpack\include\osc;..\..\..\addons\ofxThread\src;..\..\..\addons\ofxVectorGraphics\src;..\..\..\addons\ofxVectorGraphics\libs;..\..\..\addons\ofxVectorMath\src;..\..\..\addons\ofxXMLSettings\libs;..\..\..\addons\ofxXMLSettings\src;..\..\..\addons\ofx3DModelLoader\src;..\..\..\addons\ofx3DModelLoader\src\3DS;..\..\..\addons\ofxFFMV\src;..\..\..\addons\ofxNCore\src;..\..\..\addons\ofxDSVL\src;..\..\..\addons\ofxPS3\src;&quot;C:\CCV-HAND_Windows\addons\ofxNCore\src\Tracking\hands\lineFitter&quot;;&quot;C:\CCV-HAND_Windows\addons\ofxNCore\src\Tracking\Statistics&quot;;&quot;C:\CCV-HAND_Windows\addons\ofxNCore\src\Tracking\hands&quot;;&quot;C:\CCV-HAND_Windows\addons\ofxNCore\src\Tracking\AAM&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;POCO_STATIC"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -144,9 +145,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="OpenGL32.lib GLu32.lib kernel32.lib setupapi.lib glut32.lib rtAudio.lib videoInput.lib libfreetype.lib FreeImage.lib qtmlClient.lib dsound.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib GLee.lib fmodex_vc.lib glu32.lib PocoFoundationmt.lib PocoNetmt.lib PocoUtilmt.lib PocoXMLmt.lib Ws2_32.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\win32\cv110.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\win32\cvaux110.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\win32\cxcore110.lib ..\..\..\addons\ofxOsc\libs\oscpack\lib\win32\oscpack.lib ..\..\..\addons\ofxFFMV\lib\PGRFlyCapture.lib ..\..\..\addons\ofxDSVL\lib\dsvl.lib ..\..\..\addons\ofxPS3\lib\PS3EyeLib.lib"
+				AdditionalDependencies="OpenGL32.lib GLu32.lib kernel32.lib setupapi.lib glut32.lib rtAudio.lib videoInput.lib libfreetype.lib FreeImage.lib qtmlClient.lib dsound.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib GLee.lib fmodex_vc.lib glu32.lib PocoFoundationmt.lib PocoNetmt.lib PocoUtilmt.lib PocoXMLmt.lib Ws2_32.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\win32\cv110.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\win32\cvaux110.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\win32\cxcore.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\win32\cvaux.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\win32\cv.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\win32\highgui.lib ..\..\..\addons\ofxOsc\libs\oscpack\lib\win32\oscpack.lib ..\..\..\addons\ofxFFMV\lib\PGRFlyCapture.lib ..\..\..\addons\ofxDSVL\lib\dsvl.lib ..\..\..\addons\ofxPS3\lib\PS3EyeLib.lib C:\CCV-HAND_Windows\addons\ofxNCore\libs\cvblobslib.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\..\libs\glut;..\..\..\libs\rtAudio\libs\vs2008;..\..\..\libs\freeImage;..\..\..\libs\free_type_2.1.4\lib;..\..\..\libs\QTDevWin\Libraries;..\..\..\libs\fmodex\lib;..\..\..\libs\videoInput\lib;..\..\..\libs\glee\lib;..\..\..\libs\glu;..\..\..\libs\Poco\lib"
+				AdditionalLibraryDirectories="&quot;C:\CCV-HAND_Windows\addons\ofxNCore\libs&quot;;..\..\..\libs\glut;..\..\..\libs\rtAudio\libs\vs2008;..\..\..\libs\freeImage;..\..\..\libs\free_type_2.1.4\lib;..\..\..\libs\QTDevWin\Libraries;..\..\..\libs\fmodex\lib;..\..\..\libs\videoInput\lib;..\..\..\libs\glee\lib;..\..\..\libs\glu;..\..\..\libs\Poco\lib"
 				IgnoreAllDefaultLibraries="false"
 				IgnoreDefaultLibraryNames="atlthunk.lib; LIBC.lib; LIBCMT;"
 				GenerateDebugInformation="false"
@@ -190,6 +191,10 @@
 			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
+			<File
+				RelativePath="..\..\..\addons\ofxNCore\src\Tracking\BlobManager.cpp"
+				>
+			</File>
 			<File
 				RelativePath=".\src\main.cpp"
 				>
@@ -987,6 +992,230 @@
 							RelativePath="..\..\..\addons\ofxNCore\src\Tracking\Tracking.h"
 							>
 						</File>
+						<Filter
+							Name="hands"
+							>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\hands\ofVec3f.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\hands\ofVec3f.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\hands\videoBlob.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\hands\videoBlob.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\hands\videoHandConstants.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\hands\videoHandDetector.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\hands\videoHandFingerDetector.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\hands\videoHandFingerDetector.h"
+								>
+							</File>
+							<Filter
+								Name="lineFitter"
+								>
+								<File
+									RelativePath="..\..\..\addons\ofxNCore\src\Tracking\hands\lineFitter\cvLineFitter.cpp"
+									>
+								</File>
+								<File
+									RelativePath="..\..\..\addons\ofxNCore\src\Tracking\hands\lineFitter\cvLineFitter.h"
+									>
+								</File>
+								<File
+									RelativePath="..\..\..\addons\ofxNCore\src\Tracking\hands\lineFitter\linreg.cpp"
+									>
+								</File>
+								<File
+									RelativePath="..\..\..\addons\ofxNCore\src\Tracking\hands\lineFitter\Matrix.h"
+									>
+								</File>
+							</Filter>
+						</Filter>
+						<Filter
+							Name="AAM"
+							>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\AAM\AAM_Basic.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\AAM\AAM_Basic.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\AAM\AAM_CAM.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\AAM\AAM_CAM.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\AAM\AAM_IC.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\AAM\AAM_IC.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\AAM\AAM_MovieAVI.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\AAM\AAM_MovieAVI.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\AAM\AAM_PAW.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\AAM\AAM_PAW.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\AAM\AAM_PDM.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\AAM\AAM_PDM.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\AAM\AAM_Shape.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\AAM\AAM_Shape.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\AAM\AAM_TDM.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\AAM\AAM_TDM.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\AAM\AAM_Util.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\AAM\AAM_Util.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\AAM\VJfacedetect.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\AAM\VJfacedetect.h"
+								>
+							</File>
+						</Filter>
+						<Filter
+							Name="Statistics"
+							>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\Statistics\Blob.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\Statistics\BlobContour.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\Statistics\BlobLibraryConfiguration.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\Statistics\BlobOperators.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\Statistics\BlobProperties.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\Statistics\BlobResult.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\Statistics\ComponentLabeling.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\Statistics\condensation.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\Statistics\condensation.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\Statistics\Coord.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\Statistics\drawBob.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\Statistics\drawBob.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\Statistics\extractBlob.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\Statistics\extractBlob.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\Statistics\getBackground.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\Statistics\getBackground.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\Statistics\kalman.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\Statistics\kalman.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\Statistics\SampleStat.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\addons\ofxNCore\src\Tracking\Statistics\useful.h"
+								>
+							</File>
+						</Filter>
 					</Filter>
 					<Filter
 						Name="Camera"
@@ -1043,6 +1272,18 @@
 				</Filter>
 			</Filter>
 		</Filter>
+		<File
+			RelativePath="..\..\..\addons\ofxNCore\src\Tracking\BlobManager.h"
+			>
+		</File>
+		<File
+			RelativePath=".\Community Core Vision.rc"
+			>
+		</File>
+		<File
+			RelativePath=".\resource.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

@@ -1718,7 +1718,7 @@ void ofxNCoreVision::learnBackGround(ofxCvColorImage& img)
     {
         filter->BgImgColor = img;
         filter->BgImgColor.flagImageChanged();
-        bLearnBackground2 == false;
+        bLearnBackground2 = false;
     }
 }
 
