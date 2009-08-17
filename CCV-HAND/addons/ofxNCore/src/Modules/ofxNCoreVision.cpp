@@ -517,10 +517,10 @@ void ofxNCoreVision::_update(ofEventArgs &e)
 
             filter->applyCPUFiltersHand(processedImgHand);
 
-            #if !DEBUG
+            #if DEBUG
                             cvSaveImage("subtractionHand.bmp", processedImgHand.getCvImage());
 #endif
-            handContourFinder.findContours(processedImgHand, (4 * 2) + 1, ((camWidth * camHeight) * .4) * (714 * .001), 5, false);
+            handContourFinder.findContours(processedImgHand, (MIN_BLOB_SIZE * 2) + 1, ((camWidth * camHeight) * .4) * (MAX_BLOB_SIZE * .001), 5, false);
 
 
 
@@ -709,7 +709,7 @@ void ofxNCoreVision::_update(ofEventArgs &e)
                             if (win.y + win.height > processedImgColor.getCvImage()->height)
                                 win.y = processedImgColor.getCvImage()->height - win.height;
 
-#if !DEBUG
+#if DEBUG
                             cvSaveImage("sourceTemplate.bmp", processedImgColor.getCvImage());
 #endif
 
@@ -989,142 +989,133 @@ void ofxNCoreVision::_update(ofEventArgs &e)
                         ****************************************************************/
 
                     }
+                    printf("AAM fitting.. (ok!) \n");
                 }
-                printf("AAM fitting.. (ok!) \n");
-            }
+
+
 
             /****************************************************************
             End of AAM-Fitting
             ****************************************************************/
+
+            /*---------------------------------------------------------*/
+            /*******************************************************************
+            Malik's Finger Detection Algorithm
+            ********************************************************************/
+            printf("Before array: Ok!\n");
+
+            nHands = handContourFinder.nBlobs;
+
+            printf("Nhands: %d\n", nHands);
 //
-//            /*---------------------------------------------------------*/
-//            /*******************************************************************
-//            Malik's Finger Detection Algorithm
-//            ********************************************************************/
-//            printf("Before array: Ok!\n");
-//
-//            nHands = handContourFinder.nBlobs;
-//            /*
-//            useless thing just to make some tests
-//            */
-//
-//            if (nHands > 5 )
-//            {
-//                nHands = 5;
-//            }
-//            /*
-//            */
-//            //nHands = contourFinder.nBlobs;
-//            printf("Nhands: %d\n", nHands);
-//
-//            for (int i = 0; i < nHands; i++)
-//            {
-//                /*
-//                if (handContourFinder.nBlobs > 0)
-//                {
-//                myHand.myBlob = handContourFinder.blobs
-//                fingerFinder.findmyFinger(myHand);
-//                printf("How many fingers: %d\n",myHand.nFingers);
-//                }
-//                */
-//                hands[i].myBlob = handContourFinder.blobs[i];
-//                fingerFinder.findFingers(hands[i]);
-//            }
-//
-//            printf("Before energy steps: Ok!");
-//
-//            //---------------------------------------------
-//            for (int i = 0; i < MAX_N_TRACKED_FINGERS; i++)
-//            {
-//                myFinger[i].energy *= 0.905f;
-//                myFinger[i].bFoundMeThisFrame = false;
-//            }
-//
-//
-//            for (int i = 0; i < nHands; i++)
-//            {
-//                int nFingers = hands[i].nFingers;
-//                printf("NFingers: %d\n", nFingers);
-//                for (int j = 0; j < nFingers; j++)
-//                {
-//
-//
-//                    bool bFound = false;
-//                    int  smallestIndex = -1;
-//                    float smallestDist = 10000;
-//
-//                    for (int k = 0; k < MAX_N_TRACKED_FINGERS; k++)
-//                    {
-//
-//                        if (myFinger[k].energy < 0.01 || myFinger[k].bFoundMeThisFrame) continue;	// skip non energized persistant faces.
-//
-//
-//                        float dx = myFinger[k].pos.x - hands[i].fingerPos[j].x;
-//                        float dy = myFinger[k].pos.y - hands[i].fingerPos[j].y;
-//                        float len = sqrt((dx*dx) + (dy*dy));
-//
-//                        if (len < smallestDist)
-//                        {
-//                            smallestDist 		= len;
-//                            smallestIndex		= k;
-//                        }
-//                    }
-//
-//
-//
-//                    if (smallestDist < 80)
-//                    {
-//                        myFinger[smallestIndex].energy += 0.2f;
-//                        myFinger[smallestIndex].energy = MIN(myFinger[smallestIndex].energy, 1);
-//                        myFinger[smallestIndex].bFoundMeThisFrame = true;
-//                        myFinger[smallestIndex].pos.x = hands[i].fingerPos[j].x;
-//                        myFinger[smallestIndex].pos.y = hands[i].fingerPos[j].y;
-//                        myFinger[smallestIndex].birthday = ofGetElapsedTimef();
-//                        bFound = true;
-//                    }
-//
-//                    if (!bFound)
-//                    {
-//
-//                        int  smallestIndex = -1;
-//                        float smallestEnergy = 100000000	;
-//                        // ok find the earliest, of first non energized persistant face:
-//                        for (int k = 0; k < MAX_N_TRACKED_FINGERS; k++)
-//                        {
-//                            if (myFinger[k].bFoundMeThisFrame) continue;
-//                            if (myFinger[k].birthday < smallestEnergy)
-//                            {
-//                                smallestEnergy 	= myFinger[k].birthday;
-//                                smallestIndex 	= k;
-//                            }
-//                        }
-//
-//                        if (smallestIndex != -1)
-//                        {
-//                            myFinger[smallestIndex].pos.x = hands[i].fingerPos[j].x;
-//                            myFinger[smallestIndex].pos.y = hands[i].fingerPos[j].y;
-//                            myFinger[smallestIndex].energy = 0.2f;
-//                            myFinger[smallestIndex].bFoundMeThisFrame = true;
-//                            myFinger[smallestIndex].birthday = ofGetElapsedTimef();
-//                        }
-//                    }
-//
-//
-//                }
-//            }
-//
-//
-//            for (int i = 0; i < MAX_N_TRACKED_FINGERS; i++)
-//            {
-//                if (myFinger[i].bFoundMeThisFrame == false)
-//                {
-//                    myFinger[i].energy = 0;
-//                }
-//            }
-//
-//            /*******************************************************************
-//            End of Malik's Finger Detection Algorithm
-//            ********************************************************************/
+            for (int i = 0; i < nHands; i++)
+            {
+                /*
+                if (handContourFinder.nBlobs > 0)
+                {
+                myHand.myBlob = handContourFinder.blobs
+                fingerFinder.findmyFinger(myHand);
+                printf("How many fingers: %d\n",myHand.nFingers);
+                }
+                */
+                hands[i].myBlob = handContourFinder.blobs[i];
+                fingerFinder.findFingers(hands[i]);
+            }
+
+            printf("Before energy steps: Ok!");
+
+            //---------------------------------------------
+            for (int i = 0; i < MAX_N_TRACKED_FINGERS; i++)
+            {
+                myFinger[i].energy *= 0.905f;
+                myFinger[i].bFoundMeThisFrame = false;
+            }
+
+
+            for (int i = 0; i < nHands; i++)
+            {
+                int nFingers = hands[i].nFingers;
+                printf("NFingers: %d\n", nFingers);
+                for (int j = 0; j < nFingers; j++)
+                {
+
+
+                    bool bFound = false;
+                    int  smallestIndex = -1;
+                    float smallestDist = 10000;
+
+                    for (int k = 0; k < MAX_N_TRACKED_FINGERS; k++)
+                    {
+
+                        if (myFinger[k].energy < 0.01 || myFinger[k].bFoundMeThisFrame) continue;	// skip non energized persistant faces.
+
+
+                        float dx = myFinger[k].pos.x - hands[i].fingerPos[j].x;
+                        float dy = myFinger[k].pos.y - hands[i].fingerPos[j].y;
+                        float len = sqrt((dx*dx) + (dy*dy));
+
+                        if (len < smallestDist)
+                        {
+                            smallestDist 		= len;
+                            smallestIndex		= k;
+                        }
+                    }
+
+
+
+                    if (smallestDist < 80)
+                    {
+                        myFinger[smallestIndex].energy += 0.2f;
+                        myFinger[smallestIndex].energy = MIN(myFinger[smallestIndex].energy, 1);
+                        myFinger[smallestIndex].bFoundMeThisFrame = true;
+                        myFinger[smallestIndex].pos.x = hands[i].fingerPos[j].x;
+                        myFinger[smallestIndex].pos.y = hands[i].fingerPos[j].y;
+                        myFinger[smallestIndex].birthday = ofGetElapsedTimef();
+                        bFound = true;
+                    }
+
+                    if (!bFound)
+                    {
+
+                        int  smallestIndex = -1;
+                        float smallestEnergy = 100000000	;
+                        // ok find the earliest, of first non energized persistant face:
+                        for (int k = 0; k < MAX_N_TRACKED_FINGERS; k++)
+                        {
+                            if (myFinger[k].bFoundMeThisFrame) continue;
+                            if (myFinger[k].birthday < smallestEnergy)
+                            {
+                                smallestEnergy 	= myFinger[k].birthday;
+                                smallestIndex 	= k;
+                            }
+                        }
+
+                        if (smallestIndex != -1)
+                        {
+                            myFinger[smallestIndex].pos.x = hands[i].fingerPos[j].x;
+                            myFinger[smallestIndex].pos.y = hands[i].fingerPos[j].y;
+                            myFinger[smallestIndex].energy = 0.2f;
+                            myFinger[smallestIndex].bFoundMeThisFrame = true;
+                            myFinger[smallestIndex].birthday = ofGetElapsedTimef();
+                        }
+                    }
+
+
+                }
+            }
+
+
+            for (int i = 0; i < MAX_N_TRACKED_FINGERS; i++)
+            {
+                if (myFinger[i].bFoundMeThisFrame == false)
+                {
+                    myFinger[i].energy = 0;
+                }
+            }
+
+            /*******************************************************************
+            End of Malik's Finger Detection Algorithm
+            ********************************************************************/
         }
 
 
@@ -1370,10 +1361,13 @@ void ofxNCoreVision::drawFullMode()
     printf("Showing fingers\n");
     for (int j=0; j < 5;j++)
     {
+        if(hands[j].nFingers > 0)
+        {
         for (int i = 0; i < hands[j].nFingers; i++)
         {
-            ofCircle((hands[j].fingerPos[i].x*160)/camWidth+160,(hands[j].fingerPos[i].y*120)/camHeight+610, 10);
+            ofCircle((hands[j].fingerPos[i].x*MAIN_WINDOW_WIDTH)/camWidth + 40,(hands[j].fingerPos[i].y*MAIN_WINDOW_HEIGHT)/camHeight + 30, 5);
         }
+    }
     }
     printf("Showed fingers\n");
 

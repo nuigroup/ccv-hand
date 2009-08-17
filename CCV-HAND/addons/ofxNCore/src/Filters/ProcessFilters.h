@@ -158,7 +158,7 @@ class ProcessFilters : public Filters {
 
 
 		if(bSmooth){//Smooth
-            img.blur((1 * 2) + 1); //needs to be an odd number
+            img.blur((smooth * 2) + 1); //needs to be an odd number
             if(!bMiniMode)
             subtractBg = img; //for drawing
         }
@@ -170,12 +170,12 @@ class ProcessFilters : public Filters {
 //        }
 
         if(bAmplify){//Amplify
-            img.amplify(img, 46);
+            img.amplify(img, highpassAmp);
             if(!bMiniMode)
             ampImg = img; //for drawing
         }
 
-        img.threshold(10); //Threshold
+        img.threshold(threshold); //Threshold
 
     }
     /*******************************************

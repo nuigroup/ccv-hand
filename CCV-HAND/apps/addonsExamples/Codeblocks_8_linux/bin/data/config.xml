@@ -22,7 +22,7 @@
     </NETWORK>
     <!--// VIDEO SETTINGS // -->
     <VIDEO>
-        <FILENAME>test_videos/t1.avi</FILENAME>
+        <FILENAME>test_videos/t2.avi</FILENAME>
     </VIDEO>
     <!--// BLOB SETTINGS // -->
     <BLOBS>
@@ -38,8 +38,8 @@
     </HAAR>
     <!--// Template Matching // -->
     <TEMPLATE>
-        <RIGHT>data/template_hand.bmp</RIGHT>
-        <LEFT>data/template_hand_left.bmp</LEFT>
+        <RIGHT>data/template_hand_sethR.bmp</RIGHT>
+        <LEFT>data/template_hand_seth.bmp</LEFT>
     </TEMPLATE>
     <!--/////////////////////////////////////////
 
@@ -57,13 +57,13 @@
     <BOOLEAN>
         <PRESSURE>0</PRESSURE>
         <LABELS>1</LABELS>
-        <OUTLINES>1</OUTLINES>
+        <OUTLINES>0</OUTLINES>
         <LEARNBG>0</LEARNBG>
         <TUIO>1</TUIO>
         <VMIRROR>0</VMIRROR>
         <HMIRROR>0</HMIRROR>
         <PRINTFTOFILE>1</PRINTFTOFILE>
-        <HIGHPASS>1</HIGHPASS>
+        <HIGHPASS>0</HIGHPASS>
         <AMPLIFY>1</AMPLIFY>
         <SMOOTH>1</SMOOTH>
         <GPU>0</GPU>
@@ -80,10 +80,10 @@
         <MINBLOBSIZE>0</MINBLOBSIZE>
         <MAXBLOBSIZE>714</MAXBLOBSIZE>
         <!--// FILTERS SETTERS //-->
-        <THRESHOLD>10</THRESHOLD>
+        <THRESHOLD>12</THRESHOLD>
         <HIGHPASSBLUR>18</HIGHPASSBLUR>
         <HIGHPASSNOISE>3</HIGHPASSNOISE>
-        <HIGHPASSAMP>46</HIGHPASSAMP>
+        <HIGHPASSAMP>120</HIGHPASSAMP>
         <SMOOTH>1</SMOOTH>
         <BGLEARNRATE>50.900002</BGLEARNRATE>
     </INT>

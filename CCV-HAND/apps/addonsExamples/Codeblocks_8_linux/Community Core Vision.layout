@@ -13,7 +13,7 @@
 	<File name="../../../addons/ofxNCore/src/Camera/CameraUtils.h" open="0" top="0" tabpos="0">
 		<Cursor position="0" topLine="3" />
 	</File>
-	<File name="../../../addons/ofxNCore/src/Communication/TUIO.cpp" open="1" top="1" tabpos="3">
+	<File name="../../../addons/ofxNCore/src/Communication/TUIO.cpp" open="1" top="0" tabpos="3">
 		<Cursor position="8687" topLine="146" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Communication/TUIO.h" open="0" top="0" tabpos="24">
@@ -52,8 +52,8 @@
 	<File name="../../../addons/ofxNCore/src/Filters/ProcessFilters.h" open="0" top="0" tabpos="2">
 		<Cursor position="6283" topLine="137" />
 	</File>
-	<File name="../../../addons/ofxNCore/src/Modules/ofxNCoreVision.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="25753" topLine="763" />
+	<File name="../../../addons/ofxNCore/src/Modules/ofxNCoreVision.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="40362" topLine="1011" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Modules/ofxNCoreVision.h" open="0" top="0" tabpos="6">
 		<Cursor position="2660" topLine="112" />

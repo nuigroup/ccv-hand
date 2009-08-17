@@ -416,8 +416,8 @@ public:
 
     videoHandFingerDetector	fingerFinder;
 
-    handBlob			hands[5];
-    trackedFinger		myFinger[10];
+    handBlob			hands[MAX_N_HANDS];
+    trackedFinger		myFinger[MAX_N_TRACKED_FINGERS];
 
     int nHands;
 
