@@ -43,9 +43,11 @@
 ***************************************************************************/
 #include <ctime>
 #ifdef TARGET_WIN32
-#include <direct.h>
-#else
-#include <sys/stat.h>
+	#include <direct.h>
+	#include <io.h>
+#endif
+#ifdef TARGET_UNIX
+	#include <sys/stat.h>
 #endif
 #include "AAM_Basic.h"
 
@@ -310,11 +312,14 @@ void AAM_Basic::Fit(const IplImage* image, AAM_Shape& Shape,
 			__cam.CalcShape(__s, __current_c_q);
 			Shape.Mat2Point(__s);
 			Draw(Drawimg, Shape, 2);
-			#ifdef TARGET_WIN32
-			mkdir("result");
-			#else
+						#ifdef TARGET_WIN32
+		mkdir("result");
+    #endif
+
+	#ifdef TARGET_UNIX
+			
 			mkdir("result", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-			#endif
+	#endif
 			char filename[100];
 			sprintf(filename, "result/ter%d.bmp", iter);
 			cvSaveImage(filename, Drawimg);

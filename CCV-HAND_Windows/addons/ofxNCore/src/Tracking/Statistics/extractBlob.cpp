@@ -1,4 +1,5 @@
 #include "extractBlob.h"
+#include "BlobResult.h"
 
 
 
@@ -28,7 +29,7 @@ void drawInitialBlobs(IplImage * tmp_frame, CBlobResult blobs){
 
 	for (int i=0; i<blobs.GetNumBlobs();i++){
 
-		drawCoord.set( (int) blobs.GetBlob(i).MaxX(), (int) blobs.GetBlob(i).MinX(), (int) blobs.GetBlob(i).MaxY(), (int) blobs.GetBlob(i).MinY());
+		drawCoord.set( (int) blobs.GetBlob(i)->MaxX(), (int) blobs.GetBlob(i)->MinX(), (int) blobs.GetBlob(i)->MaxY(), (int) blobs.GetBlob(i)->MinY());
 
 		drawBlob2(tmp_frame, drawCoord, 255, 255, 255);
 	}
@@ -69,7 +70,7 @@ CBlobResult getBlobs2(IplImage* tmp_frame, IplImage* binFore){
 	CBlobResult blobs;
 
 
-	blobs = CBlobResult( binFore, NULL, 200, true );
+	blobs = CBlobResult( binFore, NULL, 200);//, true );
 
 
 

@@ -141,9 +141,13 @@ void videoHandFingerDetector::finger(handBlob	&blob) {
 		point3 = blob.myBlob.pts[i+2];
 
 		if(point2.y < point1.y && point2.y < point3.y) {
-			int lineAC1 = pow(((pow((point1.y - point2.y),2)) + (pow((point2.x - point1.x),2))),(1/2));
+			/**changed line A1 to float for VS 2008 compilation
+			*/
+			float lineAC1 = pow(((pow((point1.y - point2.y),2)) + (pow((point2.x - point1.x),2))),(1/2));
 			float angleA1 = acos(sin(lineAC1));
-			int lineAC2 = pow(((pow((point3.y - point2.y),2))+(pow((point3.x - point2.x),2))),(1/2));
+			/**changed line A2 to float for VS 2008 compilation
+			*/
+			float lineAC2 = pow(((pow((point3.y - point2.y),2))+(pow((point3.x - point2.x),2))),(1/2));
 			float angleA2 = acos(sin(lineAC2));
 			float angle = angleA1 + angleA2;
 			//printf("Hoek %f \n", hoek);
