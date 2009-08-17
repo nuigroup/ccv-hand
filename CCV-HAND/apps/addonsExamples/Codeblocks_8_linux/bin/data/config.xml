@@ -22,7 +22,7 @@
     </NETWORK>
     <!--// VIDEO SETTINGS // -->
     <VIDEO>
-        <FILENAME>test_videos/t2.avi</FILENAME>
+        <FILENAME>test_videos/t1.avi</FILENAME>
     </VIDEO>
     <!--// BLOB SETTINGS // -->
     <BLOBS>
