@@ -16,7 +16,7 @@
 
 class Blob {
 
-    public: 
+    public:
 
         vector <ofPoint>    pts;     // the contour of the blob
         int                 nPts;    // number of pts;
@@ -34,7 +34,10 @@ class Blob {
 		ofPoint             centroid, lastCentroid, D;
 		bool				simulated;
 		bool                hole;
-		int					color;				
+		int					color;
+		int                 handID;
+		int                 xHand;
+		int                 yHand;
 
         //----------------------------------------
         Blob() {
@@ -46,24 +49,24 @@ class Blob {
 			age			= 0.0f;
 			sitting		= 0.0f;
 			color		= 0xFFFFFF;
-			
+
 			//freakishly long variable name (ala Apple)
-			lastTimeTimeWasChecked = ofGetElapsedTimeMillis(); //get current time as of creation
+			lastTimeTimeWasChecked = ofGetElapsedTimef(); //get current time as of creation
         }
 
         //----------------------------------------
         void drawContours(float x = 0, float y = 0, float inputWidth = ofGetWidth(), float inputHeight = ofGetHeight(), float outputWidth = ofGetWidth(), float outputHeight = ofGetHeight()) {
-            
+
             glPushMatrix();
                 glTranslatef(x + angleBoundingRect.x/inputWidth * outputWidth, y + angleBoundingRect.y/inputHeight * outputHeight, 0.0f);
                 glRotatef(-angle, 0.0f, 0.0f, 1.0f);
-                glTranslatef(-(x + angleBoundingRect.x/inputWidth * outputWidth), -(y + angleBoundingRect.y/inputHeight * outputHeight), 0.0f);                
-				
-				//draw box
-//				ofSetColor(0xFFFFFF);
-//				ofRect(x + (angleBoundingRect.x - angleBoundingRect.width/2)/inputWidth * outputWidth, y + (angleBoundingRect.y - angleBoundingRect.height/2)/inputHeight * outputHeight, angleBoundingRect.width/inputWidth * outputWidth, angleBoundingRect.height/inputHeight * outputHeight);
+                glTranslatef(-(x + angleBoundingRect.x/inputWidth * outputWidth), -(y + angleBoundingRect.y/inputHeight * outputHeight), 0.0f);
 
-				//draw cross-hairs	
+				//draw box
+				ofSetColor(0xFFFFFF);
+				ofRect(x + (angleBoundingRect.x - angleBoundingRect.width/2)/inputWidth * outputWidth, y + (angleBoundingRect.y - angleBoundingRect.height/2)/inputHeight * outputHeight, angleBoundingRect.width/inputWidth * outputWidth, angleBoundingRect.height/inputHeight * outputHeight);
+
+				//draw cross-hairs
 				ofSetColor(0x0099FF);
                 ofRect(x + (angleBoundingRect.x/inputWidth) * outputWidth, y + ((angleBoundingRect.y - angleBoundingRect.height)/inputHeight) * outputHeight, 1, (angleBoundingRect.height * 2)/inputHeight * outputHeight); //Vertical Plus
                 ofRect(x + ((angleBoundingRect.x - angleBoundingRect.width)/inputWidth) * outputWidth, y + (angleBoundingRect.y/inputHeight) * outputHeight, (angleBoundingRect.width * 2)/inputWidth * outputWidth, 1); //Horizontal Plus
@@ -76,7 +79,7 @@ class Blob {
             for (int i = 0; i < nPts; i++){
                    ofVertex(x + pts[i].x/inputWidth * outputWidth, y + pts[i].y/(inputHeight) * outputHeight);
             }
-            ofEndShape(true);	
+            ofEndShape(true);
         }
 };
 #endif

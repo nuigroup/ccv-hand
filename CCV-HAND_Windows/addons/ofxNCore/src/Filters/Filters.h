@@ -1,6 +1,6 @@
 /*
 *  Filters.h
-*  
+*
 *
 *  Created on 2/2/09.
 *  Copyright 2009 NUI Group. All rights reserved.
@@ -18,7 +18,7 @@
 #define CAMERA_EXPOSURE_TIME  2200.0f
 
 class Filters {
-  
+
 	public:
 
 	  Filters(){
@@ -70,6 +70,7 @@ class Filters {
     ofxCvGrayscaleImage highpassImg;
     ofxCvGrayscaleImage ampImg;
 	ofxCvShortImage		floatBgImg;
+	ofxCvColorImage     BgImgColor;
 
 
     //GPU
@@ -90,6 +91,7 @@ class Filters {
 
     virtual void allocate( int w, int h ) = 0;
     virtual void applyCPUFilters(CPUImageFilter& img) = 0;
+    virtual void applyCPUFiltersHand(CPUImageFilter& img) = 0;
     virtual void draw() = 0;
 
     virtual void allocateGPU() = 0;

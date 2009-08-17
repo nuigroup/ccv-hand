@@ -26,17 +26,20 @@ class ContourFinder {
 
     ContourFinder();
     ~ContourFinder();
-	
+
 	int findContours( ofxCvGrayscaleImage& input,
                        int minArea, int maxArea,
                        int nConsidered, bool bFindHoles,
                        bool bUseApproximation = true);
                        // approximation = don't do points for all points of the contour, if the contour runs
                        // along a straight line, for example...
-		
+
     int                        nBlobs;     // how many did we find
     vector <Blob>	   blobs;      // the blobs, in a std::vector...
     Blob 	           getBlob(int num);
+    CvConnectedComp track_comp;
+    CvBox2D track_box;
+    CvArr* teste;
 
   protected:
 

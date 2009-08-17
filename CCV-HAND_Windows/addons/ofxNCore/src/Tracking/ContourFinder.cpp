@@ -1,6 +1,6 @@
 /*
 *  ContourFinder.cpp
-*  
+*
 *
 *  Created on 2/2/09.
 *  Adapted from openframeworks ofxCvContourFinder
@@ -8,6 +8,7 @@
 */
 
 #include "ContourFinder.h"
+#include <cv.h>
 
 //--------------------------------------------------------------------------------
 static int qsort_carea_compare( const void* _a, const void* _b) {
@@ -80,12 +81,15 @@ int ContourFinder::findContours( ofxCvGrayscaleImage&  input,
 	}
 
 	CvSeq* contour_list = NULL;
+
 	contour_storage = cvCreateMemStorage( 1000 );
 	storage	= cvCreateMemStorage( 1000 );
 
 	CvContourRetrievalMode  retrieve_mode
         = (bFindHoles) ? CV_RETR_LIST : CV_RETR_EXTERNAL;
-	cvFindContours( inputCopy.getCvImage(), contour_storage, &contour_list,
+    teste = inputCopy.getCvImage();
+
+	cvFindContours( teste, contour_storage, &contour_list,
                     sizeof(CvContour), retrieve_mode, bUseApproximation ? CV_CHAIN_APPROX_SIMPLE : CV_CHAIN_APPROX_NONE );
 	CvSeq* contour_ptr = contour_list;
 
@@ -115,13 +119,15 @@ int ContourFinder::findContours( ofxCvGrayscaleImage&  input,
 		float area = cvContourArea( cvSeqBlobs[i], CV_WHOLE_SEQ );
 
 		cvMoments( cvSeqBlobs[i], myMoments );
-		
+
 		// this is if using non-angle bounding box
 		CvRect rect	= cvBoundingRect( cvSeqBlobs[i], 0 );
 		blobs[i].boundingRect.x      = rect.x;
 		blobs[i].boundingRect.y      = rect.y;
 		blobs[i].boundingRect.width  = rect.width;
 		blobs[i].boundingRect.height = rect.height;
+
+        cvCamShift(teste, rect, cvTermCriteria( CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 10, 1 ), &track_comp, &track_box);
 
 		// this is for using angle bounding box
 		CvBox2D32f box;
@@ -136,7 +142,7 @@ int ContourFinder::findContours( ofxCvGrayscaleImage&  input,
 		// assign other parameters
 		blobs[i].area                = fabs(area);
 		blobs[i].hole                = area < 0 ? true : false;
-		blobs[i].length 			 = cvArcLength(cvSeqBlobs[i]);		
+		blobs[i].length 			 = cvArcLength(cvSeqBlobs[i]);
 		blobs[i].centroid.x			 = (int) (myMoments->m10 / myMoments->m00);
 		blobs[i].centroid.y 		 = (int) (myMoments->m01 / myMoments->m00);
 		blobs[i].lastCentroid.x 	 = (int) 0;

@@ -9,8 +9,8 @@
     <CAMERA_0>
         <USECAMERA>0</USECAMERA>
         <DEVICE>0</DEVICE>
-        <WIDTH>320</WIDTH>
-        <HEIGHT>240</HEIGHT>
+        <WIDTH>640</WIDTH>
+        <HEIGHT>480</HEIGHT>
         <FRAMERATE>120</FRAMERATE>
     </CAMERA_0>
     <!--// NETWORK COMMUNICATION SETTINGS //-->
@@ -22,56 +22,69 @@
     </NETWORK>
     <!--// VIDEO SETTINGS // -->
     <VIDEO>
-        <FILENAME>test_videos/RearDI.m4v</FILENAME>
+        <FILENAME>test_videos/t1.avi</FILENAME>
     </VIDEO>
     <!--// BLOB SETTINGS // -->
     <BLOBS>
         <MAXNUMBER>20</MAXNUMBER>
     </BLOBS>
+    <!--// AAM SETTINGS // -->
+    <AAM>
+        <MODEL>data/hand.amf</MODEL>
+    </AAM>
+    <!--// Haar Xml // -->
+    <HAAR>
+        <CASCADE>data/haarcascade.xml</CASCADE>
+    </HAAR>
+    <!--// Template Matching // -->
+    <TEMPLATE>
+        <RIGHT>data/template_hand.bmp</RIGHT>
+        <LEFT>data/template_hand_left.bmp</LEFT>
+    </TEMPLATE>
     <!--/////////////////////////////////////////
 
         DO NOT EDIT THE VALUES BELOW
  
     ///////////////////////////////////////////// -->
     <APPLICATION>
-        <TITLE>Community Core Visision</TITLE>
-        <VERSION>1.2.0</VERSION>
+        <TITLE>CCV HAND TRACKING</TITLE>
+        <VERSION>Beta 1</VERSION>
     </APPLICATION>
     <WINDOW>
         <WIDTH>950</WIDTH>
-        <HEIGHT>600</HEIGHT>
+        <HEIGHT>768</HEIGHT>
     </WINDOW>
     <BOOLEAN>
-        <PRESSURE>193</PRESSURE>
+        <PRESSURE>0</PRESSURE>
         <LABELS>1</LABELS>
-        <OUTLINES>1</OUTLINES>
+        <OUTLINES>0</OUTLINES>
         <LEARNBG>0</LEARNBG>
-        <TUIO>0</TUIO>
+        <TUIO>1</TUIO>
         <VMIRROR>0</VMIRROR>
         <HMIRROR>0</HMIRROR>
-        <PRINTFTOFILE>0</PRINTFTOFILE>
-        <HIGHPASS>1</HIGHPASS>
+        <PRINTFTOFILE>1</PRINTFTOFILE>
+        <HIGHPASS>0</HIGHPASS>
         <AMPLIFY>1</AMPLIFY>
-        <SMOOTH>0</SMOOTH>
+        <SMOOTH>1</SMOOTH>
         <GPU>0</GPU>
-        <DYNAMICBG>0</DYNAMICBG>
+        <DYNAMICBG>1</DYNAMICBG>
         <SNAPSHOT>0</SNAPSHOT>
         <MINIMODE>0</MINIMODE>
-        <HEIGHTWIDTH>0</HEIGHTWIDTH>
+        <HEIGHTWIDTH>1</HEIGHTWIDTH>
         <OSCMODE>0</OSCMODE>
-        <TCPMODE>0</TCPMODE>
+        <TCPMODE>1</TCPMODE>
         <TRACKDARK>0</TRACKDARK>
     </BOOLEAN>
     <INT>
-        <MINMOVEMENT>2</MINMOVEMENT>
-        <MINBLOBSIZE>11</MINBLOBSIZE>
-        <MAXBLOBSIZE>157</MAXBLOBSIZE>
+        <MINMOVEMENT>10</MINMOVEMENT>
+        <MINBLOBSIZE>0</MINBLOBSIZE>
+        <MAXBLOBSIZE>714</MAXBLOBSIZE>
         <!--// FILTERS SETTERS //-->
-        <THRESHOLD>42</THRESHOLD>
-        <HIGHPASSBLUR>10</HIGHPASSBLUR>
-        <HIGHPASSNOISE>6</HIGHPASSNOISE>
-        <HIGHPASSAMP>136</HIGHPASSAMP>
-        <SMOOTH>4</SMOOTH>
-        <BGLEARNRATE>118.945450</BGLEARNRATE>
+        <THRESHOLD>12</THRESHOLD>
+        <HIGHPASSBLUR>18</HIGHPASSBLUR>
+        <HIGHPASSNOISE>3</HIGHPASSNOISE>
+        <HIGHPASSAMP>120</HIGHPASSAMP>
+        <SMOOTH>1</SMOOTH>
+        <BGLEARNRATE>50.900002</BGLEARNRATE>
     </INT>
 </CONFIG>

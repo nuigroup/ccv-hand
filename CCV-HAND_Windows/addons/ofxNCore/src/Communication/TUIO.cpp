@@ -1,11 +1,47 @@
 /*
 *  TUIO.h
-*  
+*
 *
 *  Created on 2/2/09.
 *  Copyright 2009 NUI Group. All rights reserved.
 *
-*/
+** Modified by: Thiago de Freitas Oliveira Araújo
+*  NUI Group Community Core Vision Hand Tracking
+*  Google Summer of Code 2009
+*  Mentor: Laurence Muller
+*
+*  Copyright 2009 NUI Group/Inc. All rights reserved.
+*
+*   License GPL v2.0
+*
+* Redistribution and use in source and binary forms, with or without
+* modification, are permitted provided that the following conditions are
+* met:
+* 1. Redistributions of source code must retain the above copyright
+* notice, this list of conditions and the following disclaimer as
+* the first lines of this file unmodified.
+* 2. Redistributions in binary form must reproduce the above copyright
+* notice, this list of conditions and the following disclaimer in the
+* documentation and/or other materials provided with the distribution.
+*
+* THIS SOFTWARE IS PROVIDED BY NUI GROUP ``AS IS'' AND ANY EXPRESS OR
+* IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+* OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+* IN NO EVENT SHALL BEN WOODHOUSE BE LIABLE FOR ANY DIRECT, INDIRECT,
+* INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+* NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+* DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+* THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+* (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+* THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+* Web: http://nuigroup.com
+*      http://ccv.nuigroup.com/
+*      http://thiagodefreitas.wordpress.com
+*      http://www.multigesture.net
+*
+* Still under development...
+***************************************************************************/
 
 #include "TUIO.h"
 
@@ -71,6 +107,12 @@ void TUIO::sendTUIO(std::map<int, Blob> * blobs)
 				set.addFloatArg(this_blob->second.D.x); //dX
 				set.addFloatArg(this_blob->second.D.y); //dY
 				set.addFloatArg(this_blob->second.maccel); //m
+				if(bHandInfo)
+				{
+				set.addFloatArg(this_blob->second.handID);
+				set.addFloatArg(this_blob->second.xHand);
+				set.addFloatArg(this_blob->second.yHand);
+				}
 				if(bHeightWidth){
 					set.addFloatArg(this_blob->second.boundingRect.width); // wd
 					set.addFloatArg(this_blob->second.boundingRect.height);// ht
@@ -123,6 +165,24 @@ void TUIO::sendTUIO(std::map<int, Blob> * blobs)
 			for(this_blob = blobs->begin(); this_blob != blobs->end(); this_blob++)
 			{
 				//if sending height and width
+				if(bHandInfo){
+					setBlobsMsg += "<MESSAGE NAME=\"/tuio/2Dcur\"><ARGUMENT TYPE=\"s\" VALUE=\"set\"/><ARGUMENT TYPE=\"i\" VALUE=\""+ofToString(this_blob->second.id)+"\"/>"+
+					"<ARGUMENT TYPE=\"f\" VALUE=\""+ofToString(this_blob->second.centroid.x)+"\"/>"+
+					"<ARGUMENT TYPE=\"f\" VALUE=\""+ofToString(this_blob->second.centroid.y)+"\"/>"+
+					"<ARGUMENT TYPE=\"f\" VALUE=\""+ofToString(this_blob->second.D.x)+"\"/>"+
+					"<ARGUMENT TYPE=\"f\" VALUE=\""+ofToString(this_blob->second.D.y)+"\"/>"+
+					"<ARGUMENT TYPE=\"f\" VALUE=\""+ofToString(this_blob->second.maccel)+"\"/>"+
+					"<ARGUMENT TYPE=\"f\" VALUE=\""+ofToString(this_blob->second.boundingRect.width)+"\"/>"+
+					"<ARGUMENT TYPE=\"f\" VALUE=\""+ofToString(this_blob->second.boundingRect.height)+"\"/>"+
+					// To handle hand info
+					//HAND ID
+					"<ARGUMENT TYPE=\"f\" VALUE=\""+ofToString(this_blob->second.handID)+"\"/>"+
+					//xHand
+					"<ARGUMENT TYPE=\"f\" VALUE=\""+ofToString(this_blob->second.xHand )+"\"/>"+
+					//yHand
+					"<ARGUMENT TYPE=\"f\" VALUE=\""+ofToString(this_blob->second.yHand)+"\"/>"+
+					"</MESSAGE>";
+				}
 				if(bHeightWidth){
 					setBlobsMsg += "<MESSAGE NAME=\"/tuio/2Dcur\"><ARGUMENT TYPE=\"s\" VALUE=\"set\"/><ARGUMENT TYPE=\"i\" VALUE=\""+ofToString(this_blob->second.id)+"\"/>"+
 					"<ARGUMENT TYPE=\"f\" VALUE=\""+ofToString(this_blob->second.centroid.x)+"\"/>"+
