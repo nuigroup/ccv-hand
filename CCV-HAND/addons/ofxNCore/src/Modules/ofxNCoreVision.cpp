@@ -850,47 +850,49 @@ void ofxNCoreVision::_update(ofEventArgs &e)
                 /****************************************************************
                 AAM-Fitting with Template Matching
                 ****************************************************************/
-                if (bTemplate)
-                {
-                    printf("Template Matching + AAM fitting \n");
-                    if ( contourFinder.nBlobs > 5)
-                    {
-                        for (int i =0; i < contourFinder.nBlobs; i++)
-                        {
-                            if (contourFinder.blobs[i].xHand > 0)
-                            {
-
-                                Shape[0].x = contourFinder.blobs[i].xHand;
-                                Shape[0].y = contourFinder.blobs[i].yHand;
-                                Shape[1].x = contourFinder.blobs[i].xHand;
-                                Shape[1].y = contourFinder.blobs[i].xHand;
-
-
-                                flag = true;
-                                /*
-                                modelIC.InitParams(blobsCheck.getCvImage());
-                                */
-                                if (flag == false)
-                                {
-                                    printf("False model fitting\n");
-                                }
-                                else
-                                {
-
-                                    model.Fit(aamImage.getCvImage(), Shape, 30, true);
-                                    printf("Pyramid OK\n");
-                                    /*
-                                    modelIC.Fit(blobsCheck.getCvImage(), Shape, 30, false);
-                                    printf ("Inverse Compositional OK\n");
-                                    */
-                                    model.Draw(aamImage.getCvImage(), Shape, 2);
-                                    /*
-                                    modelIC.Draw(blobsCheck.getCvImage(), Shape, 1);
-                                    */
-                                }
-                            }
-                        }
-                    }
+//                if (bTemplate)
+//                {
+//                    printf("Template Matching + AAM fitting \n");
+//                    if ( contourFinder.nBlobs > 5)
+//                    {
+//                        for (int i =0; i < contourFinder.nBlobs; i++)
+//                        {
+//                            if (contourFinder.blobs[i].xHand > 0)
+//                            {
+//
+//                                Shape[0].x = (contourFinder.blobs[i].xHand)*2.0;
+//                                Shape[0].y = (contourFinder.blobs[i].yHand)*2.0;
+//                                Shape[1].x = Shape[0].x + 2.0*150;
+//                                Shape[1].y = Shape[0].y + 2.0*150;
+//                                Shape.ScaleXY((-Shape[0].x+Shape[1].x)/100, (-Shape[0].y+Shape[1].y)/100);
+//                                Shape.Translate((Shape[0].x+Shape[1].x)/2., (Shape[0].y+Shape[1].y)/2. );
+//
+//
+//                                flag = true;
+//                                /*
+//                                modelIC.InitParams(blobsCheck.getCvImage());
+//                                */
+//                                if (flag == false)
+//                                {
+//                                    printf("False model fitting\n");
+//                                }
+//                                else
+//                                {
+//
+//                                    model.Fit(aamImage.getCvImage(), Shape, 30, true);
+//                                    printf("Pyramid OK\n");
+//                                    /*
+//                                    modelIC.Fit(blobsCheck.getCvImage(), Shape, 30, false);
+//                                    printf ("Inverse Compositional OK\n");
+//                                    */
+//                                    model.Draw(aamImage.getCvImage(), Shape, 2);
+//                                    /*
+//                                    modelIC.Draw(blobsCheck.getCvImage(), Shape, 1);
+//                                    */
+//                                }
+//                            }
+//                        }
+//                    }
                 }
                 else
                 {
