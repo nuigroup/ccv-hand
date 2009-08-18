@@ -556,6 +556,7 @@ void ofxNCoreVision::_update(ofEventArgs &e)
                 blobsCheck = sourceImg;
                 camShiftImage = sourceImg;
                 aamImage = sourceImg;
+
                 //cvSub(blobsCheck.getCvImage(), grayBg.getCvImage(), blobsCheck.getCvImage());
 #if DEBUG
                 printf("Copied Image\n");
@@ -678,6 +679,7 @@ void ofxNCoreVision::_update(ofEventArgs &e)
             /*****************************
             Begin of other Tracking Methods
             *********************************/
+
             /******************************************
             Template Matching using the CCV contourFinder
             **********************************************/
@@ -843,10 +845,41 @@ void ofxNCoreVision::_update(ofEventArgs &e)
                 ***********************************************/
             }
 
+            /**************************************************
+            Start of AAM methods for better Shape control and entities association
+            ****************************************************/
+
             if (aamTracking)
             {
                 printf("AAM fitting(be careful.. :P)\n");
 
+                if (vJones)
+                {
+
+                    flag = model.InitShapeFromDetBox(Shape,blobsCheck.getCvImage(),facedet);
+
+                        if (flag == false)
+                        {
+                            printf("False model fitting\n");
+                        }
+                        else
+                        {
+
+                            model.Fit(aamImage.getCvImage(), Shape, 30, false);
+                            //printf("Pyramid OK\n");
+                            /*
+                            modelIC.Fit(blobsCheck.getCvImage(), Shape, 30, false);
+                            printf ("Inverse Compositional OK\n");
+                            */
+                            model.Draw(aamImage.getCvImage(), Shape, 2);
+                            /*
+                            modelIC.Draw(blobsCheck.getCvImage(), Shape, 1);
+                            */
+                        }
+
+                }
+                else
+                {
                 /****************************************************************
                 AAM-Fitting with Template Matching
                 ****************************************************************/
@@ -993,7 +1026,28 @@ void ofxNCoreVision::_update(ofEventArgs &e)
                 }
 
                 }
+            }
 
+            else
+            {
+
+
+        /******************************************
+            Viola and Jones - Hand Detection
+            **********************************************/
+
+            if (vJones)
+            {
+
+                facedet.DetectFace2(aamImage.getCvImage());
+
+            }
+
+            /******************************************
+            End of Viola and Jones - Hand Detection
+            **********************************************/
+
+            }
 
 
             /****************************************************************
@@ -1718,7 +1772,7 @@ void ofxNCoreVision::learnBackGround(ofxCvColorImage& img)
     {
         filter->BgImgColor = img;
         filter->BgImgColor.flagImageChanged();
-        bLearnBackground2 = false;
+//        bLearnBackground2 = false;
     }
 }
 

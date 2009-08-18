@@ -45,11 +45,13 @@
 #include "AAM_TDM.h"
 #include "AAM_PAW.h"
 #ifdef TARGET_WIN32
-#include <direct.h>
-#else
-#include <sys/stat.h>
+	#include <direct.h>
+	#include <io.h>
 #endif
-//#include <io.h>
+#ifdef TARGET_UNIX
+	#include <sys/stat.h>
+#endif
+
 
 
 //============================================================================
@@ -261,24 +263,34 @@ void AAM_TDM::ZeroMeanUnitLength(CvMat* Texture)
 void AAM_TDM::SaveSeriesTemplate(const CvMat* AllTextures, const AAM_PAW& m_warp)
 {
 	printf("Saving the face template image...\n");
-	if(access("registration", 0))
+	
 	#ifdef TARGET_WIN32
-			mkdir("registration");
-    #else
+	if(access("registration", 0))	_mkdir("registration");
+	#endif
+
+    #ifdef TARGET_UNIX
+			if(access("registration", 0))
 			mkdir("registration", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
     #endif
-	if(access("Modes", 0))
+
 	#ifdef TARGET_WIN32
-			mkdir("Modes");
-    #else
-			mkdir("Modes", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+		if(access("Modes", 0))	_mkdir("Modes");
     #endif
-	if(access("Tri", 0))
+
+	#ifdef TARGET_UNIX
+			if(access("Modes", 0))
+			mkdir("Modes", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+	#endif	
+			
 	#ifdef TARGET_WIN32
-			mkdir("Tri");
-    #else
+			if(access("Tri", 0))	_mkdir("Tri");
+    #endif
+
+	#ifdef TARGET_UNIX
+			if(access("Tri", 0))
 			mkdir("Tri", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
     #endif
+
 	char filename[100];
 
 	int i;

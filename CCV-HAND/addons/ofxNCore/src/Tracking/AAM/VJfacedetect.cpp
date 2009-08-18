@@ -44,7 +44,26 @@
 
 #include "VJfacedetect.h"
 
+#include "cv.h"
+#include "cxcore.h"
+#include "cvaux.h"
+#include "highgui.h"
+
+
 using namespace std;
+
+
+    static CvScalar colors[] =
+     {
+         {{0,0,255}},
+         {{0,128,255}},
+         {{0,255,255}},
+         {{0,255,0}},
+        {{255,128,0}},
+         {{255,255,0}},
+         {{255,0,0}},
+         {{255,0,255}}
+     };
 
 //============================================================================
 VJfacedetect::VJfacedetect()
@@ -104,6 +123,40 @@ bool VJfacedetect::DetectFace(std::vector<AAM_Shape> &Shape, const IplImage* ima
 		Shape[i][0].y  = r->y*2.0;
 		Shape[i][1].x  = Shape[i][0].x + 2.0*r->width;
 		Shape[i][1].y  = Shape[i][0].y + 2.0*r->height;
+    }
+	return true;
+}
+//
+//============================================================================
+bool VJfacedetect::DetectFace2(IplImage* image)
+{
+	IplImage* small_image = cvCreateImage
+		(cvSize(image->width/2, image->height/2), image->depth, image->nChannels);
+	cvPyrDown(image, small_image, CV_GAUSSIAN_5x5);
+
+	CvSeq* pFaces = cvHaarDetectObjects(small_image, __cascade, __storage,
+		1.1, 3, CV_HAAR_DO_CANNY_PRUNING);
+
+	cvReleaseImage(&small_image);
+
+    printf("Found quantity %d\n", pFaces->total);
+	if(0 == pFaces->total)//can't find a face
+		return false;
+
+
+	for (int i = 0; i < pFaces->total; i++)
+    {
+
+		CvRect* r = (CvRect*)cvGetSeqElem(pFaces, i);
+
+        CvPoint center;
+        CvScalar color = colors[i%8];
+        int radius;
+        center.x = cvRound((r->x + r->width*0.5));
+        center.y = cvRound((r->y + r->height*0.5));
+        radius = cvRound((r->width + r->height)*0.25);
+        cvCircle( image, center, radius, color, 3, 8, 0 );
+
     }
 	return true;
 }

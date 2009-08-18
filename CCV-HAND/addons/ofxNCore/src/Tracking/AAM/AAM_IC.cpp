@@ -42,9 +42,11 @@
 * Still under development...
 ***************************************************************************/
 #ifdef TARGET_WIN32
-#include <direct.h>
-#else
-#include <sys/stat.h>
+	#include <direct.h>
+	#include <io.h>
+#endif
+#ifdef TARGET_UNIX
+	#include <sys/stat.h>
 #endif
 #include "AAM_IC.h"
 
@@ -344,10 +346,12 @@ void AAM_IC::Train(const file_lists& pts_files,
 
 	// save gradient image
 	#ifdef TARGET_WIN32
-			mkdir("Modes");
-    #else
-			mkdir("Modes", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+		mkdir("Modes");
     #endif
+
+	#ifdef TARGET_UNIX
+			mkdir("Modes", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+	#endif	
 	__paw.SaveWarpTextureToImage("Modes/dTx.jpg", dTx);
 	__paw.SaveWarpTextureToImage("Modes/dTy.jpg", dTy);
 
@@ -415,10 +419,13 @@ void AAM_IC::Fit(const IplImage* image, 		AAM_Shape& Shape,
 			Shape.Mat2Point(__current_s);
 			Draw(Drawimg, Shape, 2);
 			#ifdef TARGET_WIN32
-			mkdir("result");
-    #else
-			mkdir("result", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+		mkdir("result");
     #endif
+
+	#ifdef TARGET_UNIX
+			
+			mkdir("result", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+	#endif	
 			char filename[100];
 			sprintf(filename, "result/Iter-%02d.jpg", iter);
 			cvSaveImage(filename, Drawimg);

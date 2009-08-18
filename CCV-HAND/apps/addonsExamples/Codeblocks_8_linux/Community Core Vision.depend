@@ -5772,7 +5772,7 @@
 	<stdio.h>
 	<stdlib.h>
 
-1250518828 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Modules/ofxNCoreVision.cpp
+1250629083 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Modules/ofxNCoreVision.cpp
 	"ofxNCoreVision.h"
 	"../Controls/gui.h"
 
@@ -6238,9 +6238,10 @@
 	<gst/gst.h>
 	<gst/base/gstbasesink.h>
 
-1249914663 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_Basic.cpp
+1250623665 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_Basic.cpp
 	<ctime>
 	<direct.h>
+	<io.h>
 	<sys/stat.h>
 	"AAM_Basic.h"
 	<cv.h>
@@ -6269,7 +6270,7 @@
 	"cv.h"
 	"highgui.h"
 
-1249091777 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/VJfacedetect.h
+1250628425 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/VJfacedetect.h
 	<iostream>
 	<vector>
 	<string>
@@ -6298,8 +6299,9 @@
 1249091670 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_CAM.cpp
 	"AAM_CAM.h"
 
-1249091680 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_IC.cpp
+1250623665 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_IC.cpp
 	<direct.h>
+	<io.h>
 	<sys/stat.h>
 	"AAM_IC.h"
 
@@ -6333,10 +6335,11 @@
 	<fstream>
 	"AAM_Shape.h"
 
-1249091746 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_TDM.cpp
+1250623665 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_TDM.cpp
 	"AAM_TDM.h"
 	"AAM_PAW.h"
 	<direct.h>
+	<io.h>
 	<sys/stat.h>
 
 1250460617 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_Util.cpp
@@ -6348,8 +6351,12 @@
 	<sys/types.h>
 	<sys/stat.h>
 
-1249091771 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/VJfacedetect.cpp
+1250629059 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/VJfacedetect.cpp
 	"VJfacedetect.h"
+	"cv.h"
+	"cxcore.h"
+	"cvaux.h"
+	"highgui.h"
 
 1249585225 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/Statistics/condensation.cpp
 	"condensation.h"

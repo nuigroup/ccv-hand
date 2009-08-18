@@ -64,6 +64,8 @@ public:
 	//detect face for get a good intial shape
 	bool DetectFace(std::vector<AAM_Shape> &Shape, const IplImage* image);
 
+	bool DetectFace2(IplImage* image);
+
 	//load adaboost cascade file for detect face
 	void LoadCascade(const char* cascade_name = "haarcascade.xml");
 

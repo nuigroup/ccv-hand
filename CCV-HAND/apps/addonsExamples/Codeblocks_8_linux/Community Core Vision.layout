@@ -13,14 +13,14 @@
 	<File name="../../../addons/ofxNCore/src/Camera/CameraUtils.h" open="0" top="0" tabpos="0">
 		<Cursor position="0" topLine="3" />
 	</File>
-	<File name="../../../addons/ofxNCore/src/Communication/TUIO.cpp" open="1" top="0" tabpos="3">
+	<File name="../../../addons/ofxNCore/src/Communication/TUIO.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="8687" topLine="146" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Communication/TUIO.h" open="0" top="0" tabpos="24">
 		<Cursor position="2225" topLine="59" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Controls/gui.h" open="0" top="0" tabpos="26">
-		<Cursor position="4832" topLine="75" />
+		<Cursor position="4182" topLine="75" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Controls/ofxGui.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="456" topLine="0" />
@@ -49,14 +49,14 @@
 	<File name="../../../addons/ofxNCore/src/Filters/GPUImageFilter.cpp" open="0" top="0" tabpos="18">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="../../../addons/ofxNCore/src/Filters/ProcessFilters.h" open="0" top="0" tabpos="2">
-		<Cursor position="6283" topLine="137" />
+	<File name="../../../addons/ofxNCore/src/Filters/ProcessFilters.h" open="1" top="0" tabpos="2">
+		<Cursor position="6277" topLine="6" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Modules/ofxNCoreVision.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="40362" topLine="1011" />
+		<Cursor position="36017" topLine="850" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Modules/ofxNCoreVision.h" open="0" top="0" tabpos="6">
-		<Cursor position="2660" topLine="112" />
+		<Cursor position="2518" topLine="19" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Tracking/AAM/AAM_Basic.h" open="0" top="0" tabpos="0">
 		<Cursor position="3184" topLine="74" />
@@ -79,7 +79,7 @@
 	<File name="../../../addons/ofxNCore/src/Tracking/AAM/AAM_Util.h" open="0" top="0" tabpos="0">
 		<Cursor position="5189" topLine="155" />
 	</File>
-	<File name="../../../addons/ofxNCore/src/Tracking/AAM/VJfacedetect.cpp" open="1" top="0" tabpos="2">
+	<File name="../../../addons/ofxNCore/src/Tracking/AAM/VJfacedetect.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="3008" topLine="87" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Tracking/Blob.h" open="0" top="0" tabpos="2">
@@ -120,6 +120,9 @@
 	</File>
 	<File name="../../../addons/ofxNCore/src/Tracking/hands/videoBlob.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="3683" topLine="141" />
+	</File>
+	<File name="../../../addons/ofxNCore/src/Tracking/hands/videoHandDetector.h" open="0" top="0" tabpos="0">
+		<Cursor position="192" topLine="1" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Tracking/hands/videoHandFingerDetector.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="1549" topLine="37" />
