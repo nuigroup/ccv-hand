@@ -86,6 +86,7 @@ void ofxNCoreVision::setupControls()
     hpanel->addButton(appPtr->hPanel_use_Kalman, "Kalman", OFXGUI_BUTTON_HEIGHT, OFXGUI_BUTTON_HEIGHT, kofxGui_Button_Off, kofxGui_Button_Switch, "");
     hpanel->addButton(appPtr->hPanel_use_AAM, "AAM", OFXGUI_BUTTON_HEIGHT, OFXGUI_BUTTON_HEIGHT, kofxGui_Button_Off, kofxGui_Button_Switch, "");
     hpanel->addButton(appPtr->hPanel_use_Vjones, "Vjones", OFXGUI_BUTTON_HEIGHT, OFXGUI_BUTTON_HEIGHT, kofxGui_Button_Off, kofxGui_Button_Switch, "");
+	hpanel->addButton(appPtr->hPanel_use_Malik, "Malik Fingers", OFXGUI_BUTTON_HEIGHT, OFXGUI_BUTTON_HEIGHT, kofxGui_Button_Off, kofxGui_Button_Switch, "");
     hpanel->mObjWidth = 150;
 
     //Tracked Image
@@ -225,6 +226,8 @@ void ofxNCoreVision::setupControls()
     controls->update(appPtr->hPanel_use_AAM, kofxGui_Set_Bool, &appPtr->aamTracking, sizeof(bool));
     controls->update(appPtr->hPanel_use_Vjones, kofxGui_Set_Bool, &appPtr->vJones, sizeof(bool));
     controls->update(appPtr->hPanel_use_Template, kofxGui_Set_Bool, &appPtr->bTemplate, sizeof(bool));
+	controls->update(appPtr->hPanel_use_Kalman, kofxGui_Set_Bool, &appPtr->bKalman, sizeof(bool));
+	controls->update(appPtr->hPanel_use_Malik, kofxGui_Set_Bool, &appPtr->bMalik , sizeof(bool));
         controls->update(appPtr->backgroundPanel_colorBackforTemplate, kofxGui_Set_Bool, &appPtr->bLearnBackground2, sizeof(bool));
 }
 
@@ -525,6 +528,10 @@ void ofxNCoreVision ::handleGui(int parameterId, int task, void* data, int lengt
         case hPanel_use_Camshift:
         if (length == sizeof(bool))
             bCamshift = *(bool*)data;
+        break;
+		 case hPanel_use_Malik:
+        if (length == sizeof(bool))
+            bMalik = *(bool*)data;
         break;
         /*************************************
         End of Hand Tracking cases

@@ -22,7 +22,7 @@
     </NETWORK>
     <!--// VIDEO SETTINGS // -->
     <VIDEO>
-        <FILENAME>test_videos/t1.avi</FILENAME>
+        <FILENAME>test_videos/t1_mjpeg.avi</FILENAME>
     </VIDEO>
     <!--// BLOB SETTINGS // -->
     <BLOBS>
@@ -62,7 +62,7 @@
         <TUIO>1</TUIO>
         <VMIRROR>0</VMIRROR>
         <HMIRROR>0</HMIRROR>
-        <PRINTFTOFILE>1</PRINTFTOFILE>
+        <PRINTFTOFILE>0</PRINTFTOFILE>
         <HIGHPASS>0</HIGHPASS>
         <AMPLIFY>1</AMPLIFY>
         <SMOOTH>1</SMOOTH>

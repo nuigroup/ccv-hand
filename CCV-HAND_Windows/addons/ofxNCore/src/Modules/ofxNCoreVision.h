@@ -125,6 +125,7 @@ class ofxNCoreVision : public ofxGuiListener//, public BlobManager
         hPanel_use_Template,
         hPanel_use_Kalman,
         hPanel_use_Camshift,
+		hPanel_use_Malik,
 
     };
 
@@ -532,6 +533,8 @@ public:
     struct tm *			timeinfo;
     char				fileName [80];
     FILE *				stream ;
+
+	bool				bMalik;
 
 };
 

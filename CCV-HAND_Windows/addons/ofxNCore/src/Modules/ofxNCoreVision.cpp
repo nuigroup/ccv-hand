@@ -135,6 +135,13 @@ void ofxNCoreVision::_setup(ofEventArgs &e)
     setupControls();
 
     printf("freedom4?");
+	
+	aamTracking = false;
+	vJones = false;
+	bTemplate = false;
+	bCamshift = false;
+	bKalman = false;
+	bMalik = false;
 
     //Setup Calibration
     calib.setup(camWidth, camHeight, &tracker);
@@ -164,12 +171,12 @@ void ofxNCoreVision::_setup(ofEventArgs &e)
         bShowInterface = true;
         printf("Starting in full mode...\n\n");
     }
-
+/*
 #ifdef TARGET_WIN32
     //get rid of the console window
     FreeConsole();
 #endif
-
+*/
     printf("Community Core Vision is setup!\n\n");
 }
 
@@ -430,49 +437,65 @@ void ofxNCoreVision::initDevice()
 *****************************************************************************/
 void ofxNCoreVision::_update(ofEventArgs &e)
 {
+	printf("update!\n");
     //save/update log file
     if (printfToFile) if ((stream = freopen(fileName, "a", stdout)) == NULL) {}
 
-
+	printf("update2\n");
     if (exited) return;
-
+	printf("update3\n");
     bNewFrame = false;
+	
+	printf("Before grabbing\n");
 
     if (bcamera) //if camera
     {
-#ifdef TARGET_WIN32
+		#ifdef TARGET_WIN32
         if (PS3!=NULL)//ps3 camera
         {
+			printf("ps3, freedom (?)\n");
             bNewFrame = PS3->isFrameNew();
+			printf("ps3, freedom 2(?)\n");
         }
         else if (ffmv!=NULL)
         {
+			printf("ffmv, freedom (?)\n");
             ffmv->grabFrame();
             bNewFrame = true;
+			printf("ffmv, freedom 1(?)\n");
         }
         else if (vidGrabber !=NULL)
         {
+			printf("VidGrab, freedom (?)\n");
             vidGrabber->grabFrame();
             bNewFrame = vidGrabber->isFrameNew();
+			printf("VidGrab, freedom 2(?)\n");
         }
         else if (dsvl !=NULL)
         {
+			printf("dsvl, freedom 1(?)\n");
             bNewFrame = dsvl->isFrameNew();
+			printf("dsvl, freedom 2(?)\n");
         }
 #else
+		printf("Camera none, freedom 1(?)\n");
         vidGrabber->grabFrame();
         bNewFrame = vidGrabber->isFrameNew();
+		printf("Camera none, freedom 2(?)\n");
 #endif
     }
     else //if video
     {
+		printf("VidPlayer, freedom 1(?)\n");
         vidPlayer->idleMovie();
         bNewFrame = vidPlayer->isFrameNew();
+		printf("VidPlayer, freedom 2(?)\n");
     }
 
     //if no new frame, return
     if (!bNewFrame)
     {
+		printf("No new frame, freedom (?)\n");
         return;
     }
     else//else process camera frame
@@ -493,7 +516,9 @@ void ofxNCoreVision::_update(ofEventArgs &e)
 
         if (bGPUMode)
         {
+			printf("Frame ok-GPU1!");
             grabFrameToGPU(filter->gpuSourceTex);
+			printf("Frame ok-GPU!");
             filter->applyGPUFilters();
             contourFinder.findContours(filter->gpuReadBackImageGS,  (MIN_BLOB_SIZE * 2) + 1, ((camWidth * camHeight) * .4) * (MAX_BLOB_SIZE * .001), maxBlobs, false);
         }
@@ -599,7 +624,7 @@ void ofxNCoreVision::_update(ofEventArgs &e)
 #if DEBUG
                         printf("How many: %d\n", blobs_total);
 #endif
-                        // drawInitialBlobs(blobsCheck.getCvImage(), blobsVector);
+                        //drawInitialBlobs(blobsCheck.getCvImage(), blobsVector);
 
                         coord selectedCoord;
 
@@ -723,10 +748,11 @@ void ofxNCoreVision::_update(ofEventArgs &e)
                             printf("Widths: %d %d %d, Heights: %d, %d, %d\n", win.width, tmpl->width, templateImg->width, win.height, tmpl->height, templateImg->height);
                             cvMatchTemplate(processedImgColor.getCvImage(), tmpl, templateImg, 1);
 
+							printf("Match template 1 (freedom)\n");
 
                             cvResetImageROI(processedImgColor.getCvImage());
                             //cvReleaseImage(&templateImg);
-
+	
                             cvNormalize(templateImg, templateImg, 1, 0, CV_MINMAX);
                             cvPow(templateImg,templateImg,5);
 
@@ -740,11 +766,13 @@ void ofxNCoreVision::_update(ofEventArgs &e)
                             cvSaveImage("done.bmp", templateImg);
 #endif
                             cvSetImageROI(processedImgColor.getCvImage(),win);
-
+							
+							printf("Match template 2 (freedom)\n");
                             templateImgLeft = cvCreateImage(cvSize(win.width - tmpl_left->width + 1 , win.height - tmpl_left->height + 1),32, 1);
 
 
                             cvMatchTemplate(processedImgColor.getCvImage(), tmpl_left, templateImgLeft, 5);
+							printf("Match template 2 after (freedom)\n");
                             cvResetImageROI(processedImgColor.getCvImage());
                             //cvReleaseImage(&templateImgLeft);
                             cvNormalize(templateImgLeft, templateImgLeft, 1, 0, CV_MINMAX);
@@ -834,7 +862,16 @@ void ofxNCoreVision::_update(ofEventArgs &e)
             {
                 printf("Before Camshift\n");
                 printf("COord Real x: %lf, Coord Real y: %lf\n", coordReal.cX, coordReal.cY);
-                HandROIAdjust(coordReal.cX,coordReal.cY, processedImg.getCvImage());
+#ifdef TARGET_WIN32
+				if ( coordReal.cX <= 0 && coordReal.cY <= 0)
+			   {
+				   coordReal.cX = 1.0;
+				   coordReal.cY = 1.0;
+			   }
+#endif
+               HandROIAdjust(coordReal.cX,coordReal.cY, processedImg.getCvImage());
+			   printf("COord Real x: %lf, Coord Real y: %lf\n", coordReal.cX, coordReal.cY);
+			   
                 cvCamShift(processedImg.getCvImage(), handSelectionRect, cvTermCriteria( CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 10, 1 ), &handComp, &handBox);
                 handSelectionRect = handComp.rect;
 
@@ -855,6 +892,8 @@ void ofxNCoreVision::_update(ofEventArgs &e)
 
                 if (vJones)
                 {
+
+					printf("if vJones (freedom)!\n");
 
                     flag = model.InitShapeFromDetBox(Shape,blobsCheck.getCvImage(),facedet);
 
@@ -1038,6 +1077,7 @@ void ofxNCoreVision::_update(ofEventArgs &e)
 
             if (vJones)
             {
+				printf("if vJones2 (freedom)!\n");
 
                 facedet.DetectFace2(aamImage.getCvImage());
 
@@ -1058,6 +1098,8 @@ void ofxNCoreVision::_update(ofEventArgs &e)
             /*******************************************************************
             Malik's Finger Detection Algorithm
             ********************************************************************/
+			if(	bMalik)
+			{
             printf("Before array: Ok!\n");
 
             nHands = handContourFinder.nBlobs;
@@ -1168,7 +1210,7 @@ void ofxNCoreVision::_update(ofEventArgs &e)
                     myFinger[i].energy = 0;
                 }
             }
-
+}
             /*******************************************************************
             End of Malik's Finger Detection Algorithm
             ********************************************************************/
