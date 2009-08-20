@@ -5776,7 +5776,7 @@
 	"ofxNCoreVision.h"
 	"../Controls/gui.h"
 
-1250518326 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Modules/ofxNCoreVision.h
+1250655293 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Modules/ofxNCoreVision.h
 	"ofMain.h"
 	"ofxffmv.h"
 	"ofxPS3.h"
@@ -6270,7 +6270,7 @@
 	"cv.h"
 	"highgui.h"
 
-1250628425 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/VJfacedetect.h
+1250655292 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/VJfacedetect.h
 	<iostream>
 	<vector>
 	<string>

@@ -132,13 +132,15 @@ bool VJfacedetect::DetectFace2(IplImage* image)
 {
 	IplImage* small_image = cvCreateImage
 		(cvSize(image->width/2, image->height/2), image->depth, image->nChannels);
+	printf("Image Vjones created\n");
 	cvPyrDown(image, small_image, CV_GAUSSIAN_5x5);
+	printf("PyrDown Vjones created\n");
 
 	CvSeq* pFaces = cvHaarDetectObjects(small_image, __cascade, __storage,
 		1.1, 3, CV_HAAR_DO_CANNY_PRUNING);
-
+	printf("cvSeq Vjones created\n");
 	cvReleaseImage(&small_image);
-
+	
     printf("Found quantity %d\n", pFaces->total);
 	if(0 == pFaces->total)//can't find a face
 		return false;

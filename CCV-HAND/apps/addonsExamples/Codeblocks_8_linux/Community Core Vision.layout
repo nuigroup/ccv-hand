@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="Debug" />
+	<ActiveTarget name="Release" />
 	<File name="../../../addons/ofxNCore/src/Calibration/Calibration.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="2528" topLine="71" />
 	</File>
@@ -49,17 +49,20 @@
 	<File name="../../../addons/ofxNCore/src/Filters/GPUImageFilter.cpp" open="0" top="0" tabpos="18">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="../../../addons/ofxNCore/src/Filters/ProcessFilters.h" open="1" top="0" tabpos="2">
+	<File name="../../../addons/ofxNCore/src/Filters/ProcessFilters.h" open="0" top="0" tabpos="2">
 		<Cursor position="6277" topLine="6" />
 	</File>
-	<File name="../../../addons/ofxNCore/src/Modules/ofxNCoreVision.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="36017" topLine="850" />
+	<File name="../../../addons/ofxNCore/src/Modules/ofxNCoreVision.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="35988" topLine="1820" />
 	</File>
-	<File name="../../../addons/ofxNCore/src/Modules/ofxNCoreVision.h" open="0" top="0" tabpos="6">
-		<Cursor position="2518" topLine="19" />
+	<File name="../../../addons/ofxNCore/src/Modules/ofxNCoreVision.h" open="1" top="0" tabpos="3">
+		<Cursor position="6878" topLine="296" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Tracking/AAM/AAM_Basic.h" open="0" top="0" tabpos="0">
 		<Cursor position="3184" topLine="74" />
+	</File>
+	<File name="../../../addons/ofxNCore/src/Tracking/AAM/AAM_IC.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="0" topLine="415" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Tracking/AAM/AAM_PAW.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="13841" topLine="449" />
@@ -74,13 +77,16 @@
 		<Cursor position="5392" topLine="201" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Tracking/AAM/AAM_Util.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="10368" topLine="344" />
+		<Cursor position="11863" topLine="420" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Tracking/AAM/AAM_Util.h" open="0" top="0" tabpos="0">
 		<Cursor position="5189" topLine="155" />
 	</File>
-	<File name="../../../addons/ofxNCore/src/Tracking/AAM/VJfacedetect.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="3008" topLine="87" />
+	<File name="../../../addons/ofxNCore/src/Tracking/AAM/VJfacedetect.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="5036" topLine="39" />
+	</File>
+	<File name="../../../addons/ofxNCore/src/Tracking/AAM/VJfacedetect.h" open="1" top="0" tabpos="4">
+		<Cursor position="2577" topLine="52" />
 	</File>
 	<File name="../../../addons/ofxNCore/src/Tracking/Blob.h" open="0" top="0" tabpos="2">
 		<Cursor position="1513" topLine="55" />

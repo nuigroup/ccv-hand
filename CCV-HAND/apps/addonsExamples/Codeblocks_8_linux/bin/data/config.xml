@@ -57,7 +57,7 @@
     <BOOLEAN>
         <PRESSURE>0</PRESSURE>
         <LABELS>1</LABELS>
-        <OUTLINES>1</OUTLINES>
+        <OUTLINES>0</OUTLINES>
         <LEARNBG>0</LEARNBG>
         <TUIO>1</TUIO>
         <VMIRROR>0</VMIRROR>
