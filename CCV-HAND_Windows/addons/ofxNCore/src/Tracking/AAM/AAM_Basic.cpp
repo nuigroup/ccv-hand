@@ -317,7 +317,7 @@ void AAM_Basic::Fit(const IplImage* image, AAM_Shape& Shape,
     #endif
 
 	#ifdef TARGET_UNIX
-			
+
 			mkdir("result", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 	#endif
 			char filename[100];
@@ -383,6 +383,7 @@ void AAM_Basic::Fit(const IplImage* image, AAM_Shape& Shape,
 //===========================================================================
 void AAM_Basic::Draw(IplImage* image, const AAM_Shape& Shape, int type)
 {
+    printf("AAM drawing(freedom!)");
 	if(type == 0) AAM_Common::DrawPoints(image, Shape);
 	else if(type == 1) AAM_Common::DrawTriangles(image, Shape, __cam.__paw.__tri);
 	else if(type == 2)

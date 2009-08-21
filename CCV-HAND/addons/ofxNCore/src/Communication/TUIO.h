@@ -61,6 +61,8 @@ class TUIO {
 		//methods
 		void setup(const char* host, int port, int flashport);
 		void sendTUIO(std::map<int, Blob> * blobs);
+		void sendHandTUIO(std::map<int, Blob> * blobs);
+
 
 		//TCP Network
 		ofxTCPServer 	m_tcpServer;

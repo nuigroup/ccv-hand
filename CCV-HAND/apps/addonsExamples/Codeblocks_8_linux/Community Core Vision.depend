@@ -5359,7 +5359,7 @@
 1249963071 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/Blob.h
 	<vector>
 
-1242518508 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/Tracking.h
+1250787685 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/Tracking.h
 	<list>
 	<map>
 	"ContourFinder.h"
@@ -5370,10 +5370,10 @@
 	"CalibrationUtils.h"
 	<cmath>
 
-1250389760 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Communication/TUIO.cpp
+1250792607 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Communication/TUIO.cpp
 	"TUIO.h"
 
-1249130186 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Communication/TUIO.h
+1250792200 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Communication/TUIO.h
 	"../Tracking/ContourFinder.h"
 	"ofxOsc.h"
 	"ofxNetwork.h"
@@ -5772,11 +5772,11 @@
 	<stdio.h>
 	<stdlib.h>
 
-1250629083 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Modules/ofxNCoreVision.cpp
+1250806622 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Modules/ofxNCoreVision.cpp
 	"ofxNCoreVision.h"
 	"../Controls/gui.h"
 
-1250655293 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Modules/ofxNCoreVision.h
+1250792776 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Modules/ofxNCoreVision.h
 	"ofMain.h"
 	"ofxffmv.h"
 	"ofxPS3.h"
@@ -5830,7 +5830,7 @@
 	"CPUImageFilter.h"
 	"GPUImageFilter.h"
 
-1250446042 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/gui.h
+1250793911 /home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Controls/gui.h
 	"../Modules/ofxNCoreVision.h"
 	"../Camera/CameraUtils.h"
 
@@ -5901,11 +5901,11 @@
 1242518508 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/BlobManager.cpp
 	"BlobManager.h"
 
-1248471534 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/ContourFinder.cpp
+1250789083 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/ContourFinder.cpp
 	"ContourFinder.h"
 	<cv.h>
 
-1248612535 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/Tracking.cpp
+1250789189 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/Tracking.cpp
 	"Tracking.h"
 
 1250284974 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNetwork/src/ofxTCPClient.cpp
@@ -6238,7 +6238,7 @@
 	<gst/gst.h>
 	<gst/base/gstbasesink.h>
 
-1250623665 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_Basic.cpp
+1250780673 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/AAM_Basic.cpp
 	<ctime>
 	<direct.h>
 	<io.h>
@@ -6351,7 +6351,7 @@
 	<sys/types.h>
 	<sys/stat.h>
 
-1250629059 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/VJfacedetect.cpp
+1250655292 source:/home/thiago/ccv_hand/CCV-HAND/addons/ofxNCore/src/Tracking/AAM/VJfacedetect.cpp
 	"VJfacedetect.h"
 	"cv.h"
 	"cxcore.h"

@@ -31,6 +31,7 @@ void BlobTracker::passInCalibration(CalibrationUtils* calibrater) {
 //assigns IDs to each blob in the contourFinder
 void BlobTracker::track(ContourFinder* newBlobs)
 {
+    printf("1\n");
 	//initialize ID's of all blobs
 	for(int i=0; i<newBlobs->nBlobs; i++)
 		newBlobs->blobs[i].id=-1;

@@ -75,6 +75,7 @@ class ofxNCoreVision : public ofxGuiListener//, public BlobManager
         optionPanel_tuio_osc,
         optionPanel_tuio_tcp,
         optionPanel_tuio_height_width,
+        optionPanel_tuio_hand_info,
 
         calibrationPanel,
         calibrationPanel_calibrate,
@@ -253,6 +254,7 @@ public:
 
     //Getters
     std::map<int, Blob> getBlobs();
+        std::map<int, Blob> getHandBlobs();
 
     /*************************************
       Hand-Tracking Stuff
@@ -497,6 +499,7 @@ public:
 
     //Blob Tracker
     BlobTracker			tracker;
+    BlobTracker         trackerHand;
 
     /****************************************************************
      *						Private Stuff
@@ -507,6 +510,7 @@ public:
 
     //Calibration
     Calibration calib;
+    Calibration calib2;
 
     //Blob Finder
     ContourFinder	contourFinder;

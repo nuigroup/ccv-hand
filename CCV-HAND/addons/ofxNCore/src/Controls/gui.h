@@ -69,7 +69,7 @@ void ofxNCoreVision::setupControls()
     oPanel->addButton(appPtr->optionPanel_tuio_osc, "Send TUIO OSC (t)", OFXGUI_BUTTON_HEIGHT, OFXGUI_BUTTON_HEIGHT, kofxGui_Button_Off, kofxGui_Button_Switch, "");
     oPanel->addButton(appPtr->optionPanel_tuio_tcp, "Send TUIO TCP | For Flash (f)", OFXGUI_BUTTON_HEIGHT, OFXGUI_BUTTON_HEIGHT, kofxGui_Button_Off, kofxGui_Button_Switch, "");
     oPanel->addButton(appPtr->optionPanel_tuio_height_width, "Send Height & Width ", OFXGUI_BUTTON_HEIGHT, OFXGUI_BUTTON_HEIGHT, kofxGui_Button_Off, kofxGui_Button_Switch, "");
-    oPanel->addButton(appPtr->optionPanel_tuio_height_width, "Send Hand Information ", OFXGUI_BUTTON_HEIGHT, OFXGUI_BUTTON_HEIGHT, kofxGui_Button_Off, kofxGui_Button_Switch, "");
+    oPanel->addButton(appPtr->optionPanel_tuio_hand_info, "Send Hand Information ", OFXGUI_BUTTON_HEIGHT, OFXGUI_BUTTON_HEIGHT, kofxGui_Button_Off, kofxGui_Button_Switch, "");
     oPanel->mObjWidth = 200;
 
     ofxGuiPanel* cPanel = controls->addPanel(appPtr->calibrationPanel, "Calibration", 735, 284, OFXGUI_PANEL_BORDER, OFXGUI_PANEL_SPACING);
@@ -219,6 +219,7 @@ void ofxNCoreVision::setupControls()
     controls->update(appPtr->optionPanel_tuio_tcp, kofxGui_Set_Bool, &appPtr->myTUIO.bTCPMode, sizeof(bool));
     //TUIO Height Width
     controls->update(appPtr->optionPanel_tuio_height_width, kofxGui_Set_Bool, &appPtr->myTUIO.bHeightWidth, sizeof(bool));
+        controls->update(appPtr->optionPanel_tuio_height_width, kofxGui_Set_Bool, &appPtr->myTUIO.bHandInfo, sizeof(bool));
     //GPU Mode
     controls->update(appPtr->gpuPanel_use, kofxGui_Set_Bool, &appPtr->bGPUMode, sizeof(bool));
 
@@ -418,6 +419,10 @@ void ofxNCoreVision ::handleGui(int parameterId, int task, void* data, int lengt
     case optionPanel_tuio_height_width:
         if (length == sizeof(bool))
             myTUIO.bHeightWidth = *(bool*)data;
+        break;
+    case optionPanel_tuio_hand_info:
+        if (length == sizeof(bool))
+            myTUIO.bHandInfo = *(bool*)data;
         break;
         //Background
     case backgroundPanel_dynamic:

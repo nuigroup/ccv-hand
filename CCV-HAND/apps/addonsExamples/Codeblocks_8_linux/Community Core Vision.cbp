@@ -25,12 +25,8 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-O3" />
 					<Add option="-MMD" />
 				</Compiler>
-				<Linker>
-					<Add option="-s" />
-				</Linker>
 			</Target>
 			<Environment>
 				<Variable name="target" value="allAddonsExample" />

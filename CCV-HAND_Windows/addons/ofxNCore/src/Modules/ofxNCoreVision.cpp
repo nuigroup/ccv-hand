@@ -135,7 +135,7 @@ void ofxNCoreVision::_setup(ofEventArgs &e)
     setupControls();
 
     printf("freedom4?");
-	
+
 	aamTracking = false;
 	vJones = false;
 	bTemplate = false;
@@ -145,7 +145,7 @@ void ofxNCoreVision::_setup(ofEventArgs &e)
 
     //Setup Calibration
     calib.setup(camWidth, camHeight, &tracker);
-
+    calib2.setup(camWidth, camHeight, &trackerHand);
     //Allocate Filters
     filter->allocate( camWidth, camHeight );
 
@@ -445,7 +445,7 @@ void ofxNCoreVision::_update(ofEventArgs &e)
     if (exited) return;
 	printf("update3\n");
     bNewFrame = false;
-	
+
 	printf("Before grabbing\n");
 
     if (bcamera) //if camera
@@ -632,7 +632,7 @@ void ofxNCoreVision::_update(ofEventArgs &e)
 
 
                         //Init Kalman
-                        printf("Kalman has started\n");
+                        printf("Kalman has started \n");
                         kalman = initKalman(indexMat, selectedCoord);
                         printf("Passed from Kalman\n");
 
@@ -711,21 +711,24 @@ void ofxNCoreVision::_update(ofEventArgs &e)
 
             if (bTemplate)
             {
-                printf("Template Matching nBlobs!: %d\n", contourFinder.nBlobs);
-                if (contourFinder.nBlobs > 0)
-                {
-                    for (int i =0; i < contourFinder.nBlobs; i++)
-                    {
-                        if ( contourFinder.blobs[i].area > 500)
-                        {
+                printf("TrackerHand\n");
 
+                trackerHand.track(&handContourFinder);
+
+                printf("Template Matching nBlobs!: %d\n", handContourFinder.nBlobs);
+                if (handContourFinder.nBlobs > 0)
+                {
+                    for (int i =0; i < handContourFinder.nBlobs; i++)
+                    {
+                        if ( handContourFinder.blobs[i].area > 500)
+                        {
 
                             /************************************
                             Template Matching
                             ***************************************/
                             // templateImg = cvCreateImage(cvSize(processedImgColor.getCvImage()->width - tmpl->width + 1 , processedImgColor.getCvImage()->height - tmpl->height + 1),32, 1);
 
-                            win = cvRect(contourFinder.blobs[i].centroid.x, contourFinder.blobs[i].centroid.y, 150,150);
+                            win = cvRect(handContourFinder.blobs[i].centroid.x, handContourFinder.blobs[i].centroid.y, 150,150);
 //                        /* make sure that the search window is still within the frame */
                             if (win.x < 0)
                                 win.x = 0;
@@ -752,7 +755,7 @@ void ofxNCoreVision::_update(ofEventArgs &e)
 
                             cvResetImageROI(processedImgColor.getCvImage());
                             //cvReleaseImage(&templateImg);
-	
+
                             cvNormalize(templateImg, templateImg, 1, 0, CV_MINMAX);
                             cvPow(templateImg,templateImg,5);
 
@@ -766,7 +769,7 @@ void ofxNCoreVision::_update(ofEventArgs &e)
                             cvSaveImage("done.bmp", templateImg);
 #endif
                             cvSetImageROI(processedImgColor.getCvImage(),win);
-							
+
 							printf("Match template 2 (freedom)\n");
                             templateImgLeft = cvCreateImage(cvSize(win.width - tmpl_left->width + 1 , win.height - tmpl_left->height + 1),32, 1);
 
@@ -784,8 +787,8 @@ void ofxNCoreVision::_update(ofEventArgs &e)
                             {
                                 templateRightMax.x += win.x;
                                 templateRightMax.y += win.y;
-                                contourFinder.blobs[i].xHand = templateRightMax.x;
-                                contourFinder.blobs[i].yHand = templateRightMax.y;
+                                handContourFinder.blobs[i].xHand = templateRightMax.x;
+                                handContourFinder.blobs[i].yHand = templateRightMax.y;
                             }
                             else
                             {
@@ -793,13 +796,13 @@ void ofxNCoreVision::_update(ofEventArgs &e)
                                 {
                                     templateLeftMax.x += win.x;
                                     templateLeftMax.y += win.y;
-                                    contourFinder.blobs[i].xHand = templateLeftMax.x;
-                                    contourFinder.blobs[i].yHand = templateLeftMax.y;
+                                    handContourFinder.blobs[i].xHand = templateLeftMax.x;
+                                    handContourFinder.blobs[i].yHand = templateLeftMax.y;
                                 }
                                 else
                                 {
-                                    contourFinder.blobs[i].xHand = 0;
-                                    contourFinder.blobs[i].yHand = 0;
+                                    handContourFinder.blobs[i].xHand = 0;
+                                    handContourFinder.blobs[i].yHand = 0;
                                 }
                             }
 
@@ -814,6 +817,13 @@ void ofxNCoreVision::_update(ofEventArgs &e)
 //                        templateImgDraw.resize(templateImg->width, templateImg->height);
 //
 //                        cvConvertImage(templateImg, templateImgDraw.getCvImage());
+                        }
+                        else
+                        {
+                            printf("In the else\n");
+                             trackerHand.trackedBlobs.erase(trackerHand.trackedBlobs.begin()+i,
+							   trackerHand.trackedBlobs.begin()+i+1);
+							   printf("Out the else\n");
                         }
 
                         /******************************************
@@ -871,7 +881,7 @@ void ofxNCoreVision::_update(ofEventArgs &e)
 #endif
                HandROIAdjust(coordReal.cX,coordReal.cY, processedImg.getCvImage());
 			   printf("COord Real x: %lf, Coord Real y: %lf\n", coordReal.cX, coordReal.cY);
-			   
+
                 cvCamShift(processedImg.getCvImage(), handSelectionRect, cvTermCriteria( CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 10, 1 ), &handComp, &handBox);
                 handSelectionRect = handComp.rect;
 
@@ -910,7 +920,7 @@ void ofxNCoreVision::_update(ofEventArgs &e)
                             modelIC.Fit(blobsCheck.getCvImage(), Shape, 30, false);
                             printf ("Inverse Compositional OK\n");
                             */
-                            model.Draw(aamImage.getCvImage(), Shape, 2);
+                            model.Draw(aamImage.getCvImage(), Shape, 0);
                             /*
                             modelIC.Draw(blobsCheck.getCvImage(), Shape, 1);
                             */
@@ -922,6 +932,7 @@ void ofxNCoreVision::_update(ofEventArgs &e)
                 /****************************************************************
                 AAM-Fitting with Template Matching
                 ****************************************************************/
+
                 if (bTemplate)
                 {
                     printf("Template Matching + AAM fitting \n");
@@ -957,7 +968,7 @@ void ofxNCoreVision::_update(ofEventArgs &e)
                                     modelIC.Fit(blobsCheck.getCvImage(), Shape, 30, false);
                                     printf ("Inverse Compositional OK\n");
                                     */
-                                    model.Draw(aamImage.getCvImage(), Shape, 2);
+                                    model.Draw(aamImage.getCvImage(), Shape, 0);
                                     /*
                                     modelIC.Draw(blobsCheck.getCvImage(), Shape, 1);
                                     */
@@ -1240,8 +1251,14 @@ void ofxNCoreVision::_update(ofEventArgs &e)
         {
             //Start sending OSC
             myTUIO.sendTUIO(&getBlobs());
+
+            if( myTUIO.bHandInfo)
+            {
+            myTUIO.sendHandTUIO(&getHandBlobs());
+            }
         }
     }
+
 }
 
 
@@ -1613,18 +1630,31 @@ void ofxNCoreVision::drawFingerOutlines()
 
 //			cvEllipseBox(sourceImg, contourFinder.track_box, CV_RGB(255,0,0), 3, CV_AA, 0);
             /*}*/
-            if (contourFinder.blobs[i].xHand > 0)
+        }
+    }
+            for (int k=0; k < handContourFinder.nBlobs; k++)
             {
+            if (handContourFinder.blobs[k].xHand > 0)
+            {
+
+                float xposHand = contourFinder.blobs[k].centroid.x * (160/camWidth);
+                float yposHand = contourFinder.blobs[k].centroid.y * (120/camHeight);
+
                 ofSetColor(255,255,255);
-                printf("%d , %d\n", contourFinder.blobs[i].xHand, contourFinder.blobs[i].yHand);
-                ofCircle((contourFinder.blobs[i].xHand*160)/camWidth + 160, (contourFinder.blobs[i].yHand*120)/camHeight + 610, 10);
-                contourFinder.blobs[i].xHand = 0;
-                contourFinder.blobs[i].yHand = 0;
+                printf("%d , %d\n", handContourFinder.blobs[k].xHand, handContourFinder.blobs[k].yHand);
+                ofCircle((handContourFinder.blobs[k].xHand*160)/camWidth + 160, (handContourFinder.blobs[k].yHand*120)/camHeight + 610, 10);
+                handContourFinder.blobs[k].xHand = 0;
+                handContourFinder.blobs[k].yHand = 0;
+
+                char idHandStr[1024];
+
+                sprintf(idHandStr, "id: %i", handContourFinder.blobs[k].id);
+                verdana.drawString(idHandStr, xposHand + 160, yposHand + handContourFinder.blobs[k].boundingRect.height/2 + 610);
+
                 printf("Entered Hand Drawing Function\n");
             }
 
         }
-    }
     ofSetColor(0xFFFFFF);
 }
 
@@ -1788,6 +1818,12 @@ std::map<int, Blob> ofxNCoreVision::getBlobs()
 {
 
     return tracker.getTrackedBlobs();
+}
+
+std::map<int, Blob> ofxNCoreVision::getHandBlobs()
+{
+
+    return trackerHand.getTrackedBlobs();
 }
 
 /****************************************************************************

@@ -34,12 +34,14 @@ public:
 	int MIN_MOVEMENT_THRESHOLD;
 	std::map<int, Blob> getTrackedBlobs();
 
+		std::vector<Blob>		trackedBlobs; //tracked blobs
+
 private:
 
 	int trackKnn(ContourFinder *newBlobs, Blob *track, int k, double thresh);
 	int						IDCounter;	  //counter of last blob
 	int						fightMongrel;
-	std::vector<Blob>		trackedBlobs; //tracked blobs
+	//std::vector<Blob>		trackedBlobs; //tracked blobs
 	std::map<int, Blob>     calibratedBlobs;
 	//std::vector<pair<int,Blob>>		finalBlobs; //tracked blobs
 };

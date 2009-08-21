@@ -168,6 +168,8 @@ int ContourFinder::findContours( ofxCvGrayscaleImage&  input,
 	if( contour_storage != NULL ) { cvReleaseMemStorage(&contour_storage); }
 	if( storage != NULL ) { cvReleaseMemStorage(&storage); }
 
+	printf ("ContourFinder (freedom!)\n");
+
 	return nBlobs;
 }
 
